@@ -35,6 +35,12 @@
   --btc:#f7931a;         /* Bitcoin orange */
   --headerH:72px;
 }
+  /* ✅ Mobile: header becomes taller because it wraps, so increase the offset */
+@media(max-width:760px){
+  :root{
+    --headerH: 132px;
+  }
+}
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -143,6 +149,28 @@ main{padding:34px 0 60px}
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
+
+    /* ✅ keeps label/value aligned cleanly */
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* ✅ force the value column to behave like a right-aligned column */
+  .k{
+    flex: 0 0 44%;
+  }
+  .v{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  /* ✅ if it wraps to a second line, keep it right-aligned */
+  .v a{
+    display: inline-block;
+    text-align: right;
+    word-break: break-word;
   }
 }
 .kv{
@@ -162,27 +190,23 @@ main{padding:34px 0 60px}
   font-weight:400;   /* normal weight */
 }
 
-/* Anchor offset for sticky header (sections) */
-section[id]{
+/* Anchor offset for sticky header (sections + headings) */
+section[id],
+h3[id]{
   scroll-margin-top: calc(var(--headerH) + 18px);
 }
 
+/* Mobile: header is taller (wraps), so increase header height instead of huge offsets */
 @media(max-width:760px){
-  section[id]{
-    scroll-margin-top: calc(var(--headerH) + 60px);
+  :root{
+    --headerH: 132px; /* adjust later if needed */
   }
-}
-  /* iPhone anchor fix */
-h3[id]{
-  scroll-margin-top: calc(var(--headerH) + 28px);
-}
 
-@media(max-width:760px){
+  section[id],
   h3[id]{
-    scroll-margin-top: calc(var(--headerH) + 90px);
+    scroll-margin-top: calc(var(--headerH) + 18px);
   }
 }
-
 /* TWO CARDS (metrics + pillars) */
 .grid{
   display:grid;
