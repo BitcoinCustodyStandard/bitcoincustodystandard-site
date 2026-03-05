@@ -190,8 +190,12 @@ main{padding:34px 0 60px}
   font-weight:400;   /* normal weight */
 }
 
-/* Anchor offset for sticky header (AUTO: uses real header height) */
-:root{ --headerOffset: 120px; } /* fallback before JS runs */
+/* Anchor offset for sticky header (SIMPLE + STABLE) */
+:root{ --headerOffset: 96px; }
+
+@media (max-width: 760px){
+  :root{ --headerOffset: 156px; }
+}
 
 html{ scroll-padding-top: var(--headerOffset); }
 section[id], h3[id]{ scroll-margin-top: var(--headerOffset); }
@@ -457,7 +461,7 @@ footer .copyright{
       </div>
 
       <nav aria-label="Primary">
-  <a href="/">Home</a>
+  <a href="#top">Home</a>
   <a href="#abstract">Abstract</a>
   <a href="#purpose">Purpose</a>
   <a href="#document">Document</a>
@@ -672,18 +676,6 @@ Contact: <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincust
 </div>
 
 </footer>
-<script>
-  (function () {
-    function setHeaderOffset() {
-      const header = document.querySelector("header");
-      if (!header) return;
-      const h = Math.ceil(header.getBoundingClientRect().height);
-      // add a small cushion so headings never clip
-      document.documentElement.style.setProperty("--headerOffset", (h + 4) + "px");
-    }
-    window.addEventListener("load", setHeaderOffset);
-    window.addEventListener("resize", setHeaderOffset);
-  })();
-</script>
+
 </body>
 </html>
