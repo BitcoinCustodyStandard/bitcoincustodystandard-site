@@ -99,9 +99,10 @@ main{padding:34px 0 60px}
   .v{ flex:1 1 auto; display:flex; justify-content:flex-end; text-align:right; }
   .v a{ display:inline-block; text-align:right; word-break:break-word; }
 }
-.kv{ display:flex; justify-content:space-between; padding:10px 14px; background:var(--panel); border-radius:12px; border:1px solid var(--border); }
-.k{ color:var(--muted); font-weight:600; }
-.v{ font-weight:400; }
+.kv{ display:flex; justify-content:space-between; align-items:flex-start; padding:10px 14px; background:var(--panel); border-radius:12px; border:1px solid var(--border); }
+.k{ color:var(--muted); font-weight:600; flex-shrink:0; padding-right:12px; }
+.v{ font-weight:400; text-align:right; }
+.v a{ display:inline-block; text-align:right; }
 :root{ --headerOffset: 120px; }
 html{ scroll-padding-top: var(--headerOffset); }
 section[id], h3[id]{ scroll-margin-top: var(--headerOffset); }
@@ -113,7 +114,7 @@ section[id], h3[id]{ scroll-margin-top: var(--headerOffset); }
 .card ul{ margin:0; padding-left:18px; color:var(--muted); font-size:14px; }
 .card li{margin:6px 0}
 .card p{margin:10px 0 0;color:var(--muted);font-size:14px}
-/* Diagram card: image fills the card naturally */
+/* Diagram card */
 .card.diagram{ display:flex; flex-direction:column; }
 .card.diagram img{
   width:100%;
@@ -242,7 +243,14 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     </div>
     <div class="card diagram">
       <h3><span class="dot"></span>BCRI Structural Resilience Model</h3>
-      <img src="BCRI_Flow_diagram.png" alt="BCRI Structural Resilience Model — flowchart showing how BCS structural pillars feed into Architecture Resilience (ARS) and Coordination Health (CHS), which combine into Custody Structural Integrity, then flow through Latent Entropy Index (LEI), Coordination Entropy Index (CEI), and Exposure Risk (XRI) into the Entropy Risk Index (ERI), and finally into the Bitcoin Custody Resilience Index (BCRI)." />
+      <img
+        src="BCRI_Flow_diagram.png"
+        alt="BCRI Structural Resilience Model flowchart"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <p style="display:none; color:var(--muted); font-size:13px; margin-top:8px;">
+        Diagram not found. Ensure <code>BCRI_Flow_diagram.png</code> is uploaded to the same folder as this page.
+      </p>
     </div>
   </section>
 
