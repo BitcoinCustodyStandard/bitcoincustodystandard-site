@@ -113,6 +113,15 @@ section[id], h3[id]{ scroll-margin-top: var(--headerOffset); }
 .card ul{ margin:0; padding-left:18px; color:var(--muted); font-size:14px; }
 .card li{margin:6px 0}
 .card p{margin:10px 0 0;color:var(--muted);font-size:14px}
+/* Diagram card: image fills the card naturally */
+.card.diagram{ display:flex; flex-direction:column; }
+.card.diagram img{
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  margin-top:6px;
+  display:block;
+}
 .govGrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
 @media(max-width:860px){ .govGrid{ grid-template-columns:1fr; } }
 .govCard{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:16px 18px; }
@@ -167,7 +176,7 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
         <a href="#governance">Governance</a>
       </nav>
       <div class="actions">
-        <a class="btn primary" href="BCS-NS-1.1.pdf" download>Download PDF</a>
+        <a class="btn primary" href="BCS-NS-1.1-2026-03-06.pdf" download>Download PDF</a>
         <a class="btn primary" href="mailto:contact@bitcoincustodystandard.org">Contact</a>
       </div>
     </div>
@@ -231,15 +240,9 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
       </ul>
       <p>ERI and XRI are the primary risk indicators used for conformance evaluation. XRI does not independently determine conformance status but contributes to the overall resilience assessment.</p>
     </div>
-    <div class="card">
-      <h3><span class="dot"></span>Structural pillars</h3>
-      <ul>
-        <li>Cryptographic Integrity</li>
-        <li>Physical Distribution</li>
-        <li>Operational Dependency</li>
-        <li>Cognitive Reliability</li>
-        <li>Temporal Resilience</li>
-      </ul>
+    <div class="card diagram">
+      <h3><span class="dot"></span>BCRI Structural Resilience Model</h3>
+      <img src="BCRI_Flow_diagram.png" alt="BCRI Structural Resilience Model — flowchart showing how BCS structural pillars feed into Architecture Resilience (ARS) and Coordination Health (CHS), which combine into Custody Structural Integrity, then flow through Latent Entropy Index (LEI), Coordination Entropy Index (CEI), and Exposure Risk (XRI) into the Entropy Risk Index (ERI), and finally into the Bitcoin Custody Resilience Index (BCRI)." />
     </div>
   </section>
 
@@ -266,9 +269,9 @@ BCS defines the normative framework; BCRI operationalizes that framework through
   <section id="document" class="viewerWrap" aria-label="Embedded PDF">
     <div class="viewerHead">
       <div>Document Viewer</div>
-      <div><a href="BCS-NS-1.1.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+      <div><a href="BCS-NS-1.1-2026-03-06.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
     </div>
-    <iframe src="BCS-NS-1.1.pdf#pagemode=none&view=FitH" title="BCS Normative Summary PDF"></iframe>
+    <iframe src="BCS-NS-1.1-2026-03-06.pdf#pagemode=none&view=FitH" title="BCS Normative Summary PDF"></iframe>
   </section>
 
   <section id="governance" class="section">
