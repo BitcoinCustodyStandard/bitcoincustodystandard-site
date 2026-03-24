@@ -155,6 +155,49 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
   nav{ justify-content:center; }
   .actions{ justify-content:center; }
 }
+
+/* Research link hover previews */
+.research-links { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0; }
+.research-link-item { position:relative; }
+.research-link-item a {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:6px;
+  font-size:14px;
+  color:var(--link);
+  text-decoration:none;
+  transition:background .12s;
+  border-bottom:1px solid var(--border);
+}
+.research-link-item:last-child a { border-bottom:none; }
+.research-link-item a:hover { background:var(--panel); text-decoration:none; }
+.research-link-item a .link-arrow { font-size:11px; color:var(--muted); margin-left:auto; flex-shrink:0; }
+/* Preview card */
+.preview-card {
+  display:none;
+  position:absolute;
+  left:calc(100% + 14px);
+  top:50%;
+  transform:translateY(-50%);
+  width:300px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.10);
+  z-index:100;
+  pointer-events:none;
+}
+.research-link-item:hover .preview-card { display:block; }
+.preview-card img { width:100%; height:160px; object-fit:cover; display:block; border-bottom:1px solid var(--border); }
+.preview-body { padding:10px 12px; }
+.preview-title { font-size:12px; font-weight:700; color:var(--text); margin:0 0 4px; line-height:1.4; }
+.preview-sub { font-size:11px; color:var(--muted); margin:0; line-height:1.5; }
+@media(max-width:900px) {
+  .preview-card { display:none !important; }
+}
 </style>
 </head>
 
@@ -313,13 +356,79 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     <p class="section-intro">The Bitcoin Custody Standard is supported by an ongoing research program. These publications extend the framework through focused analysis of custody architecture, resilience failure modes, and long-horizon operational risk.</p>
     <div class="research-block">
       <h4><span class="dot"></span>BCS Research Archive</h4>
-      <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.8;">
-        <li><a href="https://bitcoincustodystandard.substack.com/p/start-here-the-bitcoin-custody-standard" target="_blank" rel="noopener">Start Here — The Bitcoin Custody Standard</a></li>
-        <li><a href="https://bitcoincustodystandard.substack.com/p/reframing-bitcoin-custody-from-device" target="_blank" rel="noopener">The Case for a Bitcoin Standard</a></li>
-        <li><a href="https://bitcoincustodystandard.substack.com/p/custodial-entropy-the-silent-failure" target="_blank" rel="noopener">Custodial Entropy: The Silent Failure Mode of Bitcoin Custody</a></li>
-        <li><a href="https://bitcoincustodystandard.substack.com/p/the-custodial-paradox-the-structural" target="_blank" rel="noopener">The Custodial Paradox: The Structural Trade-Off in Single-Key Bitcoin Custody</a></li>
+      <ul class="research-links">
+        <li class="research-link-item">
+          <a href="https://bitcoincustodystandard.substack.com/p/start-here-the-bitcoin-custody-standard" target="_blank" rel="noopener">
+            Start Here — The Bitcoin Custody Standard
+            <span class="link-arrow">↗</span>
+          </a>
+          <div class="preview-card">
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2dc587f3-774d-428f-a4de-ac9de1c24f14_1536x1024.png" alt="Start Here preview" />
+            <div class="preview-body">
+              <p class="preview-title">Start Here — The Bitcoin Custody Standard</p>
+              <p class="preview-sub">A research initiative for the structural evaluation of Bitcoin custody systems.</p>
+            </div>
+          </div>
+        </li>
+        <li class="research-link-item">
+          <a href="https://bitcoincustodystandard.substack.com/p/reframing-bitcoin-custody-from-device" target="_blank" rel="noopener">
+            The Case for a Bitcoin Standard
+            <span class="link-arrow">↗</span>
+          </a>
+          <div class="preview-card">
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd40662c0-a753-4abc-a7b5-66de6385bf5b_1536x1024.png" alt="The Case for a Bitcoin Standard preview" />
+            <div class="preview-body">
+              <p class="preview-title">The Case for a Bitcoin Standard</p>
+              <p class="preview-sub">Why custody must be evaluated as a system rather than a collection of devices.</p>
+            </div>
+          </div>
+        </li>
+        <li class="research-link-item">
+          <a href="https://bitcoincustodystandard.substack.com/p/custodial-entropy-the-silent-failure" target="_blank" rel="noopener">
+            Custodial Entropy: The Silent Failure Mode of Bitcoin Custody
+            <span class="link-arrow">↗</span>
+          </a>
+          <div class="preview-card">
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb034fc71-11b0-433a-869c-20d022d8dded_1536x1024.png" alt="Custodial Entropy preview" />
+            <div class="preview-body">
+              <p class="preview-title">Custodial Entropy: The Silent Failure Mode of Bitcoin Custody</p>
+              <p class="preview-sub">A custody system can remain cryptographically secure while quietly becoming unrecoverable.</p>
+            </div>
+          </div>
+        </li>
+        <li class="research-link-item">
+          <a href="https://bitcoincustodystandard.substack.com/p/the-custodial-paradox-the-structural" target="_blank" rel="noopener">
+            The Custodial Paradox: The Structural Trade-Off in Single-Key Bitcoin Custody
+            <span class="link-arrow">↗</span>
+          </a>
+          <div class="preview-card">
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F878d7659-2c85-490d-a1d8-7924e38d9ff3_1536x1024.png" alt="Custodial Paradox preview" />
+            <div class="preview-body">
+              <p class="preview-title">The Custodial Paradox: The Structural Trade-Off in Single-Key Bitcoin Custody</p>
+              <p class="preview-sub">A system-level analysis of four failure modes and the trade-offs that persist over time.</p>
+            </div>
+          </div>
+        </li>
       </ul>
-      <p style="margin-top:12px;"><a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">BCS Research Archive</a> &nbsp;·&nbsp; <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a></p>
+      <div class="research-link-item" style="display:inline-block;margin-top:12px;">
+        <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:0;border-bottom:none;background:transparent;font-size:14px;">
+          BCS Research Archive <span class="link-arrow">↗</span>
+        </a>
+        <div class="preview-card" style="left:0;top:auto;bottom:calc(100% + 10px);transform:none;">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 14px 10px;border-bottom:1px solid var(--border);">
+            <img src="https://substackcdn.com/image/fetch/w_80,h_80,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4706bb8-b19a-4c49-b9b6-fe842fa7c64f_1024x1024.png" alt="BCS Research" style="width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);" />
+            <div>
+              <p style="margin:0 0 3px;font-size:13px;font-weight:700;color:var(--text);">BCS Research</p>
+              <p style="margin:0;font-size:11px;color:var(--muted);line-height:1.4;">bitcoincustodystandard.substack.com</p>
+            </div>
+          </div>
+          <div class="preview-body">
+            <p class="preview-title">Bitcoin Custody Standard Research Archive</p>
+            <p class="preview-sub">Research notes and commentary supporting the development of the Bitcoin Custody Standard — custody architecture, custodial entropy, and resilience analysis.</p>
+          </div>
+        </div>
+      </div>
+      <span style="font-size:14px;color:var(--muted);"> &nbsp;·&nbsp; </span><a href="mailto:research@bitcoincustodystandard.org" style="font-size:14px;">research@bitcoincustodystandard.org</a>
     </div>
   </div>
 
