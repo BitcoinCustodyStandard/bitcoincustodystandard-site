@@ -1,102 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BCRI Benchmark — Bitcoin Custody Standard</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #ffffff;
-      --text: #0b1220;
-      --muted: #4b5563;
-      --border: #e5e7eb;
-      --panel: #f8fafc;
-      --btn: #111827;
-      --btnText: #ffffff;
-      --link: #0f62fe;
-      --btc: #f7931a;
+      --bg: #ffffff; --text: #0b1220; --muted: #4b5563;
+      --border: #e5e7eb; --panel: #f8fafc;
+      --orange: #f7931a; --link: #0f62fe;
     }
-    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.65; }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* NAV */
-    nav { border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; gap: 2rem; height: 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
-    .nav-logo img { height: 28px; width: auto; border-radius: 4px; }
-    .nav-links { display: flex; gap: 0; margin-left: auto; }
-    .nav-links a { padding: 0 1rem; height: 56px; display: flex; align-items: center; font-size: 14px; color: var(--muted); border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; white-space: nowrap; }
+    /* ── NAV — exact match to homepage ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      height: 54px;
+      position: sticky; top: 0;
+      background: var(--bg); z-index: 200;
+    }
+    .nav-brand {
+      display: flex; flex-direction: column; justify-content: center;
+      text-decoration: none; line-height: 1.2; margin-right: auto;
+    }
+    .nav-brand-top { font-size: 13px; font-weight: 700; color: var(--text); }
+    .nav-brand-sub { font-size: 10px; color: var(--muted); }
+    .nav-links { display: flex; }
+    .nav-links a {
+      padding: 0 0.85rem; height: 54px;
+      display: flex; align-items: center;
+      font-size: 13px; color: var(--muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap; transition: color .15s, border-color .15s;
+    }
     .nav-links a:hover { color: var(--text); text-decoration: none; }
-    .nav-links a.active { color: var(--text); font-weight: 600; border-bottom-color: var(--text); }
+    .nav-links a.active { color: var(--text); font-weight: 600; border-bottom-color: var(--orange); }
 
-    /* PAGE */
-    .page { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-    .page-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-    .page-label { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .page-title { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 10px; }
-    .page-sub { font-size: 15px; color: var(--muted); max-width: 640px; line-height: 1.6; }
-    .page-meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; }
-    .meta-item { font-size: 12px; color: var(--muted); }
-    .meta-item strong { color: var(--text); }
+    /* ── HERO — exact match to homepage ── */
+    .hero { text-align: center; padding: 4rem 2rem 3rem; border-bottom: 1px solid var(--border); }
+    .hero-seal { width: 72px; height: 72px; object-fit: contain; margin-bottom: 1.25rem; }
+    .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -.02em; color: var(--text); margin-bottom: 6px; }
+    .hero-docid { font-size: 16px; color: var(--muted); margin-bottom: 1.5rem; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; background: #111827; color: #fff;
+      border-radius: 6px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: opacity .15s;
+    }
+    .btn-primary:hover { opacity: .85; text-decoration: none; }
+    .btn-primary svg { width: 15px; height: 15px; fill: currentColor; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; background: transparent; color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px;
+      font-size: 13px; font-weight: 600; text-decoration: none;
+      transition: border-color .15s;
+    }
+    .btn-outline:hover { border-color: #9ca3af; text-decoration: none; }
 
-    /* EXHIBIT */
-    .exhibit { margin-bottom: 4rem; }
-    .exhibit-label { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .exhibit-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-    .exhibit-header img { width: 38px; height: auto; border-radius: 5px; flex-shrink: 0; }
-    .exhibit-title { font-size: 16px; font-weight: 700; color: var(--text); }
-    .exhibit-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; padding-left: 50px; }
-    .exhibit-sub span { margin: 0 4px; opacity: .4; }
-    .exhibit-obs { font-size: 13px; color: var(--muted); margin-top: 16px; max-width: 720px; line-height: 1.65; font-style: italic; border-left: 3px solid var(--border); padding-left: 14px; }
+    /* ── META TABLE — exact match to homepage ── */
+    .meta-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .meta-row {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-row:nth-last-child(-n+2) { border-bottom: none; }
+    .meta-row.full { grid-column: 1 / -1; }
+    .meta-key {
+      width: 160px; flex-shrink: 0;
+      padding: 10px 14px;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      border-right: 1px solid var(--border);
+      background: var(--panel);
+    }
+    .meta-val { padding: 10px 14px; font-size: 13px; color: var(--text); }
+    .meta-row.full .meta-key { width: 160px; }
 
-    /* LEGEND */
+    /* ── SECTION ── */
+    .section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+    .odot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--text); }
+
+    /* ── CHART BLOCK ── */
+    .chart-block { margin-bottom: 3.5rem; }
+    .chart-block:last-child { margin-bottom: 0; }
+    .chart-hdr { display: flex; align-items: center; gap: 11px; margin-bottom: 3px; }
+    .chart-hdr img { width: 34px; height: auto; border-radius: 4px; flex-shrink: 0; }
+    .chart-hdr-title { font-size: 15px; font-weight: 700; color: var(--text); }
+    .chart-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; padding-left: 45px; }
+    .chart-sub i { margin: 0 4px; opacity: .4; font-style: normal; }
+
+    /* Orange observation box — matches homepage section style */
+    .obs-box {
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #fffbf5;
+    }
+    .obs-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 5px; }
+    .obs-text { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── LEGEND ── */
     .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
     .li { display: flex; align-items: center; gap: 6px; }
     .lsq { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
     .lci { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 
-    /* CHART WRAP */
-    .chart-wrap { position: relative; width: 100%; }
+    /* ── FINDINGS ── */
+    .finding {
+      padding: 1.1rem 1.4rem;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1rem;
+      background: #fffbf5;
+    }
+    .finding-num { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--orange); margin-bottom: 5px; }
+    .finding-text { font-size: 14px; color: var(--text); line-height: 1.65; }
 
-    /* TOOLTIP */
+    /* ── DOC VIEWER ── */
+    .doc-viewer-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: 1.5rem; }
+    .doc-viewer-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px; background: var(--panel); border-bottom: 1px solid var(--border); font-size: 12px;
+    }
+    .doc-viewer-toolbar span { color: var(--muted); }
+    .doc-viewer-toolbar a { font-weight: 600; color: var(--link); }
+    .doc-viewer-frame { width: 100%; height: 680px; border: none; display: block; }
+
+    /* ── FOOTER — exact match to homepage ── */
+    footer { background: var(--panel); border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--text); }
+    .footer-sub { font-size: 13px; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
+    .footer-links a { font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+    /* ── TOOLTIP ── */
     #bcri-tip {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      background: rgba(17,24,39,0.95);
-      border-radius: 10px;
-      padding: 14px 16px;
-      width: 360px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-      display: none;
+      position: fixed; pointer-events: none; z-index: 9999;
+      background: rgba(17,24,39,0.96); border-radius: 10px;
+      padding: 14px 16px; width: 360px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35); display: none;
     }
     .tip-name { font-size: 13px; font-weight: 700; color: #f9fafb; margin: 0 0 4px; line-height: 1.3; }
     .tip-score { font-size: 11px; color: #9ca3af; margin: 0 0 10px; }
     .tip-label { font-size: 9px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #6b7280; margin: 0 0 5px; }
     .tip-config { font-size: 12px; color: #d1d5db; margin: 0; line-height: 1.65; }
-
-    /* FINDINGS */
-    .findings { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); }
-    .findings-title { font-size: 18px; font-weight: 700; margin-bottom: 1.5rem; }
-    .finding { margin-bottom: 1.5rem; padding: 1.25rem 1.5rem; background: var(--panel); border-radius: 8px; border-left: 3px solid var(--border); }
-    .finding-num { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-    .finding-text { font-size: 14px; color: var(--text); line-height: 1.65; }
-
-    /* PDF LINK */
-    .doc-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 2rem; padding: 10px 18px; background: var(--btn); color: var(--btnText); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity .15s; }
-    .doc-link:hover { opacity: .85; text-decoration: none; }
-    .doc-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-
-    footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 12px; color: var(--muted); }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">
-    <img src="/BCS_logo_Short_Rounded_edges.png" alt="BCS" onerror="this.style.display='none'">
-    Bitcoin Custody Standard
+  <a class="nav-brand" href="/">
+    <span class="nav-brand-top">Bitcoin Custody Standard</span>
+    <span class="nav-brand-sub">BCRI Benchmark Report · BCS-BR-1.0</span>
   </a>
   <div class="nav-links">
     <a href="/">Home</a>
@@ -107,6 +190,7 @@
   </div>
 </nav>
 
+<!-- TOOLTIP -->
 <div id="bcri-tip">
   <p class="tip-name" id="tip-name"></p>
   <p class="tip-score" id="tip-score"></p>
@@ -114,32 +198,79 @@
   <p class="tip-config" id="tip-config"></p>
 </div>
 
-<main class="page">
-  <div class="page-header">
-    <p class="page-label">BCS Research Series</p>
-    <h1 class="page-title">BCRI Benchmark Report</h1>
-    <p class="page-sub">Structural resilience and complexity across 14 Bitcoin custody architectures, scored under the Bitcoin Custody Resilience Index (BCRI) framework.</p>
-    <div class="page-meta">
-      <span class="meta-item"><strong>Publication:</strong> BCS-BR-1.0</span>
-      <span class="meta-item"><strong>Version:</strong> 1.0</span>
-      <span class="meta-item"><strong>Date:</strong> March 2026</span>
-      <span class="meta-item"><strong>Status:</strong> Public, Citable</span>
-      <span class="meta-item"><strong>Aligned Standard:</strong> BCS-NS-1.1</span>
-    </div>
-    <a class="doc-link" href="/BCS-BR-1.0-2026-03.pdf" target="_blank">
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-seal" src="/bcs-seal.png" alt="BCS" onerror="this.style.display='none'">
+  <h1>Bitcoin Custody Standard</h1>
+  <p class="hero-docid">BCRI Benchmark Report (BCS-BR-1.0)</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="/BCS-BR-1.0-2026-03.pdf" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM12 17H8v-2h4v2zm4-4H8v-2h8v2z"/></svg>
-      Download Full Report (PDF)
+      Download PDF
     </a>
+    <a class="btn-outline" href="/documents/">All Documents</a>
+    <a class="btn-outline" href="mailto:contact@bitcoincustodystandard.org">Contact</a>
   </div>
 
-  <!-- EXHIBIT 4.1 -->
-  <div class="exhibit">
-    <p class="exhibit-label">Exhibit 4.1</p>
-    <div class="exhibit-header">
-      <img src="/BCS_logo_Short_Rounded_edges.png" alt="BCS" onerror="this.style.display='none'">
-      <span class="exhibit-title">Bitcoin Custody Architecture Benchmark Ranking (BCRI)</span>
+  <div class="meta-table">
+    <div class="meta-row">
+      <div class="meta-key">Document Type</div>
+      <div class="meta-val">Benchmark Report</div>
     </div>
-    <p class="exhibit-sub">All 14 benchmark architectures <span>·</span> Benchmark Ranking <span>·</span> BCS 2026</p>
+    <div class="meta-row">
+      <div class="meta-key">Document ID</div>
+      <div class="meta-val">BCS-BR-1.0</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Version</div>
+      <div class="meta-val">1.0</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Publication Date</div>
+      <div class="meta-val">March 2026</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Document Class</div>
+      <div class="meta-val">Benchmark Report</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Status</div>
+      <div class="meta-val">Public, Citable</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Aligned Standard</div>
+      <div class="meta-val">BCS-NS-1.1</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-key">Next Review</div>
+      <div class="meta-val">March 2027</div>
+    </div>
+    <div class="meta-row full">
+      <div class="meta-key">Steward</div>
+      <div class="meta-val">Bitcoin Custody Standard Initiative</div>
+    </div>
+    <div class="meta-row full">
+      <div class="meta-key">Contact</div>
+      <div class="meta-val"><a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- BENCHMARK EXHIBITS -->
+<div class="section" id="benchmark">
+  <div class="section-header">
+    <div class="odot"></div>
+    <h2 class="section-title">Benchmark Exhibits</h2>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:2rem;">Three exhibits presenting the full BCRI benchmark dataset. Hover any bar or dot for the full reference configuration from Annex A.</p>
+
+  <!-- CHART 1 -->
+  <div class="chart-block">
+    <div class="chart-hdr">
+      <img src="/BCS_logo_Short_Rounded_edges.png" alt="BCS" onerror="this.style.display='none'">
+      <span class="chart-hdr-title">Bitcoin Custody Architecture Benchmark Ranking (BCRI)</span>
+    </div>
+    <p class="chart-sub">All 14 benchmark architectures <i>·</i> Benchmark Ranking <i>·</i> BCS 2026</p>
     <div class="legend">
       <span class="li"><span class="lsq" style="background:repeating-linear-gradient(45deg,#d1d5db,#d1d5db 2px,#f9fafb 2px,#f9fafb 5px);border:0.5px solid #9ca3af;"></span><strong>No Sovereignty</strong></span>
       <span class="li"><span class="lsq" style="background:#fde68a;"></span><strong>Single-Key</strong></span>
@@ -147,18 +278,20 @@
       <span class="li"><span class="lsq" style="background:#bfdbfe;"></span><strong>Collaborative</strong></span>
       <span class="li"><span class="lsq" style="background:#e9d5ff;"></span><strong>Institutional</strong></span>
     </div>
-    <div class="chart-wrap" style="height:840px;"><canvas id="c1"></canvas></div>
-    <p class="exhibit-obs">The ranking orders 12 scored architectures by absolute BCRI. Distributed self-custody and collaborative multisig designs occupy the top positions. The RE column shows that BCRI rank order and resilience efficiency rank order do not align — architectures with lower absolute BCRI can achieve higher efficiency per unit of operational complexity. Hover any bar for the full reference configuration.</p>
+    <div style="position:relative;width:100%;height:840px;"><canvas id="c1"></canvas></div>
+    <div class="obs-box">
+      <div class="obs-dot"></div>
+      <p class="obs-text">The ranking orders 12 scored architectures by absolute BCRI. Distributed self-custody and collaborative multisig designs occupy the top positions. The RE column shows that BCRI rank and resilience efficiency rank do not align — lower-BCRI architectures can achieve higher efficiency per unit of operational complexity.</p>
+    </div>
   </div>
 
-  <!-- EXHIBIT 4.2 -->
-  <div class="exhibit">
-    <p class="exhibit-label">Exhibit 4.2</p>
-    <div class="exhibit-header">
+  <!-- CHART 2 -->
+  <div class="chart-block">
+    <div class="chart-hdr">
       <img src="/BCS_logo_Short_Rounded_edges.png" alt="BCS" onerror="this.style.display='none'">
-      <span class="exhibit-title">BCRI Resilience Efficiency Frontier</span>
+      <span class="chart-hdr-title">BCRI Resilience Efficiency Frontier</span>
     </div>
-    <p class="exhibit-sub">All 14 benchmark architectures <span>·</span> Benchmark Analysis <span>·</span> BCS 2026</p>
+    <p class="chart-sub">All 14 benchmark architectures <i>·</i> Benchmark Analysis <i>·</i> BCS 2026</p>
     <div class="legend">
       <span class="li"><span class="lci" style="background:#fca5a5;border:1.5px solid #f87171;"></span><strong>No Sovereignty</strong></span>
       <span class="li"><span class="lci" style="background:#fde68a;border:1.5px solid #d97706;"></span><strong>Single-Key</strong></span>
@@ -166,49 +299,86 @@
       <span class="li"><span class="lci" style="background:#bbf7d0;border:1.5px solid #059669;"></span><strong>Distributed</strong></span>
       <span class="li"><span class="lci" style="background:#e9d5ff;border:1.5px solid #7c3aed;"></span><strong>Institutional</strong></span>
     </div>
-    <div class="chart-wrap" style="height:520px;"><canvas id="c2"></canvas></div>
-    <p class="exhibit-obs">ERE rises steeply from CS 1.0 to the frontier peak near CS 4.5, then declines. Institutional architectures cluster to the right of the peak, producing lower resilience efficiency despite strong absolute BCRI scores. Hover any dot to see the full reference configuration.</p>
+    <div style="position:relative;width:100%;height:520px;"><canvas id="c2"></canvas></div>
+    <div class="obs-box">
+      <div class="obs-dot"></div>
+      <p class="obs-text">ERE rises steeply from CS 1.0 to the frontier peak near CS 4.5, then declines. Institutional architectures cluster to the right of the peak, producing lower resilience efficiency despite strong absolute BCRI scores. Beyond the peak, added complexity yields diminishing resilience returns.</p>
+    </div>
   </div>
 
-  <!-- EXHIBIT 4.3 -->
-  <div class="exhibit">
-    <p class="exhibit-label">Exhibit 4.3</p>
-    <div class="exhibit-header">
+  <!-- CHART 3 -->
+  <div class="chart-block">
+    <div class="chart-hdr">
       <img src="/BCS_logo_Short_Rounded_edges.png" alt="BCS" onerror="this.style.display='none'">
-      <span class="exhibit-title">Bitcoin Custody Architecture Map — Complexity vs Structural Resilience (BCRI)</span>
+      <span class="chart-hdr-title">Bitcoin Custody Architecture Map — Complexity vs Structural Resilience (BCRI)</span>
     </div>
-    <p class="exhibit-sub">12 benchmark architectures <span>·</span> Benchmark Analysis <span>·</span> BCS 2026</p>
+    <p class="chart-sub">12 benchmark architectures <i>·</i> Benchmark Analysis <i>·</i> BCS 2026</p>
     <div class="legend">
       <span class="li"><span class="lci" style="background:#fde68a;border:1.5px solid #d97706;"></span><strong>Single-Key</strong></span>
       <span class="li"><span class="lci" style="background:#bbf7d0;border:1.5px solid #059669;"></span><strong>Distributed</strong></span>
       <span class="li"><span class="lci" style="background:#bfdbfe;border:1.5px solid #2563eb;"></span><strong>Collaborative</strong></span>
       <span class="li"><span class="lci" style="background:#e9d5ff;border:1.5px solid #7c3aed;"></span><strong>Institutional</strong></span>
     </div>
-    <div class="chart-wrap" style="height:520px;"><canvas id="c3"></canvas></div>
-    <p class="exhibit-obs">The architecture map divides the design space into four structurally distinct quadrants. Two architectures fall below the Resilience Sufficiency Threshold at markedly different complexity levels — confirming that sub-threshold outcomes arise from distinct structural causes requiring different corrective interventions. Hover any dot for the full reference configuration.</p>
-  </div>
-
-  <!-- KEY FINDINGS -->
-  <div class="findings">
-    <h2 class="findings-title">Key Findings</h2>
-    <div class="finding">
-      <p class="finding-num">Finding 1</p>
-      <p class="finding-text"><strong>Maximum resilience is achieved through architecture design, not delegation.</strong> The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations.</p>
-    </div>
-    <div class="finding">
-      <p class="finding-num">Finding 2</p>
-      <p class="finding-text"><strong>Resilience efficiency peaks at moderate complexity and declines steeply beyond it.</strong> The three most ERE-efficient architectures all operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. Governance cannot substitute for structural design.</p>
-    </div>
-    <div class="finding">
-      <p class="finding-num">Finding 3</p>
-      <p class="finding-text"><strong>Custody failure is two-dimensional.</strong> Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
+    <div style="position:relative;width:100%;height:520px;"><canvas id="c3"></canvas></div>
+    <div class="obs-box">
+      <div class="obs-dot"></div>
+      <p class="obs-text">The architecture map divides the design space into four structurally distinct quadrants. Two architectures fall below the Resilience Sufficiency Threshold at markedly different complexity levels — confirming that sub-threshold outcomes arise from distinct structural causes requiring different corrective interventions.</p>
     </div>
   </div>
+</div>
 
-</main>
+<!-- KEY FINDINGS -->
+<div class="section" id="findings">
+  <div class="section-header">
+    <div class="odot"></div>
+    <h2 class="section-title">Key Findings</h2>
+  </div>
+  <div class="finding">
+    <p class="finding-num">Finding 1</p>
+    <p class="finding-text"><strong>Maximum resilience is achieved through architecture design, not delegation.</strong> The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations. Resilience cannot be purchased. It is built into the structure at design time.</p>
+  </div>
+  <div class="finding">
+    <p class="finding-num">Finding 2</p>
+    <p class="finding-text"><strong>Resilience efficiency peaks at moderate complexity and declines steeply beyond it.</strong> The three most ERE-efficient architectures all operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. The Corporate Bitcoin Treasury (CS 8.2, ERE 25.1) is the benchmark's clearest case of misallocated complexity. Governance cannot substitute for structural design.</p>
+  </div>
+  <div class="finding">
+    <p class="finding-num">Finding 3</p>
+    <p class="finding-text"><strong>Custody failure is two-dimensional.</strong> Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
+  </div>
+</div>
 
+<!-- DOCUMENT VIEWER -->
+<div class="section" id="document">
+  <div class="section-header">
+    <div class="odot"></div>
+    <h2 class="section-title">Document Viewer</h2>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:1.5rem;">Complete benchmark report including methodology, all exhibits, analysis, limitations, practitioner implications, and Annex A architecture profiles.</p>
+  <div class="doc-viewer-wrap">
+    <div class="doc-viewer-toolbar">
+      <span>BCS-BR-1.0 — BCRI Benchmark Report — March 2026</span>
+      <a href="/BCS-BR-1.0-2026-03.pdf" target="_blank">Open in new tab ↗</a>
+    </div>
+    <iframe class="doc-viewer-frame" src="/BCS-BR-1.0-2026-03.pdf" title="BCS-BR-1.0 BCRI Benchmark Report"></iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Bitcoin Custody Standard Initiative. All rights reserved. &nbsp;·&nbsp; <a href="/governance/">Governance</a> &nbsp;·&nbsp; <a href="/documents/">Documents</a></p>
+  <p class="footer-name">Bitcoin Custody Standard (BCS)</p>
+  <p class="footer-sub">A normative framework for evaluating Bitcoin custody resilience.<br>Maintained by the Bitcoin Custody Standard Initiative (BCSI).<br>Version 1.0 — March 2026</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/bcri/">BCRI Benchmark</a>
+    <a href="/documents/">Documents</a>
+    <a href="/research/">Research</a>
+    <a href="/governance/">Governance</a>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a>
+    <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a>
+  </div>
+  <p class="footer-copy">© 2026 Bitcoin Custody Standard (BCS). All rights reserved.</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -220,47 +390,35 @@ function rBg(r){return{'AAA':'#14532d','AA+':'#166534','AA':'#15803d','A+':'#16a
 const CONFIGS={
   'Exchange Wallet':'Client account on a centralized exchange. The exchange holds all private keys in omnibus pools. The client owns a ledger balance only — not on-chain Bitcoin. No personal hardware or signing device required. In the event of exchange insolvency, the client becomes an unsecured creditor.',
   'Hot Wallet':'Software wallet on a smartphone or desktop device. Single private key held in device memory or a cloud backup service. Internet-connected at all times. Relies on a third-party node or provider API for chain data. Device compromise or cloud backup breach results in immediate, unrecoverable total loss.',
-  'Single-Sig Cold Storage — Regular':'Single air-gapped hardware signing device (e.g. Coldcard, Ledger, Trezor). Seed phrase backed up on a stamped metal plate. Third-party node used for transaction broadcast. No multisig. Single geographic location. One device loss or seed compromise is unrecoverable.',
-  'Single-Sig Cold Storage — Advanced':'Air-gapped hardware signing device with passphrase-hardened key. PSBT signing via microSD transfer — zero USB connections. Personal Bitcoin node on dedicated hardware. Seed backed up on stamped metal with passphrase stored separately from seed. Complete operational sovereignty, no third-party data dependency.',
-  'Self-Managed Multisig — Regular (2-of-3)':'2-of-3 multisig with three hardware signing devices (Coldcard, Trezor, Foundation Passport or equivalent), all operator-held at a single primary location. Sequential PSBT signing via a multisig-capable wallet coordinator. Multisig descriptor backed up on encrypted storage. Third-party node for broadcast. Single-geography exposure means simultaneous seizure remains a risk.',
-  'Self-Managed Multisig — Advanced (3-of-5)':'2-of-3 multisig across three independent operators, each holding one hardware signing device at their own location in geographically separate cities. Any two participants must coordinate to produce a valid signature. Each operator maintains independent copies of the multisig descriptor and encrypted seed backup. No single point of failure across devices, operators, or locations.',
-  'Self-Managed Multisig — Hi Resilience (Geo)':'2-of-3 multisig with hardware signing devices at three geographically separate locations in distinct regulatory jurisdictions. Fully air-gapped PSBT signing via QR code only — zero USB connections. Personal Bitcoin node on dedicated hardened hardware. Stamped-metal seed backups at each location. Unique passphrases per device, stored separately from seeds. Benchmark maximum: BCRI 97.5.',
-  'Collaborative Multisig — Assisted (2-of-3)':'2-of-3 multisig: client holds one hardware signing device; a collaborative co-signing provider (e.g. Casa, Unchained Capital) holds one key in HSM-secured infrastructure; third path uses the client\'s own seed backup. Day-to-day spending requires client hardware plus provider co-signature. Recovery is possible with the client\'s own seed alone, without provider involvement.',
-  'Collaborative Multisig — Peer (2-of-3)':'2-of-3 multisig across two equal co-signing peers, each holding one hardware signing device at their own location in geographically separate cities. An optional third recovery key is held in a secure facility. No third-party service dependency. Neither party can spend unilaterally. Succession is the primary structural gap.',
-  'Collaborative Multisig — Advised (3-of-5)':'3-of-5 multisig: client holds two hardware signing devices at separate locations; a professional co-signing custodian holds one key in HSM-secured infrastructure; an independent key agent holds one key in geographically separate secure storage; a fifth sealed recovery package provides an additional path. Three of five keys required to spend. Multi-continental key distribution with formal succession and estate documentation.',
-  'MPC Custody':'Multi-party computation custody: no complete private key ever exists at any point. Cryptographic key shares distributed across geographically separate HSM nodes (e.g. Fireblocks, BitGo, Copper). Client initiates transactions via API or platform dashboard. Multi-jurisdictional cold storage. Independent third-party audit attestation (SOC 2 Type II). Omnibus pooling — clients cannot independently verify holdings on-chain.',
-  'Corporate Bitcoin Treasury':'Bitcoin held as a treasury reserve asset through multiple regulated custodians under board committee governance. Board approval required for all withdrawals. Direct primary custodian relationships with no sub-custodians. Reference configuration based on SEC 10-K filings — custodians are US-based, creating single-jurisdiction concentration risk that governance cannot compensate for.',
-  'Regulated Exchange Custody':'Industrial-scale MPC custody at the exchange layer. Approximately 98% of assets in cold storage, small hot wallet for operational liquidity. Omnibus client pooling — no individual on-chain addresses. Geographically distributed cold storage vaults. Based on Coinbase Global 10-K filings as best-case reference. SOC 2 Type II and PCAOB audits annually. OFAC compliance screening on all transactions.',
-  'Qualified Custodian':'OCC national bank charter or NYDFS limited purpose trust company charter. Individual segregated on-chain addresses per client — independently verifiable at any time. Hardware security modules meeting FIPS 140-2 Level 3. Multi-continental cold storage vaults. Statutory trust law structure provides bankruptcy remoteness for client assets. Highest CS in the benchmark (9.4) — maximum coordination complexity and cost.',
+  'Single-Sig Cold Storage — Regular':'Single air-gapped hardware signing device (e.g. Coldcard, Ledger, Trezor). Seed phrase backed up on a stamped metal plate. Third-party node for broadcast. No multisig. Single geographic location. One device loss or seed compromise is unrecoverable.',
+  'Single-Sig Cold Storage — Advanced':'Air-gapped hardware signing device with passphrase-hardened key. PSBT signing via microSD — zero USB connections. Personal Bitcoin node on dedicated hardware. Seed and passphrase stored separately. Complete operational sovereignty, no third-party data dependency.',
+  'Self-Managed Multisig — Regular (2-of-3)':'2-of-3 multisig with three hardware signing devices (Coldcard, Trezor, Foundation Passport or equivalent), all at a single location. Sequential PSBT signing via a multisig coordinator. Multisig descriptor on encrypted storage. Third-party node for broadcast. Single-geography exposure means simultaneous seizure remains a risk.',
+  'Self-Managed Multisig — Advanced (3-of-5)':'2-of-3 multisig across three independent operators in geographically separate cities, each holding one hardware device. Any two must coordinate to sign. Each operator holds independent copies of the descriptor and seed backup. No single point of failure across devices, operators, or locations.',
+  'Self-Managed Multisig — Hi Resilience (Geo)':'2-of-3 multisig with hardware devices at three geographically separate locations in distinct regulatory jurisdictions. Fully air-gapped QR-only signing — zero USB. Personal Bitcoin node on hardened hardware. Stamped-metal seed backups at each location. Unique passphrases per device, stored separately from seeds. Benchmark maximum: BCRI 97.5.',
+  'Collaborative Multisig — Assisted (2-of-3)':'2-of-3 multisig: client holds one hardware device; co-signing provider (e.g. Casa, Unchained) holds one key in HSM infrastructure; third path is the client\'s own seed backup. Day-to-day spending requires client hardware plus provider co-signature. Recovery is possible with the client\'s seed alone, without provider involvement.',
+  'Collaborative Multisig — Peer (2-of-3)':'2-of-3 multisig across two equal co-signing peers at separate locations. Optional third recovery key in a secure facility. No third-party service dependency. Neither party can spend unilaterally. Succession is the primary structural gap.',
+  'Collaborative Multisig — Advised (3-of-5)':'3-of-5 multisig: client holds two devices at separate locations; professional co-signer holds one HSM key; independent key agent holds one key; sealed fifth recovery package. Three of five keys required to spend. Multi-continental distribution with formal succession and estate documentation.',
+  'MPC Custody':'No complete private key ever exists. Cryptographic key shares distributed across geographically separate HSM nodes (e.g. Fireblocks, BitGo, Copper). Client initiates via API or dashboard. Multi-jurisdictional cold storage. SOC 2 Type II attested. Omnibus pooling — clients cannot independently verify holdings on-chain.',
+  'Corporate Bitcoin Treasury':'Bitcoin held via multiple regulated custodians under board committee governance. Board approval required for all withdrawals. Reference configuration based on SEC 10-K filings — all custodians are US-based, creating single-jurisdiction concentration risk that governance cannot compensate for.',
+  'Regulated Exchange Custody':'~98% cold storage via industrial-scale MPC (Coinbase model as best-case reference). Omnibus pooling — no individual on-chain addresses. Geographically distributed vaults. SOC 2 Type II and PCAOB audits annually. OFAC compliance screening on all transactions.',
+  'Qualified Custodian':'OCC national bank or NYDFS limited purpose trust charter. Individual segregated on-chain addresses per client — independently verifiable at any time. FIPS 140-2 Level 3 HSMs. Multi-continental cold storage. Statutory trust law provides bankruptcy remoteness. Highest CS in the benchmark (9.4).',
 };
 
-const tip=document.getElementById('bcri-tip');
-const tipName=document.getElementById('tip-name');
-const tipScore=document.getElementById('tip-score');
-const tipConfig=document.getElementById('tip-config');
-
-function showTip(e,name,score,config){
-  tipName.textContent=name; tipScore.textContent=score; tipConfig.textContent=config;
-  tip.style.display='block'; moveTip(e);
-}
-function moveTip(e){
-  const x=e.clientX+16,y=e.clientY+16;
-  const w=tip.offsetWidth,h=tip.offsetHeight;
-  tip.style.left=(x+w>window.innerWidth?e.clientX-w-16:x)+'px';
-  tip.style.top=(y+h>window.innerHeight?e.clientY-h-16:y)+'px';
-}
+const tip=document.getElementById('bcri-tip'),tipName=document.getElementById('tip-name'),tipScore=document.getElementById('tip-score'),tipConfig=document.getElementById('tip-config');
+function showTip(e,name,score,config){tipName.textContent=name;tipScore.textContent=score;tipConfig.textContent=config;tip.style.display='block';moveTip(e);}
+function moveTip(e){const x=e.clientX+16,y=e.clientY+16,w=tip.offsetWidth,h=tip.offsetHeight;tip.style.left=(x+w>window.innerWidth?e.clientX-w-16:x)+'px';tip.style.top=(y+h>window.innerHeight?e.clientY-h-16:y)+'px';}
 function hideTip(){tip.style.display='none';}
 
 const rd=[
   {l1:'Self-Managed Multisig',  l2:'— Hi Resilience (Geo)',bcri:97.5,re:39.1,rat:'AAA', z:'Distributed', name:'Self-Managed Multisig — Hi Resilience (Geo)'},
   {l1:'Collaborative Multisig', l2:'— Advised (3-of-5)',  bcri:96.5,re:42.3,rat:'AA+', z:'Collaborative',name:'Collaborative Multisig — Advised (3-of-5)'},
   {l1:'Qualified',              l2:'Custodian',           bcri:93.7,re:30.6,rat:'AA',  z:'Institutional', name:'Qualified Custodian'},
-  {l1:'Self-Managed Multisig',  l2:'— Advanced (3-of-5)', bcri:89.6,re:37.9,rat:'A+',  z:'Distributed', name:'Self-Managed Multisig — Advanced (3-of-5)'},
+  {l1:'Self-Managed Multisig',  l2:'— Advanced (3-of-5)', bcri:89.6,re:37.9,rat:'A+',  z:'Distributed',  name:'Self-Managed Multisig — Advanced (3-of-5)'},
   {l1:'MPC',                    l2:'Custody',             bcri:89.6,re:32.9,rat:'A+',  z:'Institutional', name:'MPC Custody'},
   {l1:'Single-Sig Cold Storage',l2:'— Advanced',          bcri:84.1,re:38.4,rat:'A',   z:'Single-Key',   name:'Single-Sig Cold Storage — Advanced'},
   {l1:'Collaborative Multisig', l2:'— Peer (2-of-3)',     bcri:82.0,re:38.2,rat:'A-',  z:'Collaborative',name:'Collaborative Multisig — Peer (2-of-3)'},
   {l1:'Collaborative Multisig', l2:'— Assisted (2-of-3)', bcri:79.2,re:43.0,rat:'BBB+',z:'Collaborative',name:'Collaborative Multisig — Assisted (2-of-3)'},
-  {l1:'Self-Managed Multisig',  l2:'— Regular (2-of-3)',  bcri:76.6,re:36.5,rat:'BBB+',z:'Distributed', name:'Self-Managed Multisig — Regular (2-of-3)'},
+  {l1:'Self-Managed Multisig',  l2:'— Regular (2-of-3)',  bcri:76.6,re:36.5,rat:'BBB+',z:'Distributed',  name:'Self-Managed Multisig — Regular (2-of-3)'},
   {l1:'Regulated Exchange',     l2:'Custody',             bcri:75.5,re:25.4,rat:'BBB+',z:'Institutional', name:'Regulated Exchange Custody'},
   {l1:'Corporate Bitcoin',      l2:'Treasury',            bcri:72.0,re:25.1,rat:'BBB', z:'Institutional', name:'Corporate Bitcoin Treasury'},
   {l1:'Single-Sig Cold Storage',l2:'— Regular',           bcri:68.2,re:42.3,rat:'BBB-',z:'Single-Key',   name:'Single-Sig Cold Storage — Regular'},
@@ -269,19 +427,14 @@ const rd=[
 ];
 
 const lblPlugin={id:'lbl',afterDraw(chart){
-  const {ctx,scales:{x,y}}=chart;
-  ctx.save();
+  const {ctx,scales:{x,y}}=chart;ctx.save();
   rd.forEach((d,i)=>{
     const yp=y.getPixelForValue(i),bH=18,bY=yp-9,rW=42,rX=4;
-    ctx.fillStyle=rBg(d.rat);
-    ctx.beginPath();ctx.roundRect(rX,bY,rW,bH,3);ctx.fill();
-    ctx.fillStyle='#fff';ctx.font='700 10px system-ui';ctx.textAlign='center';
-    ctx.fillText(d.rat,rX+rW/2,bY+12);
+    ctx.fillStyle=rBg(d.rat);ctx.beginPath();ctx.roundRect(rX,bY,rW,bH,3);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.fillText(d.rat,rX+rW/2,bY+12);
     const tx=rX+rW+6;
-    ctx.fillStyle='#111827';ctx.font='600 11px system-ui';ctx.textAlign='left';
-    ctx.fillText(d.l1,tx,yp-3);
-    ctx.fillStyle='#374151';ctx.font='11px system-ui';
-    ctx.fillText(d.l2,tx,yp+10);
+    ctx.fillStyle='#111827';ctx.font='600 11px system-ui';ctx.textAlign='left';ctx.fillText(d.l1,tx,yp-3);
+    ctx.fillStyle='#374151';ctx.font='11px system-ui';ctx.fillText(d.l2,tx,yp+10);
     if(d.bcri>25){
       const mid=(x.getPixelForValue(0)+x.getPixelForValue(d.bcri))/2;
       ctx.font='700 10px system-ui';ctx.fillStyle='rgba(17,24,39,0.72)';ctx.textAlign='center';
@@ -294,8 +447,7 @@ const lblPlugin={id:'lbl',afterDraw(chart){
       ctx.fillStyle='#374151';ctx.font='700 10px system-ui';ctx.textAlign='center';
       ctx.fillText('RE '+d.re.toFixed(1),rpX+rpW/2,bY+12);
     }
-  });
-  ctx.restore();
+  });ctx.restore();
 }};
 
 const hoverPlugin={id:'hov',afterEvent(chart,args){
@@ -316,14 +468,10 @@ new Chart(document.getElementById('c1'),{
     borderWidth:rd.map(d=>d.z==='No Sovereignty'?1:0),
     borderRadius:3,borderSkipped:false,
   }]},
-  options:{
-    indexAxis:'y',responsive:true,maintainAspectRatio:false,
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
     layout:{padding:{left:8,right:72,top:4,bottom:4}},
     plugins:{legend:{display:false},tooltip:{enabled:false}},
-    scales:{
-      x:{min:0,max:100,grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11,family:'system-ui'}}},
-      y:{grid:{display:false},ticks:{display:false}}
-    }
+    scales:{x:{min:0,max:100,grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11,family:'system-ui'}}},y:{grid:{display:false},ticks:{display:false}}}
   }
 });
 document.getElementById('c1').addEventListener('mousemove',moveTip);
@@ -334,8 +482,7 @@ const N=300,cv=[];
 for(let i=0;i<=N;i++){const cs=i/N*10.5;cv.push({x:+cs.toFixed(3),y:+fy(cs).toFixed(3)});}
 
 const grd={id:'grd',beforeDatasetsDraw(chart){
-  const {ctx,scales:{x,y}}=chart;
-  ctx.save();
+  const {ctx,scales:{x,y}}=chart;ctx.save();
   for(let i=0;i<cv.length-1;i++){
     const t=i/(cv.length-1);
     const p1={px:x.getPixelForValue(cv[i].x),py:y.getPixelForValue(cv[i].y)};
@@ -355,8 +502,7 @@ const grd={id:'grd',beforeDatasetsDraw(chart){
   const ppx=x.getPixelForValue(4.5),ppy=y.getPixelForValue(28.9);
   ctx.fillStyle='#166634';ctx.beginPath();ctx.arc(ppx,ppy,5,0,Math.PI*2);ctx.fill();
   ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ppx,ppy,2.5,0,Math.PI*2);ctx.fill();
-  const lbl='Peak  CS 4.5 · ERE 28.9';
-  ctx.font='700 10px system-ui';
+  const lbl='Peak  CS 4.5 · ERE 28.9';ctx.font='700 10px system-ui';
   const bW=ctx.measureText(lbl).width+16,bH=18,bX=ppx-bW/2-28,bY=ppy-30;
   ctx.fillStyle='#f0fdf4';ctx.strokeStyle='#16a34a';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.roundRect(bX,bY,bW,bH,4);ctx.fill();ctx.stroke();
@@ -365,8 +511,7 @@ const grd={id:'grd',beforeDatasetsDraw(chart){
 }};
 
 const bnd={id:'bnd',beforeDraw(chart){
-  const {ctx,scales:{x},chartArea:{top,bottom}}=chart;
-  ctx.save();
+  const {ctx,scales:{x},chartArea:{top,bottom}}=chart;ctx.save();
   [{f:0,t:1.5,c:'rgba(254,202,202,0.2)',n:'No Sovereignty',fc:'#b91c1c'},
    {f:1.5,t:3.5,c:'rgba(253,230,138,0.18)',n:'Single-Key',fc:'#92400e'},
    {f:3.5,t:5.5,c:'rgba(191,219,254,0.18)',n:'Collaborative',fc:'#1e40af'},
@@ -375,10 +520,8 @@ const bnd={id:'bnd',beforeDraw(chart){
   ].forEach(z=>{
     const x1=x.getPixelForValue(z.f),x2=x.getPixelForValue(z.t);
     ctx.fillStyle=z.c;ctx.fillRect(x1,top,x2-x1,bottom-top);
-    ctx.fillStyle=z.fc;ctx.font='700 10px system-ui';ctx.textAlign='center';
-    ctx.fillText(z.n,(x1+x2)/2,top+14);
-  });
-  ctx.restore();
+    ctx.fillStyle=z.fc;ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.fillText(z.n,(x1+x2)/2,top+14);
+  });ctx.restore();
 }};
 
 const fd=[
@@ -453,8 +596,7 @@ const mapHover={id:'mhov',afterEvent(chart,args){
 
 const qp={id:'qp',beforeDraw(chart){
   const {ctx,scales:{x,y},chartArea:{left,right,top,bottom}}=chart;
-  const mx=x.getPixelForValue(5),my=y.getPixelForValue(75);
-  ctx.save();
+  const mx=x.getPixelForValue(5),my=y.getPixelForValue(75);ctx.save();
   [{x1:left,y1:top,x2:mx,y2:my,bg:'rgba(209,250,229,0.45)',tc:'#065f46',sc:'#047857',t:'Efficient Self-Custody',s:'Low Complexity · High Resilience',ly:0.55},
    {x1:mx,y1:top,x2:right,y2:my,bg:'rgba(237,233,254,0.45)',tc:'#4c1d95',sc:'#6d28d9',t:'Institutional Custody',s:'High Complexity · High Resilience',ly:0.55},
    {x1:left,y1:my,x2:mx,y2:bottom,bg:'rgba(255,251,235,0.55)',tc:'#92400e',sc:'#b45309',t:'Convenience Custody',s:'Low Complexity · Lower Resilience',ly:0.55},
@@ -468,8 +610,7 @@ const qp={id:'qp',beforeDraw(chart){
     ctx.fillStyle=q.tc;ctx.font='600 10px system-ui';ctx.textAlign='center';ctx.fillText(q.t,cx,bY+13);
     ctx.fillStyle=q.sc;ctx.font='9px system-ui';ctx.fillText(q.s,cx,bY+27);
   });
-  ctx.setLineDash([]);
-  ctx.strokeStyle='rgba(107,114,128,0.5)';ctx.lineWidth=1.5;
+  ctx.setLineDash([]);ctx.strokeStyle='rgba(107,114,128,0.5)';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.moveTo(mx,top);ctx.lineTo(mx,bottom);ctx.stroke();
   ctx.beginPath();ctx.moveTo(left,my);ctx.lineTo(right,my);ctx.stroke();
   ctx.fillStyle='rgba(75,85,99,0.6)';ctx.font='9px system-ui';ctx.textAlign='left';
