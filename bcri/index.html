@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BCRI Benchmark Report — Bitcoin Custody Standard</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="canonical" href="https://bitcoincustodystandard.org/bcri/" />
+<meta name="description" content="BCS-BR-1.0 — BCRI Benchmark Report. Structural resilience and complexity benchmarks for 14 Bitcoin custody architecture types under the Bitcoin Custody Standard." />
+<meta name="robots" content="index,follow" />
+
+<meta property="og:title" content="BCRI Benchmark Report — Bitcoin Custody Standard" />
+<meta property="og:description" content="BCS-BR-1.0 — Structural benchmark for 14 Bitcoin custody architectures under the Bitcoin Custody Standard." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://bitcoincustodystandard.org/BCS_twitter_card_1200x630.png" />
+<meta property="og:url" content="https://bitcoincustodystandard.org/bcri/" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="BCRI Benchmark Report — Bitcoin Custody Standard" />
+<meta name="twitter:description" content="BCS-BR-1.0 — Structural benchmark for 14 Bitcoin custody architectures under the Bitcoin Custody Standard." />
+<meta name="twitter:image" content="https://bitcoincustodystandard.org/BCS_twitter_card_1200x630.png" />
+<meta name="twitter:site" content="@Bitcoin_Custody" />
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#0b1220;
+  --muted:#4b5563;
+  --border:#e5e7eb;
+  --panel:#f8fafc;
+  --btn:#111827;
+  --btnText:#ffffff;
+  --link:#0f62fe;
+  --btc:#f7931a;
+  --headerH:72px;
+}
+@media(max-width:760px){
+  :root{ --headerH: 132px; }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height:1.6;
+}
+a{color:var(--link); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+header{
+  border-bottom:1px solid var(--border);
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+  min-height:var(--headerH);
+  flex-wrap:wrap;
+  gap:12px;
+}
+.brand{ display:flex; align-items:center; gap:12px; }
+.logo{ width:34px; height:34px; border-radius:8px; object-fit:cover; }
+.brand h1{margin:0;font-size:16px;font-weight:900}
+.brand .sub{margin:0;font-size:12px;color:var(--muted)}
+nav{display:flex;gap:14px;flex-wrap:wrap}
+nav a{font-weight:600;color:var(--muted)}
+nav a:hover{color:var(--text);text-decoration:none}
+nav a.active{color:var(--text)}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{
+  padding:9px 14px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+}
+.btn.primary{ background:var(--btn); color:var(--btnText); border-color:var(--btn); }
+.btn:hover{text-decoration:none;filter:brightness(.97)}
+main{padding:34px 0 60px}
+.top-anchor{ position:relative; top: calc(-1 * (var(--headerH) + 18px)); height:0; }
+.hero{ padding-bottom:18px; border-bottom:1px solid var(--border); margin-bottom:18px; }
+.hero h2{margin:0 0 10px 0;font-size:32px;font-weight:950}
+.lead{margin:0;color:var(--muted);max-width:92ch}
+.meta{ border:1px solid var(--border); border-radius:14px; padding:14px; margin:18px 0; }
+.metaGrid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; }
+@media(max-width:760px){
+  .metaGrid{ grid-template-columns: 1fr; justify-items: center; }
+  .kv{ width:100%; max-width:520px; margin-left:auto; margin-right:auto; align-items:flex-start; gap:12px; }
+  .k{ flex: 0 0 44%; }
+  .v{ flex:1 1 auto; display:flex; justify-content:flex-end; text-align:right; }
+  .v a{ display:inline-block; text-align:right; word-break:break-word; }
+}
+.kv{ display:flex; justify-content:space-between; align-items:flex-start; padding:10px 14px; background:var(--panel); border-radius:12px; border:1px solid var(--border); }
+.k{ color:var(--muted); font-weight:600; flex-shrink:0; padding-right:12px; }
+.v{ font-weight:400; text-align:right; }
+.v a{ display:inline-block; text-align:right; }
+:root{ --headerOffset: 120px; }
+html{ scroll-padding-top: var(--headerOffset); }
+section[id]{ scroll-margin-top: var(--headerOffset); }
+.about-standard{ margin:18px 0; padding:14px 16px; border:1px solid var(--border); border-radius:14px; background:#fff; }
+.about-standard h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+.about-standard h3::before{ content:""; width:8px; height:8px; border-radius:999px; background:var(--btc); display:inline-block; }
+.about-divider{ height:1px; background:var(--border); margin:14px 0; }
+.about-h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+.about-h3::before{ content:""; width:8px; height:8px; border-radius:999px; background:var(--btc); display:inline-block; }
+/* Charts */
+.charts-section{ margin-top:32px; }
+.charts-section h3{ font-size:18px; font-weight:900; margin:0 0 6px; }
+.charts-section .section-lead{ color:var(--muted); font-size:14px; margin:0 0 22px; }
+.chart-block{ margin-bottom:28px; border:1px solid var(--border); border-radius:14px; overflow:hidden; background:#fff; }
+.chart-label{ padding:12px 16px; background:var(--panel); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.chart-label-title{ font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:.2px; }
+.chart-label-sub{ font-size:12px; color:var(--muted); }
+.chart-block img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+/* PDF viewer */
+.viewerWrap{ margin-top:32px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.viewerHead{ padding:12px 14px; background:var(--panel); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:12px; font-size:13px; font-weight:800; text-transform:uppercase; }
+iframe{ width:100%; height:90vh; min-height:900px; border:0; }
+footer{ border-top:1px solid var(--border); margin-top:28px; padding-top:16px; padding-bottom:24px; text-align:center; line-height:1.35; }
+footer .title{ font-weight:700; margin-bottom:4px; }
+footer .tagline{ color:var(--muted); font-size:14px; margin-bottom:8px; }
+footer .version{ font-size:14px; margin-bottom:8px; }
+footer .email{ font-size:14px; margin-bottom:4px; }
+footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
+@media(max-width:760px){
+  .top{ flex-direction:column; align-items:stretch; }
+  .brand{ justify-content:center; }
+  nav{ justify-content:center; }
+  .actions{ justify-content:center; }
+  .chart-label{ flex-direction:column; gap:4px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <img class="logo" src="/bcs-seal.png" alt="Bitcoin Custody Standard seal">
+        <div>
+          <h1>Bitcoin Custody Standard</h1>
+          <p class="sub">BCRI Benchmark Report (BCS-BR-1.0)</p>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/bcri/" class="active">BCRI Benchmark</a>
+        <a href="/documents/">Documents</a>
+        <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">Research</a>
+        <a href="/governance/">Governance</a>
+      </nav>
+      <div class="actions">
+        <a class="btn primary" href="/documents/">Documents</a>
+        <a class="btn primary" href="mailto:contact@bitcoincustodystandard.org">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div id="top" class="top-anchor" aria-hidden="true"></div>
+
+  <section class="hero">
+    <h2>BCRI Benchmark Report</h2>
+    <p class="lead">
+      Structural resilience and complexity benchmarks for 14 Bitcoin custody architecture types, evaluated under the Bitcoin Custody Standard (BCS-NS-1.1).
+    </p>
+  </section>
+
+  <section class="meta" aria-label="Document metadata">
+    <div class="metaGrid">
+      <div class="kv"><div class="k">Document Type</div><div class="v">Benchmark Report</div></div>
+      <div class="kv"><div class="k">Document ID</div><div class="v">BCS-BR-1.0</div></div>
+      <div class="kv"><div class="k">Version</div><div class="v">1.0</div></div>
+      <div class="kv"><div class="k">Publication Date</div><div class="v">March 2026</div></div>
+      <div class="kv"><div class="k">Document Class</div><div class="v">Normative Framework</div></div>
+      <div class="kv"><div class="k">Status</div><div class="v">Public, Citable</div></div>
+      <div class="kv"><div class="k">Aligned Standard</div><div class="v"><a href="/">BCS-NS-1.1</a></div></div>
+      <div class="kv"><div class="k">Next Scheduled Review</div><div class="v">March 2027</div></div>
+      <div class="kv"><div class="k">Steward</div><div class="v">Bitcoin Custody Standard Initiative</div></div>
+      <div class="kv"><div class="k">Contact</div><div class="v"><a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a></div></div>
+    </div>
+  </section>
+
+  <section class="about-standard" id="abstract" aria-label="About this report">
+    <h3>About This Report</h3>
+    <p>
+      The BCRI Benchmark Report applies the Bitcoin Custody Resilience Index (BCRI) methodology to 14 Bitcoin custody architecture types, producing scored comparisons across structural resilience and operational complexity. It is a companion publication to the Bitcoin Custody Standard Normative Summary <a href="/">BCS-NS-1.1</a>. BCS defines the normative framework; this report operationalizes that framework through structured scoring and benchmarking across 14 reference architecture classes.
+    </p>
+    <p>
+      Research publications and ongoing work related to the Bitcoin Custody Standard are available at the <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">BCS Research Archive</a>.
+    </p>
+    <div class="about-divider"></div>
+    <h3 class="about-h3">Abstract</h3>
+    <p>
+      The benchmark evaluates structural resilience and operational complexity across five custody zones — No Sovereignty, Single-Key, Distributed Self-Custody, Collaborative, and Institutional — and produces scored comparisons across BCRI, Complexity Score (CS), Resilience Efficiency (RE), and Excess Resilience Efficiency (ERE). The benchmark establishes that maximum structural resilience is achieved through architecture design rather than delegation; that resilience efficiency peaks at moderate operational complexity and declines as complexity increases; and that custody failure operates on two independent structural axes. Sections 2 and 3 are normative. Annex A is informative.
+    </p>
+    <div class="about-divider"></div>
+    <h3 class="about-h3">How to Cite This Report</h3>
+    <p>
+      Bitcoin Custody Standard Initiative.<br>
+      <em>BCRI Benchmark Report, Version 1.0 (BCS-BR-1.0).</em><br>
+      March 2026.<br>
+      Available at: https://bitcoincustodystandard.org/bcri/
+    </p>
+  </section>
+
+  <!-- Charts -->
+  <section class="charts-section" id="exhibits">
+    <h3>Benchmark Exhibits</h3>
+    <p class="section-lead">Three exhibits from BCS-BR-1.0, March 2026. Source: Bitcoin Custody Standard internal benchmark dataset.</p>
+
+    <div class="chart-block">
+      <div class="chart-label">
+        <span class="chart-label-title">Exhibit 4.1 — BCRI Benchmark Ranking</span>
+        <span class="chart-label-sub">14 architectures · BCRI score and RE (= BCRI ÷ √CS) · sorted by BCRI descending</span>
+      </div>
+      <img src="/Absolute_BCRI_Ranking.png" alt="Bitcoin Custody Architecture Benchmark Ranking — BCRI scores for 14 architectures sorted descending" />
+    </div>
+
+    <div class="chart-block">
+      <div class="chart-label">
+        <span class="chart-label-title">Exhibit 4.2 — BCRI Resilience Efficiency Frontier</span>
+        <span class="chart-label-sub">ERE = (BCRI − 25) ÷ √CS plotted against CS · frontier peak at CS ≈ 4.5</span>
+      </div>
+      <img src="/Resilience_Efficiency_Frontier.png" alt="BCRI Resilience Efficiency Frontier — ERE versus Complexity Score for all 14 architectures" />
+    </div>
+
+    <div class="chart-block">
+      <div class="chart-label">
+        <span class="chart-label-title">Exhibit 4.3 — Bitcoin Custody Architecture Map</span>
+        <span class="chart-label-sub">12 scored architectures · Complexity Score (CS) vs BCRI · Resilience Sufficiency Threshold at BCRI 75</span>
+      </div>
+      <img src="/Architecture_Map.png" alt="Bitcoin Custody Architecture Map — Complexity versus Structural Resilience for 12 scored architectures" />
+    </div>
+  </section>
+
+  <!-- PDF Viewer -->
+  <section id="document" class="viewerWrap" aria-label="Embedded PDF">
+    <div class="viewerHead">
+      <div>Full Report</div>
+      <div><a href="/BCS-BR-1.0-2026-03.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
+    </div>
+    <iframe src="/BCS-BR-1.0-2026-03.pdf#pagemode=none&view=FitH" title="BCRI Benchmark Report PDF"></iframe>
+  </section>
+
+</main>
+
+<footer>
+  <div class="title">Bitcoin Custody Standard (BCS)</div>
+  <div class="tagline">A normative framework for evaluating Bitcoin custody resilience.</div>
+  <div class="tagline">Maintained by the Bitcoin Custody Standard Initiative (BCSI).</div>
+  <div class="version">BCS-BR-1.0 — March 2026</div>
+  <div class="email">Research: <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a></div>
+  <div class="email">Contact: <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a></div>
+  <div class="copyright">© 2026 Bitcoin Custody Standard (BCS). All rights reserved.</div>
+</footer>
+
+<script>
+  (function () {
+    function setHeaderOffset() {
+      const header = document.querySelector("header");
+      if (!header) return;
+      const h = Math.ceil(header.getBoundingClientRect().height);
+      document.documentElement.style.setProperty("--headerOffset", (h + 4) + "px");
+    }
+    window.addEventListener("load", setHeaderOffset);
+    window.addEventListener("resize", setHeaderOffset);
+  })();
+</script>
+</body>
+</html>
