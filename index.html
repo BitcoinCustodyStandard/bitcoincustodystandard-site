@@ -74,43 +74,9 @@ html{ scroll-padding-top:var(--headerOffset); }
 section[id], h3[id]{ scroll-margin-top:var(--headerOffset); }
 .dot{ width:7px; height:7px; border-radius:999px; background:var(--btc); display:inline-block; margin-right:6px; transform:translateY(-1px); }
 /* Section */
-.section{margin-top:26px}
+.section{margin-top:28px}
 .section h3{margin-bottom:10px;font-size:18px;font-weight:900}
-/* Statement block */
-.statement{ margin:24px 0; padding:20px 22px; border:1px solid var(--border); border-left:3px solid var(--btc); border-radius:0 12px 12px 0; background:var(--panel); }
-.statement h3{ margin:0 0 12px; font-size:16px; font-weight:900; }
-.statement p{ margin:0 0 10px; color:var(--muted); font-size:14px; line-height:1.7; }
-.statement p:last-child{ margin:0; }
-/* Publications grid */
-.pub-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
-@media(max-width:760px){ .pub-grid{ grid-template-columns:1fr; } }
-.pub-card{
-  background:#fafafa;
-  border:1px solid #e5e5e5;
-  border-left:3px solid #c87a2b;
-  border-radius:6px;
-  padding:18px 20px;
-}
-.pub-id{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#666; margin:0 0 5px; }
-.pub-title{ font-size:16px; font-weight:900; color:#111; margin:0 0 8px; }
-.pub-desc{ font-size:13px; color:var(--muted); line-height:1.65; margin:0 0 14px; }
-.pub-btns{ display:flex; gap:8px; flex-wrap:wrap; }
-/* Framework blocks */
-.fw-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
-@media(max-width:760px){ .fw-grid{ grid-template-columns:1fr; } }
-.fw-card{ border:1px solid var(--border); background:#fff; border-radius:12px; padding:16px 18px; }
-.fw-card h4{ margin:0 0 8px; font-size:13px; font-weight:700; letter-spacing:.1px; text-transform:uppercase; display:flex; align-items:center; gap:7px; }
-.fw-card p{ margin:0; color:var(--muted); font-size:14px; line-height:1.6; }
-/* How to use */
-.how-list{ margin:12px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
-.how-list li{ display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.6; }
-.how-num{ font-size:11px; font-weight:700; color:#c87a2b; background:#fafafa; border:1px solid #e5e5e5; border-radius:4px; padding:2px 7px; flex-shrink:0; margin-top:2px; }
-/* Why fails */
-.fails-list{ margin:12px 0; padding-left:18px; color:var(--muted); font-size:14px; }
-.fails-list li{ margin:5px 0; }
-/* Text section */
-.text{ color:var(--muted); max-width:92ch; font-size:15px; white-space:pre-line; text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; -ms-hyphens:auto; }
-@media(max-width:640px){ .text{ text-align:left; hyphens:manual; } }
+.section-intro{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:14px;}
 /* About card */
 .about-standard{ margin:18px 0; padding:14px 16px; border:1px solid var(--border); border-radius:14px; background:#fff; }
 .about-standard h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
@@ -118,6 +84,40 @@ section[id], h3[id]{ scroll-margin-top:var(--headerOffset); }
 .about-divider{ height:1px; background:var(--border); margin:14px 0; }
 .about-h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
 .about-h3::before{ content:""; width:7px; height:7px; border-radius:999px; background:var(--btc); display:inline-block; }
+/* Core publications — amber callout cards */
+.pub-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:14px; }
+@media(max-width:860px){ .pub-grid{ grid-template-columns:1fr 1fr; } }
+@media(max-width:560px){ .pub-grid{ grid-template-columns:1fr; } }
+.pub-card{
+  background:#fafafa;
+  border:1px solid #e5e5e5;
+  border-left:3px solid #c87a2b;
+  border-radius:6px;
+  padding:16px 18px;
+}
+.pub-id{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#666; margin:0 0 4px; }
+.pub-title{ font-size:15px; font-weight:900; color:#111; margin:0 0 7px; }
+.pub-desc{ font-size:13px; color:var(--muted); line-height:1.65; margin:0 0 12px; }
+.pub-btns{ display:flex; gap:8px; flex-wrap:wrap; }
+/* Framework grid */
+.fw-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:14px; }
+@media(max-width:860px){ .fw-grid{ grid-template-columns:1fr 1fr; } }
+@media(max-width:560px){ .fw-grid{ grid-template-columns:1fr; } }
+.fw-card{ border:1px solid var(--border); background:#fff; border-radius:12px; padding:14px 16px; }
+.fw-card h4{ margin:0 0 7px; font-size:12px; font-weight:700; letter-spacing:.2px; text-transform:uppercase; display:flex; align-items:center; gap:6px; color:var(--text); }
+.fw-card p{ margin:0; color:var(--muted); font-size:13px; line-height:1.6; }
+/* Why fails */
+.fails-list{ margin:10px 0 12px; padding-left:18px; color:var(--muted); font-size:14px; }
+.fails-list li{ margin:4px 0; }
+/* Research block */
+.research-block{ margin-top:14px; border:1px solid var(--border); border-radius:12px; background:#fff; padding:18px 20px; }
+.research-block h4{ margin:0 0 6px; font-size:13px; font-weight:700; letter-spacing:.1px; text-transform:uppercase; display:flex; align-items:center; gap:7px; }
+.research-block p{ margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.65; }
+.research-block p:last-of-type{ margin-bottom:0; }
+/* How to use */
+.how-list{ margin:10px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+.how-list li{ display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.6; }
+.how-num{ font-size:11px; font-weight:700; color:#c87a2b; background:#fafafa; border:1px solid #e5e5e5; border-radius:4px; padding:2px 7px; flex-shrink:0; margin-top:2px; }
 /* Grid cards */
 .grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0 22px; }
 @media(max-width:860px){ .grid{grid-template-columns:1fr;} }
@@ -134,6 +134,9 @@ section[id], h3[id]{ scroll-margin-top:var(--headerOffset); }
 .govCard{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:16px 18px; }
 .govCard h4{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; font-weight:700; }
 .govCard p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+/* Text sections */
+.text{ color:var(--muted); max-width:92ch; font-size:15px; white-space:pre-line; text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; -ms-hyphens:auto; }
+@media(max-width:640px){ .text{ text-align:left; hyphens:manual; } }
 /* Viewer */
 .viewerWrap{ margin-top:26px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
 .viewerHead{ padding:12px 14px; background:var(--panel); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:12px; font-size:13px; font-weight:800; text-transform:uppercase; }
@@ -189,9 +192,7 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
   <!-- SECTION 1 — Hero / title / metadata -->
   <section class="hero">
     <h2>Bitcoin Custody Standard — Normative Summary</h2>
-    <p class="lead">
-      The Bitcoin Custody Standard (BCS) defines a normative framework for evaluating and strengthening the structural resilience of Bitcoin custody architectures across time.
-    </p>
+    <p class="lead">The Bitcoin Custody Standard (BCS) defines a normative framework for evaluating and strengthening the structural resilience of Bitcoin custody architectures across time.</p>
   </section>
 
   <section class="meta" aria-label="Document metadata">
@@ -209,22 +210,28 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     </div>
   </section>
 
-  <!-- SECTION 2 — Why This Standard Exists -->
-  <div class="statement">
-    <h3>Why This Standard Exists</h3>
-    <p>Bitcoin custody is not a product decision. It is a structural design problem.</p>
-    <p>The Bitcoin Custody Standard defines a public framework for evaluating long-horizon custody resilience across architecture, coordination, entropy, and adversarial exposure.</p>
-    <p>It was developed to address a gap in existing custody analysis: most evaluation focuses on tools, security features, or service providers, but does not adequately assess whether a custody system remains operable, recoverable, and resilient across time.</p>
-  </div>
+  <!-- SECTION 2 — Existing introductory / about area -->
+  <section class="about-standard" aria-label="About the Bitcoin Custody Standard">
+    <h3>About the Bitcoin Custody Standard</h3>
+    <p>The Bitcoin Custody Standard is a public framework for evaluating Bitcoin custody beyond point-in-time security controls. It treats custody as a system rather than a device or provider choice, and focuses on whether a custody architecture can preserve control across time, operational change, participant turnover, and adversarial conditions.</p>
+    <p style="margin-top:10px;">The framework is designed for long-term holders, fiduciaries, institutions, and serious operators who require a more rigorous basis for custody evaluation. Research publications and ongoing work related to the Bitcoin Custody Standard are available at <a href="https://bitcoincustodystandard.substack.com" target="_blank">BCS Research Archive</a>.</p>
+    <div class="about-divider"></div>
+    <h3 class="about-h3">How to Cite This Standard</h3>
+    <p>Bitcoin Custody Standard Initiative.<br>
+    <em>Bitcoin Custody Standard (BCS) — Normative Summary, Version 1.1 (BCS-NS-1.1).</em><br>
+    March 2026.<br>
+    Available at: https://bitcoincustodystandard.org</p>
+  </section>
 
   <!-- SECTION 3 — Core Publications -->
   <div class="section" id="publications">
     <h3>Core Publications</h3>
+    <p class="section-intro">The Bitcoin Custody Standard is published through a normative framework, benchmark reports, and supporting research.</p>
     <div class="pub-grid">
       <div class="pub-card">
         <p class="pub-id">BCS-NS-1.1 · Normative Standard</p>
         <p class="pub-title">Normative Standard</p>
-        <p class="pub-desc">Defines the public normative framework of the Bitcoin Custody Standard, including the conceptual basis for evaluating custody resilience across structural design, coordination, temporal degradation, and exposure.</p>
+        <p class="pub-desc">Defines the public normative framework of the Bitcoin Custody Standard, including the structural basis for evaluating Bitcoin custody resilience across time.</p>
         <div class="pub-btns">
           <a class="btn primary" href="/">View Standard</a>
           <a class="btn secondary" href="/BCS-NS-1.1-2026-03-06.pdf" target="_blank" rel="noopener">Download PDF</a>
@@ -239,33 +246,23 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
           <a class="btn secondary" href="/BCS-BR-1.0-2026-03.pdf" target="_blank" rel="noopener">Download PDF</a>
         </div>
       </div>
+      <div class="pub-card">
+        <p class="pub-id">Supporting Research</p>
+        <p class="pub-title">Research Archive</p>
+        <p class="pub-desc">Ongoing research papers and analytical publications expanding the Bitcoin Custody Standard across specific custody architectures, failure modes, and operational questions.</p>
+        <div class="pub-btns">
+          <a class="btn primary" href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">View Research</a>
+          <a class="btn secondary" href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">Open Archive</a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- SECTION 4 — About This Standard -->
-  <section class="about-standard" aria-label="About the Bitcoin Custody Standard">
-    <h3>About the Bitcoin Custody Standard</h3>
-    <p>
-      The Bitcoin Custody Standard is a public framework for evaluating Bitcoin custody beyond point-in-time security controls. It treats custody as a system rather than a device or provider choice, and focuses on whether a custody architecture can preserve control across time, operational change, participant turnover, and adversarial conditions.
-    </p>
-    <p style="margin-top:10px;">
-      The framework is designed for long-term holders, fiduciaries, institutions, and serious operators who require a more rigorous basis for custody evaluation.
-    </p>
-    <div class="about-divider"></div>
-    <h3 class="about-h3">How to Cite This Standard</h3>
-    <p>
-      Bitcoin Custody Standard Initiative.<br>
-      <em>Bitcoin Custody Standard (BCS) — Normative Summary, Version 1.1 (BCS-NS-1.1).</em><br>
-      March 2026.<br>
-      Available at: https://bitcoincustodystandard.org
-    </p>
-  </section>
 
   <!-- SECTION 5 — Why Existing Custody Evaluation Fails -->
   <div class="section" id="why">
     <h3>Why Existing Custody Evaluation Fails</h3>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:10px;">Most custody analysis focuses on components: hardware wallets, multisignature setups, service providers, or isolated security features. This is necessary but incomplete.</p>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:8px;">It does not adequately evaluate:</p>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:8px;">Most custody analysis focuses on components: hardware wallets, multisignature setups, service providers, or isolated security features. This is necessary but incomplete.</p>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:6px;">It does not adequately evaluate:</p>
     <ul class="fails-list">
       <li>structural failure over time</li>
       <li>coordination breakdown</li>
@@ -274,39 +271,71 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
       <li>jurisdictional constraints</li>
       <li>long-horizon recoverability</li>
     </ul>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-top:10px;">As a result, systems that appear secure at deployment may still fail under real-world conditions. The Bitcoin Custody Standard addresses this gap by evaluating custody as a structural system.</p>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;">As a result, systems that appear secure at deployment may still fail under real-world conditions. The Bitcoin Custody Standard addresses this gap by evaluating custody as a structural system.</p>
   </div>
 
   <!-- SECTION 6 — Framework Structure -->
   <div class="section" id="framework">
     <h3>Framework Structure</h3>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:2px;">The Bitcoin Custody Standard consists of a public normative layer and a benchmark application layer.</p>
+    <p class="section-intro">The Bitcoin Custody Standard consists of a public normative layer, a benchmark application layer, and a supporting research layer.</p>
     <div class="fw-grid">
       <div class="fw-card">
-        <h4><span class="dot"></span>BCS Normative Standard (BCS-NS-1.1)</h4>
-        <p>Defines the public conceptual and evaluative basis of the framework. It establishes the problem the standard addresses, the structural lens through which custody is evaluated, and the rationale for treating custody resilience as a system property rather than a product feature.</p>
+        <h4><span class="dot"></span>Normative Layer</h4>
+        <p>The BCS Normative Standard defines the public conceptual and evaluative basis of the framework.</p>
       </div>
       <div class="fw-card">
-        <h4><span class="dot"></span>BCRI Benchmark Report (BCS-BR-1.0)</h4>
-        <p>Applies the framework across benchmark custody architectures. It evaluates structural resilience and operational complexity, and provides comparative analysis, architecture classification, and benchmark findings.</p>
+        <h4><span class="dot"></span>Benchmark Layer</h4>
+        <p>The BCRI Benchmark Report applies the framework across benchmark custody architectures and produces comparative structural analysis.</p>
+      </div>
+      <div class="fw-card">
+        <h4><span class="dot"></span>Research Layer</h4>
+        <p>Supporting research publications extend the framework into specific custody questions, architecture studies, and applied resilience analysis.</p>
       </div>
     </div>
-    <p style="color:var(--muted);font-size:13px;margin-top:12px;">Together, these documents define the framework and demonstrate its application.</p>
+    <p style="color:var(--muted);font-size:13px;margin-top:12px;">Together, these layers define the framework, demonstrate its application, and expand its interpretive depth.</p>
   </div>
 
-  <!-- SECTION 7 — How to Use This Standard -->
+  <!-- SECTION 7 — Research Publications -->
+  <div class="section" id="research">
+    <h3>Research Publications</h3>
+    <p class="section-intro">The Bitcoin Custody Standard is supported by an ongoing research program. These publications extend the framework through focused analysis of custody design, resilience failure modes, and long-horizon operational risk.</p>
+    <div class="research-block">
+      <h4><span class="dot"></span>BCS Research Archive</h4>
+      <p>Research papers, methodology notes, and analytical commentaries related to the Bitcoin Custody Standard are published at the BCS Research Archive. The archive includes working papers on custody architecture, failure mode analysis, resilience design, and benchmark methodology.</p>
+      <p><a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">BCS Research Archive</a> &nbsp;·&nbsp; <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a></p>
+    </div>
+  </div>
+
+
+  <!-- Featured Research -->
+  <div class="section" id="featured-research">
+    <h3>Featured Research</h3>
+    <p class="section-intro">The Bitcoin Custody Standard is supported by an ongoing research program. These publications extend the framework through focused analysis of custody architecture, resilience failure modes, and long-horizon operational risk.</p>
+    <div class="research-block">
+      <h4><span class="dot"></span>BCS Research Archive</h4>
+      <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.8;">
+        <li><a href="https://bitcoincustodystandard.substack.com/p/start-here-the-bitcoin-custody-standard" target="_blank" rel="noopener">Start Here — The Bitcoin Custody Standard</a></li>
+        <li><a href="https://bitcoincustodystandard.substack.com/p/reframing-bitcoin-custody-from-device" target="_blank" rel="noopener">The Case for a Bitcoin Standard</a></li>
+        <li><a href="https://bitcoincustodystandard.substack.com/p/custodial-entropy-the-silent-failure" target="_blank" rel="noopener">Custodial Entropy: The Silent Failure Mode of Bitcoin Custody</a></li>
+        <li><a href="https://bitcoincustodystandard.substack.com/p/the-custodial-paradox-the-structural" target="_blank" rel="noopener">The Custodial Paradox: The Structural Trade-Off in Single-Key Bitcoin Custody</a></li>
+      </ul>
+      <p style="margin-top:12px;"><a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">BCS Research Archive</a> &nbsp;·&nbsp; <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a></p>
+    </div>
+  </div>
+
+  <!-- SECTION 8 — How to Use This Site -->
   <div class="section" id="howto">
-    <h3>How to Use This Standard</h3>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:4px;">For first-time readers, the recommended sequence is:</p>
-    <ol class="how-list">
-      <li><span class="how-num">1</span><span>Read the Normative Standard to understand the conceptual basis of the framework.</span></li>
-      <li><span class="how-num">2</span><span>Review the BCRI Benchmark Report to see how the framework is applied across custody architectures.</span></li>
-      <li><span class="how-num">3</span><span>Use the framework to evaluate custody structure before comparing providers, products, or implementation details.</span></li>
-    </ol>
-    <p style="color:var(--muted);font-size:13px;font-style:italic;margin-top:14px;">The architecture determines the resilience ceiling. Implementation determines how close a system comes to that ceiling.</p>
+    <h3>How to Use This Site</h3>
+    <p class="section-intro">For first-time readers, the recommended sequence is:</p>
+    <ul class="how-list">
+      <li><span class="how-num">1</span><span>Read the Normative Standard to understand the public framework.</span></li>
+      <li><span class="how-num">2</span><span>Review the BCRI Benchmark Report to see how the framework is applied.</span></li>
+      <li><span class="how-num">3</span><span>Explore the Research Archive for deeper analysis of specific custody questions and architecture types.</span></li>
+    </ul>
+    <p style="color:var(--muted);font-size:13px;font-style:italic;margin-top:14px;">The framework defines the structure. Benchmark and research publications extend its application.</p>
   </div>
 
-  <!-- SECTION 8 — Existing content sections -->
+  <!-- SECTION 9 — Existing content: key metrics, diagram, abstract, purpose, viewer, governance -->
   <section class="grid" aria-label="Overview blocks">
     <div class="card">
       <h3><span class="dot"></span>Key metrics</h3>
@@ -324,11 +353,9 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
       <img
         src="BCRI_Flow_diagram.png"
         alt="BCRI Structural Resilience Model flowchart"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        onerror="this.style.display='none';"
       />
-      <p style="display:none; color:var(--muted); font-size:13px; margin-top:8px;">
-        Diagram not found. Ensure <code>BCRI_Flow_diagram.png</code> is uploaded to the same folder as this page.
-      </p>
+
     </div>
   </section>
 
@@ -360,43 +387,24 @@ BCS defines the normative framework; BCRI operationalizes that framework through
     <iframe src="BCS-NS-1.1-2026-03-06.pdf#pagemode=none&view=FitH" title="BCS Normative Summary PDF"></iframe>
   </section>
 
-  <!-- SECTION 9 — Governance -->
   <section id="governance" class="section">
     <h3>Governance</h3>
     <div class="govGrid">
       <div class="govCard">
         <h4><span class="dot"></span>Stewardship</h4>
-        <p>
-          The Bitcoin Custody Standard (BCS) is stewarded by the Bitcoin Custody Standard Initiative (BCSI).
-          Stewardship includes maintenance of normative documents, publication of supporting research, and periodic
-          revision of the standard to ensure continued alignment with evolving custody practices, technological
-          developments, and emerging operational risks.
-        </p>
+        <p>The Bitcoin Custody Standard (BCS) is stewarded by the Bitcoin Custody Standard Initiative (BCSI). Stewardship includes maintenance of normative documents, publication of supporting research, and periodic revision of the standard to ensure continued alignment with evolving custody practices, technological developments, and emerging operational risks.</p>
       </div>
       <div class="govCard">
         <h4><span class="dot"></span>Versioning</h4>
-        <p>
-          BCS follows a versioned publication model. Each document release is assigned a version identifier.
-          Conformance claims shall reference the specific BCS version used for assessment and shall not imply
-          applicability to future versions without reassessment.
-        </p>
+        <p>BCS follows a versioned publication model. Each document release is assigned a version identifier. Conformance claims shall reference the specific BCS version used for assessment and shall not imply applicability to future versions without reassessment.</p>
       </div>
       <div class="govCard">
         <h4><span class="dot"></span>Review Cadence</h4>
-        <p>
-          Normative documents are periodically reviewed to ensure continued relevance and accuracy as the Bitcoin
-          custody landscape evolves. Unless otherwise specified, documents are reviewed annually. The next
-          scheduled review of BCS-NS-1.1 is February 2027, or earlier if a major revision is required.
-        </p>
+        <p>Normative documents are periodically reviewed to ensure continued relevance and accuracy as the Bitcoin custody landscape evolves. Unless otherwise specified, documents are reviewed annually. The next scheduled review of BCS-NS-1.1 is February 2027, or earlier if a major revision is required.</p>
       </div>
       <div class="govCard">
         <h4><span class="dot"></span>External Contributions</h4>
-        <p>
-          The BCS initiative welcomes constructive feedback and external contributions from researchers,
-          practitioners, and industry participants. Contributions may include technical review, methodological
-          suggestions, or empirical observations related to custody resilience. Feedback may be submitted to
-          <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a>.
-        </p>
+        <p>The BCS initiative welcomes constructive feedback and external contributions from researchers, practitioners, and industry participants. Contributions may include technical review, methodological suggestions, or empirical observations related to custody resilience. Feedback may be submitted to <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a>.</p>
       </div>
     </div>
   </section>
