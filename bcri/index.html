@@ -177,6 +177,45 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
   nav{justify-content:center;}
   .actions{justify-content:center;}
 }
+
+/* ── Mobile responsiveness ── */
+body { overflow-x: hidden; }
+
+@media (max-width: 768px) {
+  .metaGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .kv {
+    width: 100%;
+    max-width: 420px;
+  }
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .chart-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+  .chart-inner {
+    min-width: 600px;
+  }
+}
+
+.chart-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+.chart-wrapper canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
 </style>
 </head>
 
@@ -286,7 +325,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
         <span class="li"><span class="lsq" style="background:#bfdbfe;"></span><strong>Collaborative</strong></span>
         <span class="li"><span class="lsq" style="background:#e9d5ff;"></span><strong>Institutional</strong></span>
       </div>
-      <div style="position:relative;width:100%;height:840px;"><canvas id="c1"></canvas></div>
+      <div class="chart-wrapper"><div class="chart-inner"><div style="position:relative;width:100%;height:840px;"><canvas id="c1"></canvas></div></div></div>
       <div class="obsBox"><div class="obsDot"></div><p class="obsText">The ranking orders 12 scored architectures by absolute BCRI. Distributed self-custody and collaborative multisig designs occupy the top positions. The RE column shows that BCRI rank and resilience efficiency rank do not align — lower-BCRI architectures can achieve higher efficiency per unit of operational complexity.</p></div>
     </div>
 
@@ -304,7 +343,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
         <span class="li"><span class="lci" style="background:#bbf7d0;border:1.5px solid #059669;"></span><strong>Distributed</strong></span>
         <span class="li"><span class="lci" style="background:#e9d5ff;border:1.5px solid #7c3aed;"></span><strong>Institutional</strong></span>
       </div>
-      <div style="position:relative;width:100%;height:520px;"><canvas id="c2"></canvas></div>
+      <div class="chart-wrapper"><div class="chart-inner"><div style="position:relative;width:100%;height:520px;"><canvas id="c2"></canvas></div></div></div>
       <div class="obsBox"><div class="obsDot"></div><p class="obsText">ERE rises steeply from CS 1.0 to the frontier peak near CS 4.5, then declines. Institutional architectures cluster to the right of the peak, producing lower resilience efficiency despite strong absolute BCRI scores. Beyond the peak, added complexity yields diminishing resilience returns.</p></div>
     </div>
 
@@ -321,7 +360,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
         <span class="li"><span class="lci" style="background:#bfdbfe;border:1.5px solid #2563eb;"></span><strong>Collaborative</strong></span>
         <span class="li"><span class="lci" style="background:#e9d5ff;border:1.5px solid #7c3aed;"></span><strong>Institutional</strong></span>
       </div>
-      <div style="position:relative;width:100%;height:520px;"><canvas id="c3"></canvas></div>
+      <div class="chart-wrapper"><div class="chart-inner"><div style="position:relative;width:100%;height:520px;"><canvas id="c3"></canvas></div></div></div>
       <div class="obsBox"><div class="obsDot"></div><p class="obsText">The architecture map divides the design space into four structurally distinct quadrants. Two architectures fall below the Resilience Sufficiency Threshold at markedly different complexity levels — confirming that sub-threshold outcomes arise from distinct structural causes requiring different corrective interventions.</p></div>
     </div>
   </section>
