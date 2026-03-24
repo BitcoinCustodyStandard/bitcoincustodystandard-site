@@ -44,6 +44,7 @@ body{
   line-height:1.6;
 }
 a{color:var(--link);text-decoration:none}
+p{color:var(--muted);font-size:14px;line-height:1.65;}
 a:hover{text-decoration:underline}
 .wrap{max-width:980px;margin:0 auto;padding:0 18px}
 header{
@@ -107,7 +108,7 @@ main{padding:34px 0 60px}
 html{scroll-padding-top:var(--headerOffset);}
 /* Section & cards */
 .section{margin-top:28px;}
-.section h3{font-size:18px;font-weight:900;margin:0 0 14px;}
+.section h3{font-size:18px;font-weight:900;color:var(--text);margin:0 0 14px;}
 .fullCard{border:1px solid var(--border);background:#fff;border-radius:14px;padding:20px 22px;}
 .fullCard h4{margin:0 0 10px 0;font-size:13px;letter-spacing:.22px;text-transform:uppercase;display:flex;align-items:center;gap:8px;font-weight:700;}
 .fullCard p{margin:0;color:var(--muted);font-size:14px;line-height:1.6;}
@@ -135,7 +136,7 @@ html{scroll-padding-top:var(--headerOffset);}
   background:#fffbf5;
 }
 .obsDot{width:8px;height:8px;border-radius:50%;background:var(--btc);flex-shrink:0;margin-top:5px;}
-.obsText{font-size:13px;color:var(--muted);line-height:1.65;}
+.obsText{font-size:14px;color:var(--muted);line-height:1.65;}
 /* Findings */
 .callout-box{
   background:#fafafa;
@@ -145,9 +146,9 @@ html{scroll-padding-top:var(--headerOffset);}
   padding:16px 18px;
   margin:16px 0;
 }
-.callout-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#666;margin:0 0 6px;}
-.callout-title{font-weight:600;color:#111;margin:0 0 6px;font-size:14px;}
-.callout-text{color:#222;line-height:1.6;font-size:14px;margin:0;}
+.callout-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;}
+.callout-title{font-weight:700;color:var(--text);margin:0 0 6px;font-size:14px;}
+.callout-text{line-height:1.65;font-size:14px;margin:0;}
 /* Doc viewer */
 .viewerWrap{margin-top:14px;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .viewerHead{padding:12px 14px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:800;text-transform:uppercase;}
@@ -241,24 +242,24 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
 
   <!-- ABOUT THIS REPORT — matches homepage .about-standard card exactly -->
   <section class="about-standard" aria-label="About the BCRI Benchmark Report" style="margin:18px 0;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:#fff;">
-    <h3 style="margin:0 0 10px 0;font-size:13px;letter-spacing:.22px;text-transform:uppercase;display:flex;align-items:center;gap:8px;font-weight:700;"><span class="dot"></span>About This Report</h3>
-    <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.6;">
+    <h3 style="font-size:18px;font-weight:900;color:var(--text);margin:0 0 12px;display:flex;align-items:center;gap:8px;"><span class="dot"></span>About This Report</h3>
+    <p style="margin:0;">
       The BCRI Benchmark Report (BCS-BR-1.0) applies the Bitcoin Custody Resilience Index (BCRI) methodology to 14 Bitcoin custody architecture types — from exchange wallets and hot wallets through single-key cold storage, self-managed multisig, collaborative multisig, and institutional custody — producing scored comparisons across structural resilience and operational complexity. The benchmark is designed to surface the structural conditions that determine whether a custody arrangement will remain accessible, recoverable, and sovereign across time — not just at the moment of setup.
     </p>
-    <p style="margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.6;">
+    <p style="margin:10px 0 0;">
       Each architecture is evaluated across five orthogonal structural pillars: Cryptographic Integrity, Physical Distribution, Operational Dependency, Cognitive Reliability, and Temporal Resilience. These pillars are aggregated into four structural components — Architecture Resilience (ARS), Coordination Health (CHS), Entropy Resilience (ERS), and Exposure Resilience (XRS) — to produce a composite BCRI score from 0 to 100. The Temporal Resilience pillar specifically captures Custodial Entropy: the progressive structural degradation that occurs as documentation lapses, procedures drift, hardware ages, and coordination coherence erodes over time — independent of any external attack or security incident.
     </p>
     <div style="height:1px;background:var(--border);margin:14px 0;"></div>
-    <h3 style="margin:0 0 10px 0;font-size:13px;letter-spacing:.22px;text-transform:uppercase;display:flex;align-items:center;gap:8px;font-weight:700;"><span class="dot"></span>What This Benchmark Measures</h3>
-    <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.6;">
+    <h3 style="font-size:18px;font-weight:900;color:var(--text);margin:0 0 12px;display:flex;align-items:center;gap:8px;"><span class="dot"></span>What This Benchmark Measures</h3>
+    <p style="margin:0;">
       The benchmark produces two simultaneous views of each architecture. The BCRI score measures absolute structural resilience — how well the architecture resists Custodial Entropy and adversarial conditions across all five pillars over time. The Complexity Score (CS) measures the operational burden the architecture places on the custody operator. Together, these two dimensions identify not just which architectures are strongest in absolute terms, but which deliver the most resilience per unit of operational effort — and where additional complexity yields diminishing structural returns.
     </p>
-    <p style="margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.6;">
+    <p style="margin:10px 0 0;">
       The benchmark establishes a Resilience Sufficiency Threshold at BCRI 75 and a Resilience Efficiency Frontier peaked near CS 4.5. Architectures are positioned against both simultaneously. This two-dimensional framework reveals two structurally distinct custody risk conditions: insufficient structure — where the architecture lacks the redundancy to survive key loss, coercion, or succession failure — and the Custodial Paradox, where added complexity trades one structural risk for another without improving overall resilience. A single-axis evaluation framework cannot distinguish between them.
     </p>
     <div style="height:1px;background:var(--border);margin:14px 0;"></div>
-    <h3 style="margin:0 0 10px 0;font-size:13px;letter-spacing:.22px;text-transform:uppercase;display:flex;align-items:center;gap:8px;font-weight:700;"><span class="dot"></span>How to Cite This Report</h3>
-    <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.6;">
+    <h3 style="font-size:18px;font-weight:900;color:var(--text);margin:0 0 12px;display:flex;align-items:center;gap:8px;"><span class="dot"></span>How to Cite This Report</h3>
+    <p style="margin:0;">
       Bitcoin Custody Standard Initiative.<br>
       <em>Bitcoin Custody Standard (BCS) — BCRI Benchmark Report, Version 1.0 (BCS-BR-1.0).</em><br>
       March 2026.<br>
@@ -269,7 +270,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
   <!-- BENCHMARK EXHIBITS -->
   <section class="section" id="benchmark">
     <h3>Benchmark Exhibits</h3>
-    <p style="color:var(--muted);font-size:14px;margin:0 0 22px;">Three exhibits presenting the full BCRI benchmark dataset. Hover any bar or dot for the full reference configuration from Annex A.</p>
+    <p style="margin:0 0 22px;">Three exhibits presenting the full BCRI benchmark dataset. Hover any bar or dot for the full reference configuration from Annex A.</p>
 
     <!-- Chart 1 -->
     <div class="chartBlock">
