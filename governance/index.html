@@ -118,11 +118,11 @@ main{padding:34px 0 60px}
 .divider{ height:1px; background:var(--border); margin:20px 0; }
 /* Publications table */
 .pubList{ display:flex; flex-direction:column; gap:12px; margin-top:4px; }
-.pubRow{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding:12px 14px; background:var(--panel); border-radius:12px; border:1px solid var(--border); flex-wrap:wrap; }
-.pubRow-left .pub-id{ font-size:11px; font-weight:800; letter-spacing:.3px; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
-.pubRow-left .pub-title{ font-size:14px; font-weight:700; color:var(--text); }
-.pubRow-right{ display:flex; gap:20px; flex-wrap:wrap; font-size:13px; color:var(--muted); }
-.pubRow-right span strong{ color:var(--text); font-weight:600; }
+.pubRow{ display:flex; flex-direction:column; gap:8px; padding:12px 14px; background:var(--panel); border-radius:12px; border:1px solid var(--border); }
+.pub-id{ font-size:11px; font-weight:800; letter-spacing:.3px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.pub-title{ font-size:14px; font-weight:700; color:var(--text); }
+.pubRow-meta{ display:flex; gap:20px; flex-wrap:wrap; font-size:13px; color:var(--muted); }
+.pubRow-meta span strong{ color:var(--text); font-weight:600; }
 .text{ color:var(--muted); font-size:14px; line-height:1.7; }
 :root{ --headerOffset: 120px; }
 html{ scroll-padding-top: var(--headerOffset); }
@@ -222,8 +222,7 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
         Research publications and ongoing work related to the Bitcoin Custody Standard are published at the BCS Research Archive on Substack. The archive includes working papers, methodology notes, and commentary on custody resilience topics aligned with the BCS framework.
       </p>
       <p>
-        Research archive: <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">bitcoincustodystandard.substack.com</a><br>
-        Research inquiries: <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a>
+        <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">Research Archive</a> &nbsp;·&nbsp; <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a>
       </p>
     </div>
   </section>
@@ -274,11 +273,9 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     <h3>Publications</h3>
     <div class="pubList">
       <div class="pubRow">
-        <div class="pubRow-left">
-          <div class="pub-id">BCS-NS-1.1 · Normative Summary</div>
-          <div class="pub-title"><a href="/">Bitcoin Custody Standard — Normative Summary</a></div>
-        </div>
-        <div class="pubRow-right">
+        <div class="pub-id">BCS-NS-1.1 · Normative Summary</div>
+        <div class="pub-title"><a href="/">Bitcoin Custody Standard — Normative Summary</a></div>
+        <div class="pubRow-meta">
           <span><strong>Version</strong> 1.1</span>
           <span><strong>Published</strong> March 2026</span>
           <span><strong>Next Review</strong> February 2027</span>
@@ -286,11 +283,9 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
         </div>
       </div>
       <div class="pubRow">
-        <div class="pubRow-left">
-          <div class="pub-id">BCS-BR-1.0 · Benchmark Report</div>
-          <div class="pub-title"><a href="/bcri/">BCRI Benchmark Report</a></div>
-        </div>
-        <div class="pubRow-right">
+        <div class="pub-id">BCS-BR-1.0 · Benchmark Report</div>
+        <div class="pub-title"><a href="/bcri/">BCRI Benchmark Report</a></div>
+        <div class="pubRow-meta">
           <span><strong>Version</strong> 1.0</span>
           <span><strong>Published</strong> March 2026</span>
           <span><strong>Next Review</strong> March 2027</span>
