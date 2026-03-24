@@ -47,8 +47,9 @@ nav{display:flex;gap:14px;flex-wrap:wrap}
 nav a{font-weight:600;color:var(--muted)}
 nav a:hover{color:var(--text);text-decoration:none}
 .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.btn{ padding:9px 14px; border-radius:8px; border:1px solid var(--border); font-weight:800; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; }
+.btn{ padding:9px 14px; border-radius:8px; border:1px solid var(--border); font-weight:800; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; gap:6px; }
 .btn.primary{ background:var(--btn); color:var(--btnText); border-color:var(--btn); }
+.btn.secondary{ background:#fff; color:var(--text); border-color:var(--border); }
 .btn:hover{text-decoration:none;filter:brightness(.97)}
 main{padding:34px 0 60px}
 .top-anchor{ position:relative; top:calc(-1 * (var(--headerH) + 18px)); height:0; }
@@ -71,40 +72,80 @@ main{padding:34px 0 60px}
 :root{ --headerOffset:120px; }
 html{ scroll-padding-top:var(--headerOffset); }
 section[id], h3[id]{ scroll-margin-top:var(--headerOffset); }
-.grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0 22px; }
-@media(max-width:860px){ .grid{grid-template-columns:1fr;} }
-.card{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:14px 16px; }
-.card h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
 .dot{ width:7px; height:7px; border-radius:999px; background:var(--btc); display:inline-block; margin-right:6px; transform:translateY(-1px); }
-.card ul{ margin:0; padding-left:18px; color:var(--muted); font-size:14px; }
-.card li{margin:6px 0}
-.card p{margin:10px 0 0;color:var(--muted);font-size:14px}
-.card.diagram{ display:flex; flex-direction:column; }
-.card.diagram img{ width:100%; height:auto; border-radius:8px; margin-top:6px; display:block; }
-.govGrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
-@media(max-width:860px){ .govGrid{ grid-template-columns:1fr; } }
-.govCard{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:16px 18px; }
-.govCard h4{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; font-weight:700; }
-.govCard p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+/* Section */
 .section{margin-top:26px}
 .section h3{margin-bottom:10px;font-size:18px;font-weight:900}
+/* Statement block */
+.statement{ margin:24px 0; padding:20px 22px; border:1px solid var(--border); border-left:3px solid var(--btc); border-radius:0 12px 12px 0; background:var(--panel); }
+.statement h3{ margin:0 0 12px; font-size:16px; font-weight:900; }
+.statement p{ margin:0 0 10px; color:var(--muted); font-size:14px; line-height:1.7; }
+.statement p:last-child{ margin:0; }
+/* Publications grid */
+.pub-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
+@media(max-width:760px){ .pub-grid{ grid-template-columns:1fr; } }
+.pub-card{
+  background:#fafafa;
+  border:1px solid #e5e5e5;
+  border-left:3px solid #c87a2b;
+  border-radius:6px;
+  padding:18px 20px;
+}
+.pub-id{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#666; margin:0 0 5px; }
+.pub-title{ font-size:16px; font-weight:900; color:#111; margin:0 0 8px; }
+.pub-desc{ font-size:13px; color:var(--muted); line-height:1.65; margin:0 0 14px; }
+.pub-btns{ display:flex; gap:8px; flex-wrap:wrap; }
+/* Framework blocks */
+.fw-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
+@media(max-width:760px){ .fw-grid{ grid-template-columns:1fr; } }
+.fw-card{ border:1px solid var(--border); background:#fff; border-radius:12px; padding:16px 18px; }
+.fw-card h4{ margin:0 0 8px; font-size:13px; font-weight:700; letter-spacing:.1px; text-transform:uppercase; display:flex; align-items:center; gap:7px; }
+.fw-card p{ margin:0; color:var(--muted); font-size:14px; line-height:1.6; }
+/* How to use */
+.how-list{ margin:12px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+.how-list li{ display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.6; }
+.how-num{ font-size:11px; font-weight:700; color:#c87a2b; background:#fafafa; border:1px solid #e5e5e5; border-radius:4px; padding:2px 7px; flex-shrink:0; margin-top:2px; }
+/* Why fails */
+.fails-list{ margin:12px 0; padding-left:18px; color:var(--muted); font-size:14px; }
+.fails-list li{ margin:5px 0; }
+/* Text section */
 .text{ color:var(--muted); max-width:92ch; font-size:15px; white-space:pre-line; text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; -ms-hyphens:auto; }
 @media(max-width:640px){ .text{ text-align:left; hyphens:manual; } }
-.viewerWrap{ margin-top:26px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
-.viewerHead{ padding:12px 14px; background:var(--panel); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:12px; font-size:13px; font-weight:800; text-transform:uppercase; }
-iframe{ width:100%; height:90vh; min-height:900px; border:0; }
-footer{ border-top:1px solid var(--border); margin-top:28px; padding-top:16px; padding-bottom:24px; text-align:center; line-height:1.35; }
-footer .title{ font-weight:700; margin-bottom:4px; }
-footer .tagline{ color:var(--muted); font-size:14px; margin-bottom:8px; }
-footer .version{ font-size:14px; margin-bottom:8px; }
-footer .email{ font-size:14px; margin-bottom:4px; }
-footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
+/* About card */
 .about-standard{ margin:18px 0; padding:14px 16px; border:1px solid var(--border); border-radius:14px; background:#fff; }
 .about-standard h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
 .about-standard h3::before{ content:""; width:7px; height:7px; border-radius:999px; background:var(--btc); display:inline-block; }
 .about-divider{ height:1px; background:var(--border); margin:14px 0; }
 .about-h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
 .about-h3::before{ content:""; width:7px; height:7px; border-radius:999px; background:var(--btc); display:inline-block; }
+/* Grid cards */
+.grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0 22px; }
+@media(max-width:860px){ .grid{grid-template-columns:1fr;} }
+.card{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:14px 16px; }
+.card h3{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+.card ul{ margin:0; padding-left:18px; color:var(--muted); font-size:14px; }
+.card li{margin:6px 0}
+.card p{margin:10px 0 0;color:var(--muted);font-size:14px}
+.card.diagram{ display:flex; flex-direction:column; }
+.card.diagram img{ width:100%; height:auto; border-radius:8px; margin-top:6px; display:block; }
+/* Gov cards */
+.govGrid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px; }
+@media(max-width:860px){ .govGrid{ grid-template-columns:1fr; } }
+.govCard{ border:1px solid var(--border); background:#fff; border-radius:14px; padding:16px 18px; }
+.govCard h4{ margin:0 0 10px 0; font-size:13px; letter-spacing:.22px; text-transform:uppercase; display:flex; align-items:center; gap:8px; font-weight:700; }
+.govCard p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+/* Viewer */
+.viewerWrap{ margin-top:26px; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.viewerHead{ padding:12px 14px; background:var(--panel); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:12px; font-size:13px; font-weight:800; text-transform:uppercase; }
+iframe{ width:100%; height:90vh; min-height:900px; border:0; }
+/* Footer note */
+.footer-note{ margin-top:32px; padding:14px 18px; border:1px solid var(--border); border-radius:10px; background:var(--panel); font-size:12px; color:var(--muted); line-height:1.7; text-align:center; }
+footer{ border-top:1px solid var(--border); margin-top:28px; padding-top:16px; padding-bottom:24px; text-align:center; line-height:1.35; }
+footer .title{ font-weight:700; margin-bottom:4px; }
+footer .tagline{ color:var(--muted); font-size:14px; margin-bottom:8px; }
+footer .version{ font-size:14px; margin-bottom:8px; }
+footer .email{ font-size:14px; margin-bottom:4px; }
+footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
 @media(max-width:760px){
   .top{ flex-direction:column; align-items:stretch; }
   .brand{ justify-content:center; }
@@ -145,6 +186,7 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
 
   <div id="top" class="top-anchor" aria-hidden="true"></div>
 
+  <!-- SECTION 1 — Hero / title / metadata -->
   <section class="hero">
     <h2>Bitcoin Custody Standard — Normative Summary</h2>
     <p class="lead">
@@ -167,14 +209,47 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     </div>
   </section>
 
+  <!-- SECTION 2 — Why This Standard Exists -->
+  <div class="statement">
+    <h3>Why This Standard Exists</h3>
+    <p>Bitcoin custody is not a product decision. It is a structural design problem.</p>
+    <p>The Bitcoin Custody Standard defines a public framework for evaluating long-horizon custody resilience across architecture, coordination, entropy, and adversarial exposure.</p>
+    <p>It was developed to address a gap in existing custody analysis: most evaluation focuses on tools, security features, or service providers, but does not adequately assess whether a custody system remains operable, recoverable, and resilient across time.</p>
+  </div>
+
+  <!-- SECTION 3 — Core Publications -->
+  <div class="section" id="publications">
+    <h3>Core Publications</h3>
+    <div class="pub-grid">
+      <div class="pub-card">
+        <p class="pub-id">BCS-NS-1.1 · Normative Standard</p>
+        <p class="pub-title">Normative Standard</p>
+        <p class="pub-desc">Defines the public normative framework of the Bitcoin Custody Standard, including the conceptual basis for evaluating custody resilience across structural design, coordination, temporal degradation, and exposure.</p>
+        <div class="pub-btns">
+          <a class="btn primary" href="/">View Standard</a>
+          <a class="btn secondary" href="/BCS-NS-1.1-2026-03-06.pdf" target="_blank" rel="noopener">Download PDF</a>
+        </div>
+      </div>
+      <div class="pub-card">
+        <p class="pub-id">BCS-BR-1.0 · Benchmark Report</p>
+        <p class="pub-title">BCRI Benchmark Report</p>
+        <p class="pub-desc">Applies the Bitcoin Custody Standard framework across benchmark custody architectures to evaluate structural resilience and operational complexity.</p>
+        <div class="pub-btns">
+          <a class="btn primary" href="/bcri/">View Benchmark</a>
+          <a class="btn secondary" href="/BCS-BR-1.0-2026-03.pdf" target="_blank" rel="noopener">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — About This Standard -->
   <section class="about-standard" aria-label="About the Bitcoin Custody Standard">
-    <h3>About This Standard</h3>
+    <h3>About the Bitcoin Custody Standard</h3>
     <p>
-      The Bitcoin Custody Standard (BCS) is a normative framework for evaluating and strengthening the structural resilience of Bitcoin custody architectures across time. BCS evaluates custody across five orthogonal structural pillars — Cryptographic Integrity, Physical Distribution, Operational Dependency, Cognitive Reliability, and Temporal Resilience — and is designed to be analytically independent across domains so that weaknesses within one domain cannot be obscured by strength in another. The Bitcoin Custody Resilience Index (BCRI) operationalizes the BCS framework through structured scoring across those pillars, incorporating architecture resilience (ARS), coordination health (CHS), entropy-related degradation (ERI), and adversarial exposure (XRI).
+      The Bitcoin Custody Standard is a public framework for evaluating Bitcoin custody beyond point-in-time security controls. It treats custody as a system rather than a device or provider choice, and focuses on whether a custody architecture can preserve control across time, operational change, participant turnover, and adversarial conditions.
     </p>
-    <p>
-      Research publications and ongoing work related to the Bitcoin Custody Standard are available at
-      <a href="https://bitcoincustodystandard.substack.com" target="_blank">BCS Research Archive</a>.
+    <p style="margin-top:10px;">
+      The framework is designed for long-term holders, fiduciaries, institutions, and serious operators who require a more rigorous basis for custody evaluation.
     </p>
     <div class="about-divider"></div>
     <h3 class="about-h3">How to Cite This Standard</h3>
@@ -186,6 +261,52 @@ footer .copyright{ font-size:13px; color:var(--muted); margin-top:8px; }
     </p>
   </section>
 
+  <!-- SECTION 5 — Why Existing Custody Evaluation Fails -->
+  <div class="section" id="why">
+    <h3>Why Existing Custody Evaluation Fails</h3>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:10px;">Most custody analysis focuses on components: hardware wallets, multisignature setups, service providers, or isolated security features. This is necessary but incomplete.</p>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:8px;">It does not adequately evaluate:</p>
+    <ul class="fails-list">
+      <li>structural failure over time</li>
+      <li>coordination breakdown</li>
+      <li>entropy-driven degradation</li>
+      <li>dependency concentration</li>
+      <li>jurisdictional constraints</li>
+      <li>long-horizon recoverability</li>
+    </ul>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-top:10px;">As a result, systems that appear secure at deployment may still fail under real-world conditions. The Bitcoin Custody Standard addresses this gap by evaluating custody as a structural system.</p>
+  </div>
+
+  <!-- SECTION 6 — Framework Structure -->
+  <div class="section" id="framework">
+    <h3>Framework Structure</h3>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:2px;">The Bitcoin Custody Standard consists of a public normative layer and a benchmark application layer.</p>
+    <div class="fw-grid">
+      <div class="fw-card">
+        <h4><span class="dot"></span>BCS Normative Standard (BCS-NS-1.1)</h4>
+        <p>Defines the public conceptual and evaluative basis of the framework. It establishes the problem the standard addresses, the structural lens through which custody is evaluated, and the rationale for treating custody resilience as a system property rather than a product feature.</p>
+      </div>
+      <div class="fw-card">
+        <h4><span class="dot"></span>BCRI Benchmark Report (BCS-BR-1.0)</h4>
+        <p>Applies the framework across benchmark custody architectures. It evaluates structural resilience and operational complexity, and provides comparative analysis, architecture classification, and benchmark findings.</p>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-top:12px;">Together, these documents define the framework and demonstrate its application.</p>
+  </div>
+
+  <!-- SECTION 7 — How to Use This Standard -->
+  <div class="section" id="howto">
+    <h3>How to Use This Standard</h3>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:4px;">For first-time readers, the recommended sequence is:</p>
+    <ol class="how-list">
+      <li><span class="how-num">1</span><span>Read the Normative Standard to understand the conceptual basis of the framework.</span></li>
+      <li><span class="how-num">2</span><span>Review the BCRI Benchmark Report to see how the framework is applied across custody architectures.</span></li>
+      <li><span class="how-num">3</span><span>Use the framework to evaluate custody structure before comparing providers, products, or implementation details.</span></li>
+    </ol>
+    <p style="color:var(--muted);font-size:13px;font-style:italic;margin-top:14px;">The architecture determines the resilience ceiling. Implementation determines how close a system comes to that ceiling.</p>
+  </div>
+
+  <!-- SECTION 8 — Existing content sections -->
   <section class="grid" aria-label="Overview blocks">
     <div class="card">
       <h3><span class="dot"></span>Key metrics</h3>
@@ -239,8 +360,9 @@ BCS defines the normative framework; BCRI operationalizes that framework through
     <iframe src="BCS-NS-1.1-2026-03-06.pdf#pagemode=none&view=FitH" title="BCS Normative Summary PDF"></iframe>
   </section>
 
+  <!-- SECTION 9 — Governance -->
   <section id="governance" class="section">
-    <h3 id="governance">Governance</h3>
+    <h3>Governance</h3>
     <div class="govGrid">
       <div class="govCard">
         <h4><span class="dot"></span>Stewardship</h4>
@@ -278,6 +400,13 @@ BCS defines the normative framework; BCRI operationalizes that framework through
       </div>
     </div>
   </section>
+
+  <!-- SECTION 10 — Footer note -->
+  <div class="footer-note">
+    Version-controlled public standard.<br>
+    Maintained by the Bitcoin Custody Standard Initiative.<br>
+    Benchmark and research publications will expand over time under the BCS framework.
+  </div>
 
 </main>
 
