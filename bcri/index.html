@@ -128,7 +128,7 @@ html{scroll-padding-top:var(--headerOffset);}
 .obsBox{
   margin-top:14px;
   border:1px solid var(--border);
-  border-left:2px solid var(--btc);
+  border-left:3px solid var(--btc);
   border-radius:0 6px 6px 0;
   padding:11px 15px;
   display:flex;align-items:flex-start;gap:9px;
@@ -137,17 +137,16 @@ html{scroll-padding-top:var(--headerOffset);}
 .obsDot{width:8px;height:8px;border-radius:50%;background:var(--btc);flex-shrink:0;margin-top:5px;}
 .obsText{font-size:13px;color:var(--muted);line-height:1.65;}
 /* Findings */
-.callout-box{
-  background:#fafafa;
-  border:1px solid #e5e5e5;
-  border-left:3px solid #c87a2b;
-  border-radius:6px;
-  padding:16px 18px;
-  margin:16px 0;
+.finding{
+  border:1px solid var(--border);
+  border-left:3px solid var(--btc);
+  border-radius:0 8px 8px 0;
+  padding:12px 16px;
+  margin-bottom:10px;
+  background:#fffbf5;
 }
-.callout-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#666666;margin:0 0 6px;}
-.callout-title{font-weight:600;color:#111111;margin:0 0 6px;font-size:14px;}
-.callout-text{color:#222222;line-height:1.6;font-size:14px;margin:0;}
+.findingNum{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--btc);margin-bottom:5px;}
+.findingText{font-size:14px;color:var(--text);line-height:1.65;}
 /* Doc viewer */
 .viewerWrap{margin-top:14px;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .viewerHead{padding:12px 14px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:800;text-transform:uppercase;}
@@ -203,7 +202,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM12 17H8v-2h4v2zm4-4H8v-2h8v2z"/></svg>
           Download PDF
         </a>
-        <a class="btn primary" href="/cdn-cgi/l/email-protection#d8bbb7b6acb9bbac98bab1acbbb7b1b6bbadabacb7bca1abacb9b6bcb9aabcf6b7aabf">Contact</a>
+        <a class="btn primary" href="mailto:contact@bitcoincustodystandard.org">Contact</a>
       </div>
     </div>
   </div>
@@ -235,7 +234,7 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
       <div class="kv"><div class="k">Aligned Standard</div><div class="v">BCS-NS-1.1</div></div>
       <div class="kv"><div class="k">Next Scheduled Review</div><div class="v">March 2027</div></div>
       <div class="kv"><div class="k">Steward</div><div class="v">Bitcoin Custody Standard Initiative</div></div>
-      <div class="kv"><div class="k">Contact</div><div class="v"><a href="/cdn-cgi/l/email-protection#93f0fcfde7f2f0e7d3f1fae7f0fcfafdf0e6e0e7fcf7eae0e7f2fdf7f2e1f7bdfce1f4"><span class="__cf_email__" data-cfemail="4d2e2223392c2e390d2f24392e2224232e383e392229343e392c23292c3f2963223f2a">[email&#160;protected]</span></a></div></div>
+      <div class="kv"><div class="k">Contact</div><div class="v"><a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a></div></div>
     </div>
   </section>
 
@@ -331,17 +330,17 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
     <div class="callout-box">
       <p class="callout-label">Finding 1</p>
       <p class="callout-title">Maximum resilience is achieved through architecture design, not delegation.</p>
-      <p class="callout-text"> The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations. Resilience cannot be purchased. It is built into the structure at design time.</p>
+      <p class="callout-text">The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations. Resilience cannot be purchased. It is built into the structure at design time.</p>
     </div>
     <div class="callout-box">
       <p class="callout-label">Finding 2</p>
       <p class="callout-title">Resilience efficiency peaks at moderate complexity and declines steeply beyond it.</p>
-      <p class="callout-text"> The three most ERE-efficient architectures operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. The Corporate Bitcoin Treasury (CS 8.2, ERE 25.1) is the benchmark's clearest case of misallocated complexity. Governance cannot substitute for structural design.</p>
+      <p class="callout-text">The three most ERE-efficient architectures operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. The Corporate Bitcoin Treasury (CS 8.2, ERE 25.1) is the benchmark's clearest case of misallocated complexity. Governance cannot substitute for structural design.</p>
     </div>
     <div class="callout-box">
       <p class="callout-label">Finding 3</p>
       <p class="callout-title">Custody failure is two-dimensional.</p>
-      <p class="callout-text"> Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
+      <p class="callout-text">Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
     </div>
   </section>
 
@@ -361,12 +360,12 @@ footer .copyright{font-size:13px;color:var(--muted);margin-top:8px;}
   <div class="tagline">A normative framework for evaluating Bitcoin custody resilience.</div>
   <div class="tagline">Maintained by the Bitcoin Custody Standard Initiative (BCSI).</div>
   <div class="version">Version 1.1 — March 2026</div>
-  <div class="email">Research: <a href="/cdn-cgi/l/email-protection#087a6d7b6d697a6b60486a617c6b6761666b7d7b7c676c717b7c69666c697a6c26677a6f"><span class="__cf_email__" data-cfemail="02706771676370616a42606b76616d6b6c617771766d667b7176636c666370662c6d7065">[email&#160;protected]</span></a></div>
-  <div class="email">Contact: <a href="/cdn-cgi/l/email-protection#73101c1d0712100733111a07101c1a1d100600071c170a0007121d171201175d1c0114"><span class="__cf_email__" data-cfemail="d9bab6b7adb8baad99bbb0adbab6b0b7baacaaadb6bda0aaadb8b7bdb8abbdf7b6abbe">[email&#160;protected]</span></a></div>
+  <div class="email">Research: <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a></div>
+  <div class="email">Contact: <a href="mailto:contact@bitcoincustodystandard.org">contact@bitcoincustodystandard.org</a></div>
   <div class="copyright">© 2026 Bitcoin Custody Standard (BCS). All rights reserved.</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const ZF={'No Sovereignty':'#f3f4f6','Single-Key':'#fde68a','Distributed':'#bbf7d0','Collaborative':'#bfdbfe','Institutional':'#e9d5ff'};
 const ZB={'Single-Key':'#d97706','Distributed':'#059669','Collaborative':'#2563eb','Institutional':'#7c3aed'};
@@ -452,4 +451,11 @@ const mhov={id:'mhov',afterEvent(chart,args){const e=args.event.native;if(!e)ret
 const qp={id:'qp',beforeDraw(chart){const {ctx,scales:{x,y},chartArea:{left,right,top,bottom}}=chart;const mx=x.getPixelForValue(5),my=y.getPixelForValue(75);ctx.save();[{x1:left,y1:top,x2:mx,y2:my,bg:'rgba(209,250,229,0.45)',tc:'#065f46',sc:'#047857',t:'Efficient Self-Custody',s:'Low Complexity · High Resilience',ly:0.55},{x1:mx,y1:top,x2:right,y2:my,bg:'rgba(237,233,254,0.45)',tc:'#4c1d95',sc:'#6d28d9',t:'Institutional Custody',s:'High Complexity · High Resilience',ly:0.55},{x1:left,y1:my,x2:mx,y2:bottom,bg:'rgba(255,251,235,0.55)',tc:'#92400e',sc:'#b45309',t:'Convenience Custody',s:'Low Complexity · Lower Resilience',ly:0.55},{x1:mx,y1:my,x2:right,y2:bottom,bg:'rgba(254,226,226,0.45)',tc:'#991b1b',sc:'#b91c1c',t:'Diminishing Returns Zone',s:'High Complexity · Lower Resilience',ly:0.55}].forEach(q=>{ctx.fillStyle=q.bg;ctx.fillRect(q.x1,q.y1,q.x2-q.x1,q.y2-q.y1);const cx=(q.x1+q.x2)/2,cy=q.y1+(q.y2-q.y1)*q.ly;const bW=170,bH=36,bX=cx-85,bY=cy-18;ctx.fillStyle='rgba(255,255,255,0.85)';ctx.strokeStyle=q.tc+'55';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(bX,bY,bW,bH,4);ctx.fill();ctx.stroke();ctx.fillStyle=q.tc;ctx.font='600 10px system-ui';ctx.textAlign='center';ctx.fillText(q.t,cx,bY+13);ctx.fillStyle=q.sc;ctx.font='9px system-ui';ctx.fillText(q.s,cx,bY+27);});ctx.setLineDash([]);ctx.strokeStyle='rgba(107,114,128,0.5)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(mx,top);ctx.lineTo(mx,bottom);ctx.stroke();ctx.beginPath();ctx.moveTo(left,my);ctx.lineTo(right,my);ctx.stroke();ctx.fillStyle='rgba(75,85,99,0.6)';ctx.font='9px system-ui';ctx.textAlign='left';ctx.fillText('Resilience Sufficiency Threshold (75)',left+6,my-4);ctx.restore();}};
 new Chart(document.getElementById('c3'),{type:'scatter',plugins:[qp,mhov],
   data:{datasets:['Single-Key','Distributed','Collaborative','Institutional'].map(z=>({label:z,data:md.filter(d=>d.z===z).map(d=>({x:d.cs,y:d.bcri,label:d.label})),backgroundColor:ZF[z],borderColor:ZB[z],borderWidth:2,pointRadius:10,pointHoverRadius:12}))},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{min:0,max:10,title:{display:true,text:'Complexity Score (CS) · Operational burden on custody operator',font:{size:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11,family:'system-ui'}}},y:{min:50,max:100,title:{display:true,text:
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{min:0,max:10,title:{display:true,text:'Complexity Score (CS) · Operational burden on custody operator',font:{size:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11,family:'system-ui'}}},y:{min:50,max:100,title:{display:true,text:'BCRI Score (50–100)',font:{size:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11,family:'system-ui'}}}}}
+});
+document.getElementById('c3').addEventListener('mousemove',mvTip);document.getElementById('c3').addEventListener('mouseleave',hideTip);
+
+(function(){function setHeaderOffset(){const header=document.querySelector('header');if(!header)return;const h=Math.ceil(header.getBoundingClientRect().height);document.documentElement.style.setProperty('--headerOffset',(h+4)+'px');}window.addEventListener('load',setHeaderOffset);window.addEventListener('resize',setHeaderOffset);})();
+</script>
+</body>
+</html>
