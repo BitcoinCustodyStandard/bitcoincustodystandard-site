@@ -195,6 +195,7 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
 }
 
 @media(max-width:680px){
+  .comp-row{grid-template-columns:1fr 1fr!important;}
   .hdr{flex-direction:column;align-items:stretch;height:auto;padding:10px 14px;gap:6px;}
   .brand{justify-content:space-between;}
   .site-nav{justify-content:center;flex-wrap:wrap;gap:1px;}
@@ -206,23 +207,31 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   main.wrap{padding:0 14px;}
   .m-pillars,.m-eri-row,.m-xc-row,.m-out-cols{grid-template-columns:1fr!important;}
   .pillar-grid{grid-template-columns:1fr!important;}
-  .comp-row{grid-template-columns:1fr 1fr!important;}
+  
+
 }
 @media(max-width:380px){
   .path-grid{grid-template-columns:1fr!important;}
   .site-nav a{font-size:10px;padding:3px 5px;}
-  .comp-row{grid-template-columns:1fr!important;}
+  
+
 }
 
 .pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
 .pillar-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--orange-line);border-radius:0 4px 4px 0;padding:12px 14px;}
 .pillar-card .pillar-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .pillar-card .pillar-desc{font-size:11px;color:var(--muted);line-height:1.55;}
+
+
+.bcri-formula-tile{margin-top:10px;display:flex;align-items:center;justify-content:center;width:100%;border:1px solid var(--orange-line);border-radius:4px;background:var(--bg2);padding:14px 24px;text-align:center;}
+.bft-formula{font-family:monospace;font-size:16px;font-weight:700;color:var(--orange);letter-spacing:.04em;}
+.app-eval-body p{margin-top:0!important;}
+.app-eval-body p+p{margin-top:0!important;}
 .comp-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
-.comp-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:11px 13px;text-align:center;}
+.comp-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:12px 13px;text-align:center;display:flex;flex-direction:column;}
 .comp-code{font-size:16px;font-weight:900;color:var(--orange);letter-spacing:-.01em;margin-bottom:3px;}
-.comp-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
-.comp-desc{font-size:10px;color:var(--dim);line-height:1.5;}
+.comp-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.comp-desc{font-size:10px;color:var(--dim);line-height:1.5;margin-top:2px;}
 .path-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px;}
 .path-tile{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .12s;}
 .path-tile:hover{border-color:var(--orange);text-decoration:none;}
@@ -240,11 +249,48 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   .site-nav a{font-size:11px;padding:3px 6px;}
 }
 @media(max-width:680px){
+  .comp-row{grid-template-columns:1fr 1fr!important;}
   .hdr{flex-wrap:wrap;padding:10px 14px;gap:8px;}
   .brand{flex:1;}
   .site-nav{order:3;width:100%;justify-content:center;flex-wrap:wrap;}
   .hdr-actions{order:2;margin-left:auto;}
 }
+
+/* ── Dark mode ── */
+body.dark{
+  --bg:#0b0f14;--bg2:#111827;--card:#0f172a;
+  --text:#e5e7eb;--muted:#9ca3af;--dim:#6b7280;
+  --border:#1f2937;--border2:#374151;
+  --orange:#f7931a;--orange-dim:rgba(247,147,26,0.10);--orange-line:rgba(247,147,26,0.35);
+  --link:#f7931a;
+}
+body.dark header{background:var(--bg);border-color:var(--border);}
+body.dark .site-footer{background:var(--bg);border-color:var(--border);}
+body.dark .card{background:var(--card);border-color:var(--border);}
+body.dark .path-tile{background:var(--card);border-color:var(--border);}
+body.dark .pillar-card{background:var(--card);border-color:var(--border);}
+body.dark body.dark .out-card{background:var(--card);border-color:var(--border);}
+body.dark .section-title{border-color:var(--border);}
+body.dark .km-grid > div{background:var(--card);border-color:var(--border);}
+body.dark 
+body.dark 
+body.dark 
+body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!important;}
+body.dark 
+
+/* ── Featured Research list ── */
+.research-list{border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.res-row{border-bottom:1px solid var(--border);}
+.res-row:last-child{border-bottom:none;}
+.res-link{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;text-decoration:none;transition:background .12s;background:transparent;}
+.res-link:hover{background:var(--bg2);}
+.res-title{font-size:13px;font-weight:600;color:var(--orange);}
+.res-arrow{color:var(--orange);font-size:12px;flex-shrink:0;margin-left:10px;}
+.res-tip{display:none;padding:10px 16px 13px;font-size:12px;color:var(--muted);line-height:1.65;background:var(--bg2);border-top:1px solid var(--border);}
+.res-row:hover .res-tip{display:block;}
+.res-footer{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:12px;border-top:1px solid var(--border);background:var(--card);}
+.res-footer a{color:var(--orange);font-weight:600;text-decoration:none;}
+.res-footer a:hover{text-decoration:underline;}
 </style>
 <script data-goatcounter="https://bcs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Bitcoin Custody Standard", "url": "https://bitcoincustodystandard.org", "description": "A public framework for evaluating the long-horizon resilience of Bitcoin custody systems.", "publisher": {"@type": "Organization", "name": "Bitcoin Custody Standard Initiative", "url": "https://bitcoincustodystandard.org"}}</script>
@@ -277,7 +323,7 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   <!-- 1. HERO -->
   <section class="hero" style="padding-bottom:20px;">
     <h1>Bitcoin Custody Standard</h1>
-    <p class="hero-sub" style="margin-top:10px;">A framework for evaluating the long-horizon resilience of Bitcoin custody systems.</p>
+    <p class="hero-sub" style="margin-top:10px;">A framework for evaluating the long-horizon resilience of Bitcoin custody architectures.</p>
   </section>
 
   <!-- 2. START HERE -->
@@ -312,12 +358,21 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
     </div>
   </section>
 
+  <!-- 4. THE STANDARD + ABOUT THE STANDARD (combined) -->
+  <section style="margin-top:32px;" aria-label="About the Bitcoin Custody Standard">
+    <div class="section-title">About the Standard</div>
+    <p>The Bitcoin Custody Standard is a public framework for evaluating Bitcoin custody beyond point-in-time security. It treats custody as a system, focused on whether an architecture can preserve control across time, operational change, participant turnover, and adversarial conditions.</p>
+    <p>Custody must be evaluated structurally — not as a product choice or a static audit. The framework assesses five independent pillars, combined into a composite resilience score capturing entropy, exposure, and coordination risk.</p>
+    <p>It addresses risks typically ignored in custody design, including custodial entropy — the gradual degradation of a system over time — and the custodial paradox, where strengthening one part of a custody architecture can weaken another.</p>
+    <p>Designed for long-term holders, fiduciaries, institutions, and operators requiring a rigorous basis for custody evaluation.</p>
+  </section>
+
   <!-- 3. BCRI STRUCTURAL MODEL -->
   <!-- 2. STRUCTURAL MODEL -->
   <section aria-label="BCRI Structural Model" style="margin-top:28px;">
     <div class="section-title">BCRI Structural Model</div>
     <p class="section-intro">The Bitcoin Custody Resilience Index is constructed from four linked components. Hover any node for its definition — click to pin.</p>
-    <div id="bcri-wrap" style="position:relative;width:100%;background:#0d0d0d;border-radius:6px;overflow:hidden;margin-top:12px;">
+    <div id="bcri-wrap" style="position:relative;width:100%;background:#111111;border-radius:6px;overflow:hidden;margin-top:12px;">
       <canvas id="bcri-cv" style="display:block;width:100%;"></canvas>
       <div id="bcri-tip" style="position:absolute;background:#111;border:1px solid #2a2a2a;border-radius:5px;padding:10px 13px;font-size:11px;max-width:200px;pointer-events:none;opacity:0;transition:opacity .12s;z-index:20;line-height:1.6;font-family:system-ui,sans-serif;">
         <div id="bcri-tip-t" style="font-weight:700;color:#f7931a;font-size:12px;margin-bottom:3px;"></div>
@@ -343,13 +398,13 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       ci:  ["Cryptographic Integrity","Secure key generation, derivation path preservation, and long-horizon algorithmic resilience. Failure: descriptor lost; key on compromised device."],
       pd:  ["Physical Distribution","Geographic separation of recovery material across independent physical risk domains. Failure: all copies in one location."],
       tr:  ["Temporal Resilience","Long-horizon survivability through review cadence, succession planning, and Custodial Entropy mitigation. Failure: system unreviewed for 3+ years."],
-      cr:  ["Cognitive Reliability","Recovery must not depend on any individual's memory. Procedures must be documented and reproducible. Failure: no written procedure exists."],
+      cr:  ["Cognitive Reliability","Recovery must not depend on any individual\u2019s memory. Procedures must be documented and reproducible. Failure: no written procedure exists."],
       od:  ["Operational Dependency","Reliance on signing devices, software, and providers. Portability is a core requirement. Failure: wallet discontinued with no alternative path."],
       ars: ["Architecture Resilience Score","Composite structural strength across the five orthogonal pillars. Primary structural input to the BCRI model."],
       eri: ["Entropy Risk Index","Measures degradation of custody reliability over time. Comprises Latent Entropy (LEI) and Coordination Entropy (CEI)."],
       xri: ["Exposure Risk Index","How identifiable, targetable, and attackable the custody system is under adversarial conditions."],
       chs: ["Coordination Health Score","Reliability of coordination required to execute transactions and recovery across participants over time."],
-      bcri:["BCRI — Bitcoin Custody Resilience Index","Final composite score 0 to 100. BCRI = f(ARS, ERI, XRI, CHS). Higher is stronger. Primary output of the BCS evaluation framework."]
+      bcri:["BCRI \u2014 Bitcoin Custody Resilience Index","Final composite score 0 to 100. BCRI = f(ARS, ERI, XRI, CHS). Higher is stronger. Primary output of the BCS evaluation framework."]
     };
 
     /* ---------- LAYOUT ---------- */
@@ -404,7 +459,6 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2); ctx.fill();
       ctx.globalAlpha = 1;
 
-      /* label radiates away from ARS */
       var acx = 222, acy = 258;
       var dx = x - acx, dy = y - acy;
       var dist = Math.sqrt(dx*dx + dy*dy) || 1;
@@ -424,7 +478,6 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
 
     /* ---------- ARS CENTER ---------- */
     function drawARS(x, y, active) {
-      /* subtle ambient only — no glow blob */
       ctx.fillStyle   = '#161616';
       ctx.strokeStyle = active ? '#f7931a' : 'rgba(247,147,26,0.45)';
       ctx.lineWidth   = active ? 1.6 : 1;
@@ -444,7 +497,7 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       ctx.fillText('5 pillars', x, y+47);
     }
 
-    /* ---------- RIGHT BOX ---------- */
+    /* ---------- ROUNDED RECT ---------- */
     function rr(c,x,y,w,h,r){
       c.beginPath();
       c.moveTo(x+r,y); c.lineTo(x+w-r,y); c.quadraticCurveTo(x+w,y,x+w,y+r);
@@ -453,27 +506,24 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       c.lineTo(x,y+r); c.quadraticCurveTo(x,y,x+r,y); c.closePath();
     }
 
+    /* ---------- RIGHT BOX ---------- */
     function drawBox(x, y, code, title, sub, active) {
       var bw = 158, bh = 62;
       ctx.fillStyle   = active ? '#1c1c1c' : '#141414';
       ctx.strokeStyle = active ? '#f7931a' : '#282828';
       ctx.lineWidth   = active ? 1.2 : 0.7;
       rr(ctx, x-bw/2, y-bh/2, bw, bh, 6); ctx.fill(); ctx.stroke();
-      /* dot */
       ctx.fillStyle   = '#f7931a';
       ctx.globalAlpha = active ? 1 : 0.4;
       ctx.beginPath(); ctx.arc(x-bw/2+11, y-bh/2+14, 3.5, 0, Math.PI*2); ctx.fill();
       ctx.globalAlpha = 1;
-      /* code */
       ctx.textAlign   = 'left';
       ctx.fillStyle   = active ? '#f7931a' : '#a06010';
       ctx.font        = '700 13px system-ui,sans-serif';
       ctx.fillText(code, x-bw/2+23, y-bh/2+19);
-      /* title */
       ctx.fillStyle   = active ? '#ffffff' : '#aaa';
       ctx.font        = '600 10.5px system-ui,sans-serif';
       ctx.fillText(title, x-bw/2+12, y-bh/2+36);
-      /* sub */
       ctx.fillStyle   = active ? '#ccc' : '#555';
       ctx.font        = '10px system-ui,sans-serif';
       ctx.fillText(sub, x-bw/2+12, y-bh/2+51);
@@ -482,14 +532,13 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
     /* ---------- BCRI OUTPUT ---------- */
     function drawBCRI(x, y, active) {
       var bw = 166, bh = 58;
-      /* subtle outer ring when active */
       if (active) {
         ctx.strokeStyle = 'rgba(247,147,26,0.25)';
         ctx.lineWidth   = 1;
         rr(ctx, x-bw/2-5, y-bh/2-5, bw+10, bh+10, 10);
         ctx.stroke();
       }
-      ctx.fillStyle   = active ? '#1e1a14' : '#141210';
+      ctx.fillStyle   = active ? '#1c1c1c' : '#141414';
       ctx.strokeStyle = active ? '#f7931a' : 'rgba(247,147,26,0.5)';
       ctx.lineWidth   = active ? 1.4 : 1;
       rr(ctx, x-bw/2, y-bh/2, bw, bh, 7); ctx.fill(); ctx.stroke();
@@ -502,7 +551,7 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       ctx.fillText('Resilience Index', x, y+4);
       ctx.fillStyle   = active ? '#ccc' : '#666';
       ctx.font        = '10px system-ui,sans-serif';
-      ctx.fillText('0 – 100', x, y+17);
+      ctx.fillText('0 \u2013 100', x, y+17);
     }
 
     /* ---------- DATA ---------- */
@@ -526,37 +575,39 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       Object.keys(BASE).forEach(function(k){ p[k] = gp(k, ts); });
 
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, W, H);
+
+      /* BACKGROUND: one uniform neutral-dark fill, no gradients, no panels */
+      ctx.fillStyle = '#111111';
+      ctx.fillRect(0, 0, W, H);
+      /* Very subtle central lift — barely perceptible, no colour */
+      var lift = ctx.createRadialGradient(W*0.38, H*0.46, 0, W*0.38, H*0.46, W*0.55);
+      lift.addColorStop(0,   'rgba(255,255,255,0.025)');
+      lift.addColorStop(1,   'rgba(255,255,255,0.000)');
+      ctx.fillStyle = lift; ctx.fillRect(0, 0, W, H);
 
       var act = hovered || pinned;
 
-      /* Hover rules:
-         pillar key  → light that pillar + ARS only
-         ars         → light all 5 pillars + ARS only (NOT boxes)
-         eri/xri/chs → light that box + ARS + line from ARS + line to BCRI
-         bcri        → light EVERYTHING (Christmas tree)
-      */
       var bcriAll = act === 'bcri';
 
-      /* pillar → ARS lines */
+      /* pillar \u2192 ARS lines */
       PILLARS.forEach(function(pl) {
         var a = bcriAll || act===pl.k || act==='ars';
         ln(p.ars.x, p.ars.y, p[pl.k].x, p[pl.k].y,
-           '#f7931a', a ? 0.65 : 0.18, [], a ? 1.1 : 0.6);
+           '#f7931a', a ? 0.65 : 0.22, [], a ? 1.1 : 0.6);
       });
 
-      /* ARS → right boxes (dashed) */
+      /* ARS \u2192 right boxes (dashed) */
       RIGHT.forEach(function(b) {
         var a = bcriAll || act===b.k;
         ln(p.ars.x+22, p.ars.y, p[b.k].x-79, p[b.k].y,
-           '#f7931a', a ? 0.55 : 0.14, [5,4], a ? 1 : 0.6);
+           '#f7931a', a ? 0.55 : 0.18, [5,4], a ? 1 : 0.6);
       });
 
-      /* right boxes → BCRI (dashed) */
+      /* right boxes \u2192 BCRI (dashed) */
       RIGHT.forEach(function(b) {
         var a = bcriAll || act===b.k;
         ln(p[b.k].x, p[b.k].y+31, p.bcri.x, p.bcri.y-29,
-           '#f7931a', a ? 0.55 : 0.12, [3,4], a ? 1 : 0.7);
+           '#f7931a', a ? 0.55 : 0.16, [3,4], a ? 1 : 0.7);
       });
 
       /* draw pillars */
@@ -565,13 +616,13 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
         drawPillar(p[pl.k].x, p[pl.k].y, pl.label, a);
       });
 
-      /* draw right boxes (ERI/XRI/CHS) */
+      /* draw right boxes */
       RIGHT.forEach(function(b) {
         var a = bcriAll || act===b.k;
         drawBox(p[b.k].x, p[b.k].y, b.code, b.title, b.sub, a);
       });
 
-      /* draw ARS — active when: ARS hovered, any pillar hovered, any box hovered, or BCRI */
+      /* draw ARS */
       drawARS(p.ars.x, p.ars.y,
         bcriAll ||
         act==='ars' ||
@@ -582,13 +633,14 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       /* draw BCRI */
       drawBCRI(p.bcri.x, p.bcri.y, bcriAll);
 
-      /* status dot + label bottom-left */
+      /* status dot */
       ctx.fillStyle = '#10b981';
       ctx.beginPath(); ctx.arc(18, H-20, 4, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#4a4a4a';
       ctx.font = '10px system-ui,sans-serif';
       ctx.textAlign = 'left';
-      ctx.fillText('Custody · Five pillars active', 28, H-16);
+      ctx.fillText('Custody system active', 28, H-16);
+
       /* title */
       ctx.fillStyle = '#f7931a';
       ctx.font      = '700 11px system-ui,sans-serif';
@@ -596,7 +648,7 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
       ctx.fillText('BCRI STRUCTURAL MODEL', 16, 22);
       ctx.fillStyle = '#444';
       ctx.font      = '10px system-ui,sans-serif';
-      ctx.fillText('hover any node — click to pin', 16, 35);
+      ctx.fillText('hover any node \u2014 click to pin', 16, 35);
 
       requestAnimationFrame(frame);
     }
@@ -659,14 +711,6 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
     },{passive:false});
   })();
   </script>
-
-  <!-- 4. THE STANDARD + ABOUT THE STANDARD (combined) -->
-  <section style="margin-top:32px;" aria-label="About the Bitcoin Custody Standard">
-    <div class="section-title">The Bitcoin Custody Standard</div>
-    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px;">The Bitcoin Custody Standard is a public framework for evaluating Bitcoin custody beyond point-in-time security controls. It treats custody as a system rather than a device or provider choice, and focuses on whether a custody architecture can preserve control across time, operational change, participant turnover, and adversarial conditions.</p>
-    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px;">Bitcoin custody must be evaluated as a structural system — not as a product selection or a point-in-time security audit. The framework evaluates custody across five orthogonal structural pillars, aggregated into a composite resilience score that accounts for entropy-driven degradation, adversarial exposure, and coordination health.</p>
-    <p style="font-size:14px;color:var(--muted);line-height:1.75;">The framework is designed for long-term holders, fiduciaries, institutions, and serious operators who require a more rigorous basis for custody evaluation.</p>
-  </section>
 
   <!-- CORE PUBLICATIONS -->
   <section style="margin-top:32px;" aria-label="Core Publications">
@@ -744,30 +788,44 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   <section style="margin-top:32px;" aria-label="Featured Research">
     <div class="section-title">Featured Research</div>
     <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:14px;">The Bitcoin Custody Standard is supported by an ongoing research program. These publications provide analytical extensions of the framework, including custody architecture analysis, failure modeling, and long-horizon resilience research.</p>
-    <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden;">
-      <a href="https://bitcoincustodystandard.substack.com/p/start-here-the-bitcoin-custody-standard" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .12s;" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''">
-        <span style="font-size:13px;font-weight:600;color:var(--orange);">Start Here — The Bitcoin Custody Standard</span>
-        <span style="color:var(--orange);font-size:12px;">↗</span>
-      </a>
-      <a href="https://bitcoincustodystandard.substack.com/p/reframing-bitcoin-custody-from-device" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .12s;" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''">
-        <span style="font-size:13px;font-weight:600;color:var(--orange);">The Case for a Bitcoin Custody Standard</span>
-        <span style="color:var(--orange);font-size:12px;">↗</span>
-      </a>
-      <a href="https://bitcoincustodystandard.substack.com/p/custodial-entropy-the-silent-failure" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .12s;" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''">
-        <span style="font-size:13px;font-weight:600;color:var(--orange);">Custodial Entropy</span>
-        <span style="color:var(--orange);font-size:12px;">↗</span>
-      </a>
-      <a href="https://bitcoincustodystandard.substack.com/p/the-custodial-paradox-the-structural" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .12s;" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''">
-        <span style="font-size:13px;font-weight:600;color:var(--orange);">The Custodial Paradox</span>
-        <span style="color:var(--orange);font-size:12px;">↗</span>
-      </a>
-      <div style="padding:13px 16px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);">
-        <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--orange);text-decoration:none;">BCS Research Archive ↗</a>
-        <span style="color:var(--dim);font-size:12px;">·</span>
-        <a href="mailto:research@bitcoincustodystandard.org" style="font-size:13px;color:var(--dim);text-decoration:none;">research@bitcoincustodystandard.org</a>
+    <div class="research-list">
+      <div class="res-row">
+        <a href="https://bitcoincustodystandard.substack.com/p/start-here-the-bitcoin-custody-standard" target="_blank" rel="noopener" class="res-link">
+          <span class="res-title">Start Here — The Bitcoin Custody Standard</span>
+          <span class="res-arrow">↗</span>
+        </a>
+        <div class="res-tip">An introduction to the BCS framework: what it measures, why custody is a structural system, and how the BCRI model works.</div>
+      </div>
+      <div class="res-row">
+        <a href="https://bitcoincustodystandard.substack.com/p/reframing-bitcoin-custody-from-device" target="_blank" rel="noopener" class="res-link">
+          <span class="res-title">The Case for a Bitcoin Custody Standard</span>
+          <span class="res-arrow">↗</span>
+        </a>
+        <div class="res-tip">Why existing custody evaluation is incomplete — and what a structural framework must capture that component-level analysis cannot.</div>
+      </div>
+      <div class="res-row">
+        <a href="https://bitcoincustodystandard.substack.com/p/custodial-entropy-the-silent-failure" target="_blank" rel="noopener" class="res-link">
+          <span class="res-title">Custodial Entropy</span>
+          <span class="res-arrow">↗</span>
+        </a>
+        <div class="res-tip">Custodial entropy is the progressive structural degradation of a custody system through knowledge loss, operational drift, and insufficient review.</div>
+      </div>
+      <div class="res-row">
+        <a href="https://bitcoincustodystandard.substack.com/p/the-custodial-paradox-the-structural" target="_blank" rel="noopener" class="res-link">
+          <span class="res-title">The Custodial Paradox</span>
+          <span class="res-arrow">↗</span>
+        </a>
+        <div class="res-tip">How custody systems that appear secure at deployment can become structurally compromised over time without any external attack.</div>
+      </div>
+      <div class="res-footer">
+        <a href="https://bitcoincustodystandard.substack.com" target="_blank" rel="noopener">BCS Research Archive ↗</a>
+        <span style="color:var(--dim);">&middot;</span>
+        <a href="mailto:research@bitcoincustodystandard.org">research@bitcoincustodystandard.org</a>
       </div>
     </div>
   </section>
+
+  <!-- 5. FIVE  </section>
 
   <!-- 5. FIVE STRUCTURAL PILLARS -->
   <section style="margin-top:28px;" aria-label="Five structural pillars">
@@ -785,15 +843,38 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   <section style="margin-top:28px;" aria-label="Measurement components">
     <div class="section-title">Measurement Components</div>
     <div class="comp-row">
-      <div class="comp-card"><div class="comp-code">ARS</div><div class="comp-name">Architecture Resilience Score</div><div class="comp-desc">Structural strength across the five pillars. 0–100, higher is stronger.</div></div>
-      <div class="comp-card"><div class="comp-code">ERI</div><div class="comp-name">Entropy Risk Index</div><div class="comp-desc">Long-horizon degradation risk. 0–100, lower is better.</div></div>
-      <div class="comp-card"><div class="comp-code">XRI</div><div class="comp-name">Exposure Risk Index</div><div class="comp-desc">Adversarial exposure and visibility. 0–100, lower is better.</div></div>
-      <div class="comp-card"><div class="comp-code">CHS</div><div class="comp-name">Coordination Health Score</div><div class="comp-desc">Coordination reliability over time. 0–100, higher is stronger.</div></div>
-      <div class="comp-card" style="border-color:var(--orange-line);"><div class="comp-code">BCRI</div><div class="comp-name">Resilience Index</div><div class="comp-desc">Composite output. BCRI = f(ARS, ERI, XRI, CHS). 0–100.</div></div>
+      <div class="comp-card">
+        <div class="comp-code">ARS</div>
+        <div class="comp-name">Architecture Resilience Score</div>
+        <div class="comp-desc">Structural strength across the five pillars. 0–100, higher is stronger.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">ERI</div>
+        <div class="comp-name">Entropy Risk Index</div>
+        <div class="comp-desc">Long-horizon degradation of custody reliability over time. Comprises Latent Entropy (LEI) and Coordination Entropy (CEI). 0–100, lower is better.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">XRI</div>
+        <div class="comp-name">Exposure Risk Index</div>
+        <div class="comp-desc">How identifiable, targetable, and attackable the custody system is under adversarial conditions. 0–100, lower is better.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">CHS</div>
+        <div class="comp-name">Coordination Health Score</div>
+        <div class="comp-desc">Reliability of coordination required to execute transactions and recovery across participants over time. 0–100, higher is stronger.</div>
+      </div>
+      <div class="comp-card" style="border-color:var(--orange-line);">
+        <div class="comp-code">BCRI</div>
+        <div class="comp-name">Bitcoin Custody Resilience Index</div>
+        <div class="comp-desc">Score · Rating</div>
+      </div>
+    </div>
+    <div class="bcri-formula-tile">
+      <div class="bft-formula">BCRI = f(​ARS, ERI, XRI, CHS)</div>
     </div>
   </section>
 
-  <!-- 7. OUTPUTS -->
+<!-- 7. OUTPUTS -->
   <section style="margin-top:28px;" aria-label="Outputs">
     <div class="section-title">Outputs</div>
     <div class="out-grid">
@@ -808,10 +889,12 @@ header{background:var(--bg);border-bottom:1px solid var(--border);position:stick
   <!-- 8. APPLICATION AND EVALUATION -->
   <section style="margin-top:32px;padding-bottom:40px;" aria-label="Application and Evaluation">
     <div class="section-title">Application and Evaluation</div>
-    <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:6px;">The Bitcoin Custody Standard defines a public framework for evaluating Bitcoin custody resilience.</p>
-    <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:6px;">The scoring methodology is maintained as a controlled model to ensure consistency, comparability, and integrity across assessments.</p>
-    <p style="font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:6px;">Evaluations are conducted under the Bitcoin Custody Standard framework and administered by the Bitcoin Custody Standard Initiative.</p>
-    <p style="font-size:14px;color:var(--muted);line-height:1.5;">The standard is version-controlled, with benchmark and research publications expanding over time.</p>
+    <div class="app-eval-body">
+      <p>The Bitcoin Custody Standard defines a public framework for evaluating Bitcoin custody resilience.</p>
+      <p>The scoring methodology is maintained as a controlled model to ensure consistency, comparability, and integrity across assessments.</p>
+      <p>Evaluations are conducted under the Bitcoin Custody Standard framework and administered by the Bitcoin Custody Standard Initiative.</p>
+      <p>The standard is version-controlled, with benchmark and research publications expanding over time.</p>
+    </div>
   </section>
 
 </main>
