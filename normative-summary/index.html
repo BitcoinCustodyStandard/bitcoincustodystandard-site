@@ -133,7 +133,7 @@ a:hover{text-decoration:underline;}
 .kv-val{text-align:right;color:var(--text);}
 /* Path tiles */
 .path-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;}
-.path-tile{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .12s,box-shadow .12s;}
+.path-tile{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .12s,box-shadow .12s;min-height:64px;}
 .path-tile:hover{border-color:var(--orange);text-decoration:none;}
 .path-tile-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);}
 .path-tile-title{font-size:13px;font-weight:700;color:var(--text);}
@@ -231,7 +231,7 @@ body.dark .card{background:var(--card);border-color:var(--border);}
 body.dark .path-tile{background:var(--card);border-color:var(--border);}
 body.dark .pillar-card{background:var(--card);border-color:var(--border);}
 body.dark body.dark 
-body.dark .section-title{border-color:var(--border);}
+body.dark .section-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
 body.dark .km-grid > div{background:var(--card);border-color:var(--border);}
 body.dark 
 body.dark 
@@ -290,6 +290,10 @@ body.dark
 .viewerHead a:hover{text-decoration:underline;}
 .viewerFrame{width:100%;height:85vh;min-height:750px;border:0;display:block;}
 @media(max-width:680px){.viewerFrame{height:70vh;min-height:500px;}}
+
+/* ── Why-list ── */
+.why-list{padding-left:18px;display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.why-list li{font-size:14px;color:var(--muted);line-height:1.65;}
 </style>
 <script data-goatcounter="https://bcs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","name":"Bitcoin Custody Standard — Normative Summary","url":"https://bitcoincustodystandard.org/normative-summary/","description":"BCS-NS-1.1 — The foundational normative document of the Bitcoin Custody Standard. Defines the framework, five structural pillars, and BCRI evaluation methodology.","publisher":{"@type":"Organization","name":"Bitcoin Custody Standard Initiative","url":"https://bitcoincustodystandard.org"}}</script>
@@ -328,7 +332,8 @@ body.dark
     <a class="btn secondary" href="/documents/">Document Registry</a>
   </div>
 
-  <section class="about-standard" aria-label="Abstract and Purpose" style="margin:18px 0;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:var(--bg);">
+  <section style="margin-top:32px;" aria-label="Abstract and Purpose"><div class="section-title">Abstract and Purpose</div>
+  <section class="about-standard" style="margin:18px 0;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:var(--bg);">
 
     <h3 style="font-size:18px;font-weight:900;color:var(--text);margin:0 0 12px;display:flex;align-items:center;gap:8px;"><span class="dot"></span>Abstract</h3>
     <p style="margin:0;">The Bitcoin Custody Standard (BCS) defines a normative framework for evaluating the structural resilience of Bitcoin custody architectures across time. The Bitcoin Custody Resilience Index (BCRI) is the quantitative assessment methodology aligned with BCS and used to measure custody resilience under the standard. The framework evaluates custody architectures across the five BCS structural pillars through the Architecture Resilience Score (ARS) while also assessing coordination health (CHS), entropy-related degradation (ERI), and adversarial exposure conditions (XRI). BCS is designed to operate alongside evolving institutional, regulatory, and technological custody frameworks while remaining structurally independent of jurisdiction-specific requirements and legal regimes.</p>
@@ -351,7 +356,8 @@ body.dark
   </section>
 
   <!-- KEY METRICS + BCRI STRUCTURAL RESILIENCE MODEL -->
-  <section style="margin-top:28px;" aria-label="Key Metrics and Structural Model">
+  <section style="margin-top:32px;" aria-label="Key Metrics and Structural Model">
+    <div class="section-title">Key Metrics and Structural Model</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;" class="km-grid">
 
       <!-- LEFT: Key Metrics -->
@@ -385,14 +391,14 @@ body.dark
     </div>
   </section>
 
-  <section class="section" id="definitions">
-    <h3>Definitions</h3>
+  <section class="section" style="margin-top:32px;" id="definitions">
+    <div class="section-title">Definitions</div>
     <p style="margin:0;">All framework terms are defined in the BCS Definitions and Glossary — including structural pillars, measurement components, entropy theory, and conformance terminology.</p>
     <p style="margin:10px 0 0;"><a href="/definitions/" style="font-weight:600;">View Definitions &amp; Glossary →</a></p>
   </section>
 
-  <section class="section" id="citation">
-    <h3>Citable As</h3>
+  <section class="section" style="margin-top:32px;" id="citation">
+    <div class="section-title">Citable As</div>
     <p style="margin:0;font-size:14px;line-height:2;">
       Bitcoin Custody Standard (2026).<br>
       BCS-NS-1.1 — Normative Summary.<br>
@@ -400,7 +406,7 @@ body.dark
     </p>
   </section>
 
-  <section id="document" class="viewerWrap" aria-label="Embedded PDF" style="margin-top:28px;">
+  <section id="document" class="viewerWrap" aria-label="Embedded PDF" style="margin-top:32px;">
     <div class="viewerHead">
       <div>Document Viewer</div>
       <div><a href="/BCS-NS-1.1-2026-03-06.pdf" target="_blank" rel="noopener">Open in new tab</a></div>
@@ -408,8 +414,7 @@ body.dark
     <iframe class="viewerFrame" src="/BCS-NS-1.1-2026-03-06.pdf#pagemode=none&view=FitH" title="BCS Normative Summary BCS-NS-1.1" loading="lazy"></iframe>
   </section>
 
-  <section class="meta" aria-label="Document metadata" style="margin-top:28px;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:12px;">Document Record</div>
+  <section class="meta" aria-label="Document Record" style="margin-top:32px;"><div class="section-title">Document Record</div>
     <div class="metaGrid">
       <div class="kv"><div class="k">Document Type</div><div class="v">Normative Summary</div></div>
       <div class="kv"><div class="k">Document ID</div><div class="v">BCS-NS-1.1</div></div>
