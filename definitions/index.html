@@ -193,9 +193,9 @@ a:hover{text-decoration:underline;}
 .site-footer a:hover{color:var(--muted);}
 /* Responsive */
 
-.pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
-.pillar-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--orange-line);border-radius:0 4px 4px 0;padding:12px 14px;}
-.pillar-card .pillar-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
+
+
+.pillar-card 
 .pillar-card .pillar-desc{font-size:11px;color:var(--muted);line-height:1.55;}
 
 .bcri-formula-tile{margin-top:10px;display:flex;align-items:center;justify-content:center;width:100%;border:1px solid var(--orange-line);border-radius:4px;background:var(--bg2);padding:14px 24px;text-align:center;}
@@ -229,7 +229,7 @@ body.dark{
 body.dark body.dark .site-footer{background:var(--bg);border-color:var(--border);}
 body.dark .card{background:var(--card);border-color:var(--border);}
 body.dark .path-tile{background:var(--card);border-color:var(--border);}
-body.dark .pillar-card{background:var(--card);border-color:var(--border);}
+body.dark 
 body.dark body.dark 
 body.dark .section-title{border-color:var(--border);}
 body.dark .km-grid > div{background:var(--card);border-color:var(--border);}
@@ -264,7 +264,7 @@ body.dark
   .path-grid{grid-template-columns:1fr 1fr!important;}
   .comp-row{grid-template-columns:1fr 1fr!important;}
   .out-grid{grid-template-columns:1fr 1fr!important;}
-  .pillar-grid{grid-template-columns:1fr 1fr!important;}
+  
   .fw-grid{grid-template-columns:1fr!important;}
   .kv-grid{grid-template-columns:1fr!important;}
   .m-pillars,.m-eri-row,.m-xc-row,.m-out-cols{grid-template-columns:1fr!important;}
@@ -282,6 +282,70 @@ body.dark
   .path-tile{padding:16px;}
 }
 
+
+/* ── Definitions page layout ── */
+.def-layout{display:grid;grid-template-columns:200px 1fr;gap:32px;margin-top:24px;align-items:start;}
+.def-sidebar{position:sticky;top:68px;}
+.sidebar-nav{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:10px 14px;border-bottom:1px solid var(--border);background:var(--bg2);}
+.sidebar-nav a{display:block;font-size:12px;font-weight:600;color:var(--muted);padding:8px 14px;text-decoration:none;border-bottom:1px solid var(--border);}
+.sidebar-nav a:last-child{border-bottom:none;}
+.sidebar-nav a:hover{color:var(--text);background:var(--bg2);}
+
+/* ── Section headers ── */
+.def-section{margin-bottom:36px;}
+.def-section-hdr{font-size:16px;font-weight:800;color:var(--text);margin:0 0 16px;padding-bottom:10px;border-bottom:2px solid var(--orange-line);}
+
+/* ── Individual entries ── */
+.def-entry{padding:14px 0;border-bottom:1px solid var(--border);}
+.def-entry:last-child{border-bottom:none;}
+.def-term{font-size:14px;font-weight:800;color:var(--text);margin:0 0 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.def-code{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:2px 7px;font-family:monospace;}
+.def-body{font-size:13px;color:var(--muted);line-height:1.7;margin:0;}
+.def-note{margin-top:8px;padding:10px 14px;background:var(--orange-dim);border-left:3px solid var(--orange-line);border-radius:0 4px 4px 0;font-size:12px;color:var(--muted);line-height:1.65;}
+.def-formula{margin-top:8px;padding:8px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;font-family:monospace;font-size:13px;color:var(--orange);}
+
+/* ── Pillar entries ── */
+
+
+/* ── Principle block ── */
+.principle{margin:20px 0 0;padding:14px 18px;border-left:3px solid var(--orange);background:var(--bg2);border-radius:0 4px 4px 0;}
+.principle-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin:0 0 4px;}
+.principle-text{font-size:14px;font-weight:600;color:var(--text);margin:0;line-height:1.6;}
+
+/* ── Mobile nav ── */
+.mob-nav{display:none;gap:6px;flex-wrap:wrap;margin:16px 0;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;}
+.mob-nav a{font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;padding:4px 8px;border:1px solid var(--border);border-radius:3px;background:var(--card);}
+.mob-nav a:hover{color:var(--text);border-color:var(--orange);}
+
+/* ── Footer note ── */
+.footer-note{margin-top:32px;padding:14px 18px;border:1px solid var(--border);border-radius:6px;background:var(--bg2);font-size:12px;color:var(--dim);line-height:1.7;text-align:center;}
+
+/* ── Dark mode ── */
+body.dark .def-note{background:rgba(247,147,26,0.08);border-color:var(--orange-line);}
+body.dark .def-formula{background:var(--bg2);border-color:var(--border);}
+body.dark .principle{background:var(--bg2);}
+body.dark .mob-nav{background:var(--bg2);border-color:var(--border);}
+body.dark .mob-nav a{background:var(--card);border-color:var(--border);}
+body.dark .sidebar-nav{border-color:var(--border);}
+body.dark .sidebar-nav a{border-color:var(--border);}
+body.dark .sidebar-label{background:var(--bg2);border-color:var(--border);}
+
+/* ── Responsive ── */
+@media(max-width:680px){
+  .def-layout{grid-template-columns:1fr;}
+  .def-sidebar{display:none;}
+  .mob-nav{display:flex;}
+}
+
+/* ── Five Pillars — compact card grid ── */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+.pillar-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:6px;}
+.pillar-num{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pillar-name{font-size:13px;font-weight:800;color:var(--text);margin:0;}
+.pillar-body{font-size:12px;color:var(--muted);line-height:1.6;margin:0;}
+@media(max-width:680px){.pillar-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:400px){.pillar-grid{grid-template-columns:1fr;}}
 </style>
 <script data-goatcounter="https://bcs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Bitcoin Custody Standard — Definitions","url":"https://bitcoincustodystandard.org/definitions/","description":"Formal definitions and controlled vocabulary for the Bitcoin Custody Standard normative framework.","publisher":{"@type":"Organization","name":"Bitcoin Custody Standard Initiative","url":"https://bitcoincustodystandard.org"}}</script>
@@ -387,24 +451,29 @@ body.dark
         </div>
         <div class="pillar-grid">
           <div class="pillar-card">
-            <p class="pillar-name">I. Cryptographic Integrity</p>
-            <p class="pillar-body">Requirements relating to secure and verifiably randomized key generation, disciplined handling of private-key material throughout its lifecycle, preservation of cryptographic configuration data including derivation paths and wallet descriptors, and awareness of long-horizon algorithmic resilience planning.</p>
+            <div class="pillar-num">I</div>
+            <p class="pillar-name">Cryptographic Integrity</p>
+            <p class="pillar-body">Secure key generation, lifecycle handling of private-key material, preservation of derivation paths and wallet descriptors, and long-horizon algorithmic resilience.</p>
           </div>
           <div class="pillar-card">
-            <p class="pillar-name">II. Physical Distribution</p>
-            <p class="pillar-body">Requirements relating to redundancy and geographic separation of recovery material across independent physical risk domains, eliminating single physical points of failure where feasible.</p>
+            <div class="pillar-num">II</div>
+            <p class="pillar-name">Physical Distribution</p>
+            <p class="pillar-body">Geographic redundancy of recovery material across independent physical risk domains, eliminating single points of physical failure.</p>
           </div>
           <div class="pillar-card">
-            <p class="pillar-name">III. Operational Dependency</p>
-            <p class="pillar-body">Requirements addressing reliance on operational tools, signing devices, wallet software, external service providers, and coordination dependencies involved in custody execution. Portability of the custody arrangement is a core requirement under this pillar.</p>
+            <div class="pillar-num">III</div>
+            <p class="pillar-name">Operational Dependency</p>
+            <p class="pillar-body">Reliance on signing devices, wallet software, and service providers. Portability of the custody arrangement is a core requirement.</p>
           </div>
           <div class="pillar-card">
-            <p class="pillar-name">IV. Cognitive Reliability</p>
-            <p class="pillar-body">Requirements ensuring that custody and recovery do not depend on fragile memory or undocumented knowledge. Recovery procedures shall be documented and reproducible without reliance on any single individual's recollection.</p>
+            <div class="pillar-num">IV</div>
+            <p class="pillar-name">Cognitive Reliability</p>
+            <p class="pillar-body">Recovery must not depend on memory or undocumented knowledge. Procedures shall be documented and reproducible by any authorized party.</p>
           </div>
-          <div class="pillar-card" style="grid-column:1 / -1;">
-            <p class="pillar-name">V. Temporal Resilience</p>
-            <p class="pillar-body">Requirements ensuring the long-horizon survivability of the custody architecture, including documented review cadence, periodic recovery validation, succession planning, change control, and active mitigation of Custodial Entropy.</p>
+          <div class="pillar-card">
+            <div class="pillar-num">V</div>
+            <p class="pillar-name">Temporal Resilience</p>
+            <p class="pillar-body">Long-horizon survivability through review cadence, recovery validation, succession planning, change control, and active Custodial Entropy mitigation.</p>
           </div>
         </div>
       </section>
