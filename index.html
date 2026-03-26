@@ -131,7 +131,7 @@ a:hover{text-decoration:underline;}
 .kv-val{text-align:right;color:var(--text);}
 /* Path tiles */
 .path-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;}
-.path-tile{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .12s,box-shadow .12s;}
+.path-tile{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .12s,box-shadow .12s;min-height:64px;}
 .path-tile:hover{border-color:var(--orange);text-decoration:none;}
 .path-tile-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);}
 .path-tile-title{font-size:13px;font-weight:700;color:var(--text);}
@@ -229,7 +229,7 @@ body.dark .card{background:var(--card);border-color:var(--border);}
 body.dark .path-tile{background:var(--card);border-color:var(--border);}
 body.dark .pillar-card{background:var(--card);border-color:var(--border);}
 body.dark body.dark 
-body.dark .section-title{border-color:var(--border);}
+body.dark .section-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
 body.dark .km-grid > div{background:var(--card);border-color:var(--border);}
 body.dark 
 body.dark 
@@ -241,9 +241,9 @@ body.dark
 .research-list{border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .res-row{border-bottom:1px solid var(--border);}
 .res-row:last-child{border-bottom:none;}
-.res-link{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;text-decoration:none;transition:background .12s;background:transparent;}
+.res-link{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;text-decoration:none;transition:background .12s;background:transparent;}
 .res-link:hover{background:var(--bg2);}
-.res-title{font-size:13px;font-weight:600;color:var(--orange);}
+.res-title{font-size:12px;font-weight:600;color:var(--orange);}
 .res-arrow{color:var(--orange);font-size:12px;flex-shrink:0;margin-left:10px;}
 .res-tip{display:none;padding:10px 16px 13px;font-size:12px;color:var(--muted);line-height:1.65;background:var(--bg2);border-top:1px solid var(--border);}
 .res-row:hover .res-tip{display:block;}
@@ -279,6 +279,18 @@ body.dark
   .theme-toggle{width:40px;height:40px;}
   .path-tile{padding:16px;}
 }
+
+/* ── Viewer (canonical) ── */
+.viewerWrap{margin-top:28px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.viewerHead{padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:700;color:var(--text);}
+.viewerHead a{font-size:12px;font-weight:600;color:var(--orange);text-decoration:none;}
+.viewerHead a:hover{text-decoration:underline;}
+.viewerFrame{width:100%;height:85vh;min-height:750px;border:0;display:block;}
+/* ── Why-list ── */
+.why-list{padding-left:18px;display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.why-list li{font-size:14px;color:var(--muted);line-height:1.65;}
+/* ── Mobile viewer ── */
+@media(max-width:680px){.viewerFrame{height:70vh;min-height:500px;}}
 </style>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Bitcoin Custody Standard", "url": "https://bitcoincustodystandard.org", "description": "A public framework for evaluating the long-horizon resilience of Bitcoin custody systems.", "publisher": {"@type": "Organization", "name": "Bitcoin Custody Standard Initiative", "url": "https://bitcoincustodystandard.org"}}</script>
@@ -782,13 +794,13 @@ body.dark
     <div class="section-title">Why Existing Custody Evaluation Fails</div>
     <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px;">Most custody analysis focuses on components: hardware wallets, multisignature setups, service providers, or isolated security features. This is necessary but incomplete.</p>
     <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px;">It does not adequately evaluate:</p>
-    <ul style="padding-left:18px;display:flex;flex-direction:column;gap:4px;margin-bottom:12px;">
-      <li style="font-size:14px;color:var(--muted);">structural failure over time</li>
-      <li style="font-size:14px;color:var(--muted);">coordination breakdown</li>
-      <li style="font-size:14px;color:var(--muted);">entropy-driven degradation</li>
-      <li style="font-size:14px;color:var(--muted);">dependency concentration</li>
-      <li style="font-size:14px;color:var(--muted);">jurisdictional constraints</li>
-      <li style="font-size:14px;color:var(--muted);">long-horizon recoverability</li>
+    <ul class="why-list">
+      <li>structural failure over time</li>
+      <li>coordination breakdown</li>
+      <li>entropy-driven degradation</li>
+      <li>dependency concentration</li>
+      <li>jurisdictional constraints</li>
+      <li>long-horizon recoverability</li>
     </ul>
     <p style="font-size:14px;color:var(--muted);line-height:1.75;">As a result, systems that appear secure at deployment may still fail under real-world conditions. The Bitcoin Custody Standard addresses this gap by evaluating custody as a structural system.</p>
   </section>
