@@ -34,11 +34,14 @@
 .site-footer .f-maintained{margin-bottom:4px;font-size:11px;color:var(--dim);}
 .site-footer .f-copy{font-size:11px;color:var(--dim);}
 body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;}
+.hero{padding:40px 0 32px;border-bottom:1px solid var(--border);}
+.hero h1,.hero h2{font-size:28px;font-weight:900;letter-spacing:-.02em;color:var(--text);margin:0;}
+.hero p,.hero-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-top:10px;}
+.hero-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border2);border-radius:3px;padding:3px 8px;background:var(--bg2);}
 p{color:var(--muted);font-size:14px;line-height:1.75;margin:0;}
 p+p{margin-top:10px;}
 .section-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.hero h1,.hero h2{font-size:28px;font-weight:900;letter-spacing:-.02em;color:var(--text);margin:0;}
-.hero p,.hero-sub{font-size:15px;color:var(--muted);line-height:1.7;margin-top:10px;}
 h3{font-size:16px;font-weight:800;color:var(--text);margin:0 0 8px;}
 h4{font-size:13px;font-weight:700;color:var(--text);margin:0 0 6px;}
 
@@ -130,9 +133,7 @@ nav a.active{color:var(--text)}
 .btn:hover{text-decoration:none;filter:brightness(.97)}
 .btn svg{width:14px;height:14px;fill:currentColor;flex-shrink:0;}
 main{padding:34px 0 60px}
-.hero{padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:18px;}
 
-.lead{margin:0;color:var(--muted);max-width:92ch}
 .dot{width:8px;height:8px;border-radius:999px;background:var(--btc);display:inline-block;margin-right:6px;transform:translateY(-1px);}
 /* Metadata strip */
 .meta{border:1px solid var(--border);border-radius:14px;padding:14px;margin:18px 0;}
@@ -279,8 +280,7 @@ body.dark .def-formula{background:var(--bg2);border-color:var(--border);color:va
 body.dark .pillar-card{background:var(--card);border-color:var(--border);}
 body.dark .doc-entry{background:var(--card);border-color:var(--border);}
 body.dark .doc-entry .doc-title{color:var(--text);}
-body.dark .hero-badge{background:var(--bg2);border-color:var(--border);}
-body.dark .viewerHead{background:var(--bg2);}
+body.dark body.dark .viewerHead{background:var(--bg2);}
 body.dark .footer-note{background:var(--bg2);border-color:var(--border);}
 body.dark .def-note{background:var(--bg2);border-color:var(--border);}
 body.dark .section-intro{background:var(--bg2);border-color:var(--border);}
@@ -309,7 +309,6 @@ body.dark iframe{filter:invert(0.88) hue-rotate(180deg);}
 
 /* Body & global */
 
-.lead{ max-width:72ch; line-height:1.75; }
 
 /* ── Buttons — clear hierarchy ── */
 .btn{
@@ -535,8 +534,7 @@ body.dark nav a:hover,body.dark nav a.active{ color:var(--text); }
   .hdr-actions{order:2;margin-left:auto;}
   .site-nav a{font-size:11px;padding:4px 6px;}
   main.wrap{padding:0 14px;}
-  .hero h1,.hero h2{font-size:20px!important;}
-  .card-grid{grid-template-columns:1fr!important;}
+    .card-grid{grid-template-columns:1fr!important;}
   .card-grid.cols2{grid-template-columns:1fr!important;}
   .path-grid{grid-template-columns:1fr 1fr!important;}
   .comp-row{grid-template-columns:1fr 1fr!important;}
@@ -584,8 +582,8 @@ body.dark nav a:hover,body.dark nav a.active{ color:var(--text); }
 <main class="wrap">
 
   <section class="hero">
-    <h2>Bitcoin Custody Standard — Normative Summary</h2>
-    <p class="lead">Version 1.1 &nbsp;·&nbsp; BCS-NS-1.1 &nbsp;·&nbsp; Public Standard &nbsp;·&nbsp; March 2026</p>
+    <h1>Bitcoin Custody Standard — Normative Summary</h1>
+    <p class="hero-sub">BCS-NS-1.1 &nbsp;&middot;&nbsp; Version 1.1 &nbsp;&middot;&nbsp; Public Standard &nbsp;&middot;&nbsp; March 2026</p>
   </section>
   <p style="font-size:14px;margin:4px 0 14px;">The foundational document of the Bitcoin Custody Standard.</p>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
