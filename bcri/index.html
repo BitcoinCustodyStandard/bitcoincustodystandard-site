@@ -274,6 +274,15 @@ html{scroll-padding-top:var(--headerOffset);}
   #c2-wrap, #c3-wrap {
     min-width: 480px;
   }
+  /* Chart 2 only: wider canvas for comfortable swipe exploration */
+  #c2-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #c2-wrap {
+    min-width: 760px !important;
+    width: 760px !important;
+  }
   /* FIX: legend wraps better on mobile */
   .legend {
     gap: 10px;
@@ -412,7 +421,7 @@ html{scroll-padding-top:var(--headerOffset);}
         <span class="li"><span class="lci" style="background:#bbf7d0;border:1.5px solid #059669;"></span><strong>Distributed</strong></span>
         <span class="li"><span class="lci" style="background:#e9d5ff;border:1.5px solid #7c3aed;"></span><strong>Institutional</strong></span>
       </div>
-      <div class="chart-scroll-wrap">
+      <div class="chart-scroll-wrap" id="c2-scroll">
         <div id="c2-wrap" style="position:relative;width:100%;height:520px;">
           <canvas id="c2"></canvas>
         </div>
@@ -926,23 +935,35 @@ var chart2 = new Chart(document.getElementById('c2'),{
         backgroundColor:{'No Sovereignty':'rgba(252,165,165,0.85)','Single-Key':'rgba(253,230,138,0.9)','Collaborative':'rgba(191,219,254,0.9)','Distributed':'rgba(187,247,208,0.9)','Institutional':'rgba(233,213,255,0.9)'}[z],
         borderColor:{'No Sovereignty':'#f87171','Single-Key':'#d97706','Collaborative':'#2563eb','Distributed':'#059669','Institutional':'#7c3aed'}[z],
         borderWidth:1.5,
-        // FIX: larger hit radius on mobile
         pointRadius: isMobile ? 10 : 7,
         pointHoverRadius: isMobile ? 16 : 14
       };
     })
   },
   options:{
-    responsive:true,
+    // On mobile: responsive:false lets the canvas fill the explicit 760px width set by CSS
+    // On desktop: responsive:true fills the container naturally
+    responsive: !isMobile,
     maintainAspectRatio:false,
     layout:{padding:{top:28}},
     plugins:{legend:{display:false},tooltip:{enabled:false}},
     scales:{
-      x:{min:0,max:11,title:{display:true,text:'Complexity Score (CS)',font:{size:isMobile?9:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.1)'},ticks:{font:{size:isMobile?9:11,family:'system-ui'}}},
-      y:{min:-2,max:36,title:{display:true,text:'ERE = (BCRI−25)÷√CS',font:{size:isMobile?9:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.1)'},ticks:{font:{size:isMobile?9:11,family:'system-ui'}}}
+      x:{min:0,max:11,title:{display:true,text:'Complexity Score (CS)',font:{size:isMobile?10:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.1)'},ticks:{font:{size:isMobile?10:11,family:'system-ui'}}},
+      y:{min:-2,max:36,title:{display:true,text:'ERE = (BCRI−25)÷√CS',font:{size:isMobile?10:11,family:'system-ui'},color:'#6b7280'},grid:{color:'rgba(128,128,128,0.1)'},ticks:{font:{size:isMobile?10:11,family:'system-ui'}}}
     }
   }
 });
+
+/* Chart 2: on mobile, set canvas to explicit pixel dimensions so it renders at full width */
+if (isMobile) {
+  var c2el = document.getElementById('c2');
+  var c2wrap = document.getElementById('c2-wrap');
+  c2el.style.width = '760px';
+  c2el.style.height = '520px';
+  c2wrap.style.width = '760px';
+  c2wrap.style.height = '520px';
+  chart2.resize(760, 520);
+}
 
 /* Chart 2 touch — pinned tap model */
 attachTouchTap(document.getElementById('c2'), function(cx, cy) {
