@@ -12,8 +12,8 @@
 <meta name="robots" content="index,follow" />
 <meta property="og:title" content="Bitcoin Custody Standard — BCRI Benchmark"/>
 <meta property="og:description" content="BCS-BR-1.0 — The BCRI Benchmark Report applies the Bitcoin Custody Standard across 14 benchmark custody architectures to evaluate structural resilience and operational complexity."/>
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://bitcoincustodystandard.org/Normative.png"/>
+<meta property="og:type" content="article" />
+<meta property="og:image" content="https://bitcoincustodystandard.org/BCS_twitter_card_1200x630.png"/>
 <meta property="og:url" content="https://bitcoincustodystandard.org/bcri/"/>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Bitcoin Custody Standard — BCRI Benchmark"/>
@@ -64,6 +64,7 @@ body.dark .about-standard { background:var(--card); border-color:var(--border); 
 
 *{box-sizing:border-box}
 body{
+  margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
@@ -149,17 +150,14 @@ main{padding:34px 0 60px}
 
 /* ── Metadata strip ── */
 .meta{border:1px solid var(--border);border-radius:14px;padding:14px;margin:18px 0;}
-.metaGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;}
+.metaGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 @media(max-width:760px){
-  .metaGrid{grid-template-columns:1fr;justify-items:center;}
-  .kv{width:100%;max-width:520px;margin-left:auto;margin-right:auto;}
-  .k{flex:0 0 44%;}
-  .v{flex:1 1 auto;display:flex;justify-content:flex-end;text-align:right;}
+  .metaGrid{grid-template-columns:1fr;}
 }
-.kv{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 14px;background:var(--panel);border-radius:12px;border:1px solid var(--border);}
-.k{color:var(--muted);font-weight:600;flex-shrink:0;padding-right:12px;}
-.v{font-weight:400;text-align:right;}
-.v a{display:inline-block;text-align:right;}
+.kv{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:3px;font-size:13px;}
+.kv-key{color:var(--muted);font-weight:600;flex-shrink:0;padding-right:10px;}
+.kv-val{text-align:right;color:var(--text);}
+.kv-val a{display:inline-block;text-align:right;}
 
 /* ── Scroll offset for sticky header ── */
 :root{--headerOffset:120px;}
@@ -520,16 +518,18 @@ html{scroll-padding-top:var(--headerOffset);}
   </section>
 
   <!-- DOCUMENT RECORD -->
-  <section class="meta" aria-label="Document Record" style="margin-top:32px;"><div class="section-title">Document Record</div>
+  <section aria-label="Document Record" style="margin-top:32px;"><div class="section-title">Document Record</div>
     <div class="metaGrid">
-      <div class="kv"><div class="k">Document Type</div><div class="v">Benchmark Report</div></div>
-      <div class="kv"><div class="k">Document ID</div><div class="v">BCS-BR-1.0</div></div>
-      <div class="kv"><div class="k">Version</div><div class="v">1.0</div></div>
-      <div class="kv"><div class="k">Publication Date</div><div class="v">March 2026</div></div>
-      <div class="kv"><div class="k">Document Class</div><div class="v">Benchmark Report</div></div>
-      <div class="kv"><div class="k">Status</div><div class="v">Public, Citable</div></div>
-      <div class="kv"><div class="k">Steward</div><div class="v">Bitcoin Custody Standard Initiative</div></div>
-      <div class="kv"><div class="k">Next Scheduled Review</div><div class="v">March 2027</div></div>
+      <div class="kv"><div class="kv-key">Document Type</div><div class="kv-val">Benchmark Report</div></div>
+      <div class="kv"><div class="kv-key">Document ID</div><div class="kv-val">BCS-BR-1.0</div></div>
+      <div class="kv"><div class="kv-key">Version</div><div class="kv-val">1.0</div></div>
+      <div class="kv"><div class="kv-key">Publication Date</div><div class="kv-val">March 2026</div></div>
+      <div class="kv"><div class="kv-key">Document Class</div><div class="kv-val">Benchmark Report</div></div>
+      <div class="kv"><div class="kv-key">Status</div><div class="kv-val">Public, Citable</div></div>
+      <div class="kv"><div class="kv-key">Steward</div><div class="kv-val">Bitcoin Custody Standard Initiative</div></div>
+      <div class="kv"><div class="kv-key">Next Scheduled Review</div><div class="kv-val">March 2027 (or earlier if major revision required)</div></div>
+      <div class="kv"><div class="kv-key">Social</div><div class="kv-val"><a href="https://x.com/Bitcoin_custody" target="_blank" rel="noopener" style="color:var(--orange);">@Bitcoin_custody</a></div></div>
+      <div class="kv"><div class="kv-key">Contact</div><div class="kv-val"><a href="mailto:contact@bitcoincustodystandard.org" style="color:var(--orange);">contact@bitcoincustodystandard.org</a></div></div>
     </div>
   </section>
 
