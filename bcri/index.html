@@ -174,7 +174,7 @@ html{scroll-padding-top:var(--headerOffset);}
 .fullCard p+p{margin-top:10px;}
 
 /* ── Chart block ── */
-.chartBlock{margin-top:40px;padding-top:28px;border-top:1px solid var(--border);}
+.chartBlock{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
 .chartHdr{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
 .chartLogo{width:32px;height:auto;border-radius:4px;flex-shrink:0;}
 .chartTitle{font-size:14px;font-weight:700;color:var(--text);}
@@ -401,25 +401,13 @@ html{scroll-padding-top:var(--headerOffset);}
 
   <section class="hero">
     <h1>Bitcoin Custody Standard — BCRI Benchmark Report</h1>
-    <p class="lead">Structural resilience and complexity across 14 Bitcoin custody architectures, scored under the Bitcoin Custody Resilience Index (BCRI) framework.</p>
-  </section>
-
-  <section style="margin-top:32px;" aria-label="About the BCRI Benchmark Report">
-    <div class="section-title">About the BCRI Benchmark Report</div>
-  <section class="about-standard" aria-label="About the BCRI Benchmark Report" style="margin:18px 0;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:var(--card);">
-    <p style="margin:0;color:var(--muted);font-size:14px;line-height:1.6;">
-      The BCRI Benchmark Report (BCS-BR-1.0) applies the Bitcoin Custody Resilience Index (BCRI) methodology to 14 Bitcoin custody architecture types — from exchange wallets and hot wallets through single-key cold storage, self-managed multisig, collaborative multisig, and institutional custody — producing scored comparisons across structural resilience and operational complexity. The benchmark is designed to surface the structural conditions that determine whether a custody arrangement will remain accessible, recoverable, and sovereign across time — not just at the moment of setup.
-    </p>
-    <p style="margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.6;">
-      Each architecture is evaluated across five orthogonal structural pillars: Cryptographic Integrity, Physical Distribution, Operational Dependency, Cognitive Reliability, and Temporal Resilience. These pillars are aggregated into four structural components — Architecture Resilience (ARS), Coordination Health (CHS), Entropy Risk Index (ERI), and Exposure Risk Index (XRI) — to produce a composite BCRI score from 0 to 100. The Temporal Resilience pillar specifically captures Custodial Entropy: the progressive structural degradation that occurs as documentation lapses, procedures drift, hardware ages, and coordination coherence erodes over time — independent of any external attack or security incident.
-    </p>
-  </section>
+    <p class="lead">Evaluate structural resilience and operational complexity across 14 Bitcoin custody architectures scored under the Bitcoin Custody Resilience Index (BCRI) framework.</p>
   </section>
 
   <!-- BENCHMARK EXHIBITS -->
-  <section class="section" id="benchmark">
+  <section class="section" id="benchmark" style="margin-top:18px;">
     <div class="section-title">Benchmark Exhibits</div>
-    <p style="color:var(--muted);font-size:14px;margin:0 0 22px;">Three exhibits presenting the full BCRI benchmark dataset. Tap any bar or dot for the full reference configuration from Annex A.</p>
+    <p style="color:var(--muted);font-size:14px;margin:0 0 10px;">Three exhibits presenting the full BCRI benchmark dataset. Tap any bar or dot for the full reference configuration from Annex A.</p>
 
     <!-- Chart 1 -->
     <div class="chartBlock">
@@ -441,7 +429,9 @@ html{scroll-padding-top:var(--headerOffset);}
           <canvas id="c1"></canvas>
         </div>
       </div>
-      <div class="obsBox"><div class="obsDot"></div><p class="obsText">The ranking orders 12 scored architectures by absolute BCRI. Distributed self-custody and collaborative multisig designs occupy the top positions. The RE column shows that BCRI rank and resilience efficiency rank do not align — lower-BCRI architectures can achieve higher efficiency per unit of operational complexity.</p></div>
+      <div class="finding" style="margin-top:14px;">
+        <p class="findingText"><strong>Maximum resilience is achieved through architecture design, not delegation.</strong> The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations. Resilience cannot be purchased. It is built into the structure at design time.</p>
+      </div>
     </div>
 
     <!-- Chart 2 -->
@@ -463,7 +453,9 @@ html{scroll-padding-top:var(--headerOffset);}
           <canvas id="c2"></canvas>
         </div>
       </div>
-      <div class="obsBox"><div class="obsDot"></div><p class="obsText">ERE (Excess Resilience Efficiency) rises steeply from CS (Complexity Score) 1.0 to the frontier near 4.5, then declines. Institutional architectures cluster to the right of the peak, producing lower resilience efficiency despite strong absolute BCRI scores. Beyond the peak, added complexity yields diminishing resilience returns.</p></div>
+      <div class="finding" style="margin-top:14px;">
+        <p class="findingText"><strong>Resilience efficiency peaks at moderate complexity and declines steeply beyond it.</strong> The three most ERE-efficient architectures operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. The Corporate Bitcoin Treasury (CS 8.2, ERE 25.1) is the benchmark's clearest case of misallocated complexity. Governance cannot substitute for structural design.</p>
+      </div>
     </div>
 
     <!-- Chart 3 -->
@@ -484,24 +476,9 @@ html{scroll-padding-top:var(--headerOffset);}
           <canvas id="c3"></canvas>
         </div>
       </div>
-      <div class="obsBox"><div class="obsDot"></div><p class="obsText">The architecture map divides the design space into four structurally distinct quadrants. Two architectures fall below the Resilience Sufficiency Threshold at markedly different complexity levels — confirming that sub-threshold outcomes arise from distinct structural causes requiring different corrective interventions.</p></div>
-    </div>
-  </section>
-
-  <!-- KEY FINDINGS -->
-  <section class="section" id="findings">
-    <div class="section-title">Key Findings</div>
-    <div class="finding">
-      <p class="findingNum">Finding 1</p>
-      <p class="findingText"><strong>Maximum resilience is achieved through architecture design, not delegation.</strong> The three highest-scoring architectures are distributed or collaborative designs. Self-Managed Multisig — Hi Resilience (97.5, AAA) achieves the benchmark maximum. The highest institutional architecture, Qualified Custodian (93.7, AA), scores below the two leading self-custody configurations. Resilience cannot be purchased. It is built into the structure at design time.</p>
-    </div>
-    <div class="finding">
-      <p class="findingNum">Finding 2</p>
-      <p class="findingText"><strong>Resilience efficiency peaks at moderate complexity and declines steeply beyond it.</strong> The three most ERE-efficient architectures operate between CS 2.6 and 5.2. Every institutional architecture with CS above 7.0 produces ERE between 25.1 and 32.9. The Corporate Bitcoin Treasury (CS 8.2, ERE 25.1) is the benchmark's clearest case of misallocated complexity. Governance cannot substitute for structural design.</p>
-    </div>
-    <div class="finding">
-      <p class="findingNum">Finding 3</p>
-      <p class="findingText"><strong>Custody failure is two-dimensional.</strong> Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
+      <div class="finding" style="margin-top:14px;">
+        <p class="findingText"><strong>Custody failure is two-dimensional.</strong> Under-engineered systems fail through lack of structural redundancy. Over-engineered systems fail through misallocated complexity and concentration risk. Each requires a different corrective intervention. A single-axis evaluation framework will misdiagnose the second failure mode every time.</p>
+      </div>
     </div>
   </section>
 
