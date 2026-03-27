@@ -565,14 +565,19 @@ var CONFIGS={
 };
 
 /* ─────────────────────────────────────────────
-   TOOLTIP LOGIC — unified desktop hover + mobile tap
+   TOOLTIP LOGIC
+   Desktop: follows mouse hover, hides on mouseleave
+   Mobile:  pinned — tap to open, tap same to close,
+            tap different to switch, tap outside to dismiss
 ───────────────────────────────────────────── */
 var tip = document.getElementById('bcri-tip');
 var tipName = document.getElementById('tip-name');
 var tipScore = document.getElementById('tip-score');
 var tipCfg = document.getElementById('tip-cfg');
 var tipOverlay = document.getElementById('tip-overlay');
-var tipVisible = false;
+
+// Pinned state — tracks currently open tooltip label on mobile
+var pinnedLabel = null;
 
 function positionTip(clientX, clientY) {
   var w = tip.offsetWidth || 300;
@@ -580,25 +585,20 @@ function positionTip(clientX, clientY) {
   var vw = window.innerWidth;
   var vh = window.innerHeight;
   var margin = 16;
-
-  // On mobile, position above the finger to avoid being obscured
   var x, y;
   if (isMobile) {
+    // anchor above finger so the finger doesn't hide it
     x = clientX - w / 2;
-    y = clientY - h - 24; // above finger
-    // if it would go off top, put it below
-    if (y < margin) { y = clientY + 24; }
+    y = clientY - h - 32;
+    if (y < margin) { y = clientY + 36; } // flip below if off top
   } else {
     x = clientX + 16;
     y = clientY + 16;
   }
-
-  // Clamp within viewport
   if (x + w > vw - margin) { x = vw - w - margin; }
   if (x < margin) { x = margin; }
   if (y + h > vh - margin) { y = vh - h - margin; }
   if (y < margin) { y = margin; }
-
   tip.style.left = x + 'px';
   tip.style.top = y + 'px';
 }
@@ -608,30 +608,73 @@ function showTip(clientX, clientY, name, score, cfg) {
   tipScore.textContent = score;
   tipCfg.textContent = cfg;
   tip.style.display = 'block';
-  tipVisible = true;
-  // small delay so offsetHeight is computed
-  requestAnimationFrame(function() {
-    positionTip(clientX, clientY);
-  });
-  if (isMobile) {
-    tipOverlay.classList.add('active');
-  }
+  pinnedLabel = name;
+  requestAnimationFrame(function() { positionTip(clientX, clientY); });
+  if (isMobile) { tipOverlay.classList.add('active'); }
 }
 
 function hideTip() {
   tip.style.display = 'none';
-  tipVisible = false;
+  pinnedLabel = null;
   tipOverlay.classList.remove('active');
 }
 
 function mvTip(e) {
-  if (tipVisible && !isMobile) {
-    positionTip(e.clientX, e.clientY);
-  }
+  // desktop only — follow mouse
+  if (!isMobile && pinnedLabel) { positionTip(e.clientX, e.clientY); }
 }
 
-// Tap overlay dismisses tooltip on mobile
+// Tap outside any chart = dismiss
+tipOverlay.addEventListener('touchend', function(e) {
+  e.preventDefault();
+  hideTip();
+}, {passive:false});
 tipOverlay.addEventListener('click', hideTip);
+
+/* ─────────────────────────────────────────────
+   TOUCH TAP HANDLER FACTORY
+   Shared logic for all three charts.
+   Uses touchstart coords (finger-down position)
+   so hit-testing is at point of contact, not lift.
+───────────────────────────────────────────── */
+function attachTouchTap(canvas, getLabel) {
+  var touchStartX = 0, touchStartY = 0;
+  var touchMoved = false;
+
+  canvas.addEventListener('touchstart', function(e) {
+    var t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchMoved = false;
+  }, {passive:true});
+
+  canvas.addEventListener('touchmove', function(e) {
+    var t = e.touches[0];
+    // If finger moved more than 8px it's a scroll/pan, not a tap
+    if (Math.abs(t.clientX - touchStartX) > 8 || Math.abs(t.clientY - touchStartY) > 8) {
+      touchMoved = true;
+    }
+  }, {passive:true});
+
+  canvas.addEventListener('touchend', function(e) {
+    if (touchMoved) return; // was a scroll — ignore
+    e.preventDefault(); // block synthetic mouse events that would close tip
+
+    var result = getLabel(touchStartX, touchStartY);
+    if (result) {
+      if (pinnedLabel === result.name) {
+        // tap same point = close
+        hideTip();
+      } else {
+        // tap new point = open/switch
+        showTip(touchStartX, touchStartY, result.name, result.score, result.cfg);
+      }
+    } else {
+      // tap empty area = close
+      hideTip();
+    }
+  }, {passive:false});
+}
 
 /* ─────────────────────────────────────────────
    CHART DATA
@@ -726,7 +769,7 @@ var c1Hov={
         chart.canvas.style.cursor='default';
       }
     } else if(args.event.type==='mouseout'){
-      hideTip();
+      if (!isMobile) hideTip();
     }
   }
 };
@@ -758,25 +801,21 @@ var chart1 = new Chart(document.getElementById('c1'),{
   }
 });
 
-/* Mobile tap handler for chart 1 */
-document.getElementById('c1').addEventListener('touchend', function(e){
-  e.preventDefault();
-  var touch = e.changedTouches[0];
-  var els = chart1.getElementsAtEventForMode(touch, 'nearest', {intersect:false}, false);
-  if(els.length){
-    var d = rd[els[0].index];
-    if(tipVisible && tipName.textContent === d.name){
-      hideTip();
-    } else {
-      showTip(touch.clientX, touch.clientY, d.name, 'BCRI '+d.bcri+' · '+d.rat+(d.re?' · RE '+d.re:''), CONFIGS[d.name]||'');
-    }
-  } else {
-    hideTip();
-  }
-}, {passive:false});
+/* Chart 1 touch — pinned tap model */
+attachTouchTap(document.getElementById('c1'), function(cx, cy) {
+  // Build a fake event object Chart.js can hit-test with canvas coords
+  var canvas = document.getElementById('c1');
+  var rect = canvas.getBoundingClientRect();
+  var fake = {clientX: cx, clientY: cy, target: canvas};
+  var els = chart1.getElementsAtEventForMode(fake, 'nearest', {intersect:false}, false);
+  if (!els.length) return null;
+  var d = rd[els[0].index];
+  return { name: d.name, score: 'BCRI '+d.bcri+' · '+d.rat+(d.re?' · RE '+d.re:''), cfg: CONFIGS[d.name]||'' };
+});
 
+/* Desktop only */
 document.getElementById('c1').addEventListener('mousemove', mvTip);
-document.getElementById('c1').addEventListener('mouseleave', hideTip);
+if (!isMobile) { document.getElementById('c1').addEventListener('mouseleave', hideTip); }
 
 /* ─────────────────────────────────────────────
    CHART 2 — Efficiency frontier
@@ -872,7 +911,7 @@ var shov={
       } else {
         hideTip();chart.canvas.style.cursor='default';
       }
-    } else if(args.event.type==='mouseout'){hideTip();}
+    } else if(args.event.type==='mouseout'){if(!isMobile)hideTip();}
   }
 };
 
@@ -905,19 +944,19 @@ var chart2 = new Chart(document.getElementById('c2'),{
   }
 });
 
-/* Mobile tap for chart 2 */
-document.getElementById('c2').addEventListener('touchend', function(e){
-  e.preventDefault();
-  var touch = e.changedTouches[0];
-  var els = chart2.getElementsAtEventForMode(touch,'nearest',{intersect:false},false);
-  if(els.length){
-    var pt = chart2.data.datasets[els[0].datasetIndex].data[els[0].index];
-    if(tipVisible && tipName.textContent === pt.label){ hideTip(); }
-    else { showTip(touch.clientX, touch.clientY, pt.label,'CS '+pt.x+'  ·  ERE '+pt.y, CONFIGS[pt.label]||''); }
-  } else { hideTip(); }
-}, {passive:false});
+/* Chart 2 touch — pinned tap model */
+attachTouchTap(document.getElementById('c2'), function(cx, cy) {
+  var canvas = document.getElementById('c2');
+  var fake = {clientX: cx, clientY: cy, target: canvas};
+  var els = chart2.getElementsAtEventForMode(fake, 'nearest', {intersect:false}, false);
+  if (!els.length) return null;
+  var pt = chart2.data.datasets[els[0].datasetIndex].data[els[0].index];
+  return { name: pt.label, score: 'CS '+pt.x+'  ·  ERE '+pt.y, cfg: CONFIGS[pt.label]||'' };
+});
+
+/* Desktop only */
 document.getElementById('c2').addEventListener('mousemove', mvTip);
-document.getElementById('c2').addEventListener('mouseleave', hideTip);
+if (!isMobile) { document.getElementById('c2').addEventListener('mouseleave', hideTip); }
 
 /* ─────────────────────────────────────────────
    CHART 3 — Architecture map
@@ -950,7 +989,7 @@ var mhov={
         showTip(e.clientX,e.clientY,pt.label,'BCRI '+pt.y+'  ·  CS '+pt.x,CONFIGS[pt.label]||'');
         chart.canvas.style.cursor='pointer';
       } else { hideTip(); chart.canvas.style.cursor='default'; }
-    } else if(args.event.type==='mouseout'){ hideTip(); }
+    } else if(args.event.type==='mouseout'){ if(!isMobile)hideTip(); }
   }
 };
 
@@ -1014,19 +1053,19 @@ var chart3 = new Chart(document.getElementById('c3'),{
   }
 });
 
-/* Mobile tap for chart 3 */
-document.getElementById('c3').addEventListener('touchend', function(e){
-  e.preventDefault();
-  var touch = e.changedTouches[0];
-  var els = chart3.getElementsAtEventForMode(touch,'nearest',{intersect:false},false);
-  if(els.length){
-    var pt = chart3.data.datasets[els[0].datasetIndex].data[els[0].index];
-    if(tipVisible && tipName.textContent === pt.label){ hideTip(); }
-    else { showTip(touch.clientX, touch.clientY, pt.label,'BCRI '+pt.y+'  ·  CS '+pt.x, CONFIGS[pt.label]||''); }
-  } else { hideTip(); }
-}, {passive:false});
+/* Chart 3 touch — pinned tap model */
+attachTouchTap(document.getElementById('c3'), function(cx, cy) {
+  var canvas = document.getElementById('c3');
+  var fake = {clientX: cx, clientY: cy, target: canvas};
+  var els = chart3.getElementsAtEventForMode(fake, 'nearest', {intersect:false}, false);
+  if (!els.length) return null;
+  var pt = chart3.data.datasets[els[0].datasetIndex].data[els[0].index];
+  return { name: pt.label, score: 'BCRI '+pt.y+'  ·  CS '+pt.x, cfg: CONFIGS[pt.label]||'' };
+});
+
+/* Desktop only */
 document.getElementById('c3').addEventListener('mousemove', mvTip);
-document.getElementById('c3').addEventListener('mouseleave', hideTip);
+if (!isMobile) { document.getElementById('c3').addEventListener('mouseleave', hideTip); }
 
 /* ─────────────────────────────────────────────
    DYNAMIC HEADER OFFSET
@@ -1060,19 +1099,7 @@ document.getElementById('c3').addEventListener('mouseleave', hideTip);
   });
 })();
 
-/* ─────────────────────────────────────────────
-   PREVENT PAGE SCROLL on chart canvas touch-drag
-   (allow horizontal scroll within the scroll-wrap instead)
-───────────────────────────────────────────── */
-['c1','c2','c3'].forEach(function(cid){
-  var el=document.getElementById(cid);
-  if(!el) return;
-  // Allow the scroll wrapper to scroll horizontally;
-  // prevent vertical page scroll only when touch starts on canvas
-  el.addEventListener('touchstart', function(e){
-    // do nothing — let the scroll wrap handle it
-  }, {passive:true});
-});
+
 </script>
 </body>
 </html>
