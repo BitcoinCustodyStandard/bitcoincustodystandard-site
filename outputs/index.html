@@ -611,52 +611,6 @@ body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!i
     </div>
   </section>
 
-  <section style="margin-top:32px;" aria-label="Output definitions">
-    <div style="display:flex;flex-direction:column;gap:12px;">
-
-      <article class="accent-card" aria-label="BCRI Score">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div class="card-title" style="font-size:15px;">BCRI Score</div>
-          <span class="badge">0 – 100 · Higher is stronger</span>
-        </div>
-        <p class="card-body" style="margin-top:8px;">Numerical composite measure from 0 to 100 across architecture, entropy, exposure, and coordination. Subject to entropy degradation without active maintenance.</p>
-      </article>
-
-      <article class="accent-card" aria-label="BCRI Rating">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div class="card-title" style="font-size:15px;">BCRI Rating</div>
-          <span class="badge">AAA → Floor</span>
-        </div>
-        <p class="card-body" style="margin-top:8px;">Standardized tiered classification from AAA to Floor. Based on score relative to the Resilience Sufficiency Threshold of BCRI 75.</p>
-      </article>
-
-      <article class="accent-card" aria-label="Frontier Positioning">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div class="card-title" style="font-size:15px;">Frontier Positioning</div>
-          <span class="badge">ERE = (BCRI − 25) / √CS</span>
-        </div>
-        <p class="card-body" style="margin-top:8px;">Relative resilience efficiency given system complexity. Peak efficiency near CS 4.5. Beyond the frontier, added complexity yields diminishing returns.</p>
-      </article>
-
-      <article class="accent-card" aria-label="Resilience Gap Analysis">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div class="card-title" style="font-size:15px;">Resilience Gap Analysis</div>
-          <span class="badge">ARS · ERI · XRI · CHS</span>
-        </div>
-        <p class="card-body" style="margin-top:8px;">Snapshot of structural weaknesses. Identifies which pillars, entropy factors, or exposure conditions reduce the BCRI score.</p>
-      </article>
-
-      <article class="accent-card" aria-label="Resilience Upgrade Path">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div class="card-title" style="font-size:15px;">Resilience Upgrade Path</div>
-          <span class="badge">Pillar · Entropy · Complexity</span>
-        </div>
-        <p class="card-body" style="margin-top:8px;">Pillar-specific improvements to raise BCRI score, reduce entropy risk, or improve resilience efficiency without unnecessary added complexity.</p>
-      </article>
-
-    </div>
-  </section>
-
   <section style="margin-top:32px;" aria-label="Interpretation">
     <div class="section-title">Interpretation Reference</div>
     <div class="card-grid">
