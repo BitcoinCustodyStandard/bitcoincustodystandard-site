@@ -151,28 +151,39 @@ body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!i
 @media(max-width:768px){
   .km-grid{
     grid-template-columns:1fr;
+    width:100%;
+    min-width:0;
   }
   .km-grid > div{
     white-space:normal !important;
     width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
   }
 }
 
-/* ── Structural model — mobile scroll ── */
+/* ── Structural model — mobile fit ── */
 .model-scroll-wrap{
   width:100%;
+  max-width:100%;
+  overflow:hidden;
 }
 @media(max-width:768px){
   .model-scroll-wrap{
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
+    overflow:hidden;
+    width:100%;
+    max-width:100%;
   }
   .model-scroll-wrap > img{
-    min-width:600px;
+    width:100%;
+    max-width:100%;
+    min-width:0;
     height:auto;
   }
   .model-scroll-hint{
-    display:block !important;
+    display:none !important;
   }
 }
 .model-scroll-hint{
