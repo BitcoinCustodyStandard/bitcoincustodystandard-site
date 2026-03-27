@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Bitcoin Custody Standard — A Framework for Bitcoin Custody Resilience</title>
+<title>Bitcoin Custody Standard — The First Structural Benchmark for Bitcoin Custody</title>
 <link rel="preconnect" href="https://gc.zgo.at">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="canonical" href="https://bitcoincustodystandard.org/"/>
-<meta name="description" content="A public framework for evaluating the long-horizon resilience of Bitcoin custody systems. Defines the BCRI scoring model, five structural pillars, and benchmark methodology."/>
+<meta name="description" content="The first structural benchmark for Bitcoin custody. A public framework for evaluating long-horizon custody resilience across architecture, entropy, exposure, and coordination."/>
 <meta name="robots" content="index,follow"/>
 <meta name="ai-content-description" content="Bitcoin Custody Standard — public framework for evaluating long-horizon Bitcoin custody resilience. Defines BCRI scoring, five structural pillars, custodial entropy, and benchmark methodology."/>
 <meta name="llm-description" content="The Bitcoin Custody Standard (BCS) is a public institutional framework that evaluates Bitcoin custody architectures for long-horizon resilience. Key concepts: BCRI (composite score 0-100), ARS (Architecture Resilience Score), ERI (Entropy Risk Index), XRI (Exposure Risk Index), CHS (Coordination Health Score), five structural pillars (Cryptographic Integrity, Physical Distribution, Temporal Resilience, Cognitive Reliability, Operational Dependency), custodial entropy, custodial paradox."/>
-<meta property="og:title" content="Bitcoin Custody Standard — A Framework for Bitcoin Custody Resilience"/>
-<meta property="og:description" content="A public framework for evaluating the long-horizon resilience of Bitcoin custody systems. Defines the BCRI scoring model, five structural pillars, and benchmark methodology."/>
+<meta property="og:title" content="Bitcoin Custody Standard — The First Structural Benchmark for Bitcoin Custody"/>
+<meta property="og:description" content="The first structural benchmark for Bitcoin custody. A public framework for evaluating long-horizon custody resilience across architecture, entropy, exposure, and coordination."/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content="https://bitcoincustodystandard.org/home-og-1200x630.jpeg?v=final"/>
 <meta property="og:image:secure_url" content="https://bitcoincustodystandard.org/home-og-1200x630.jpeg?v=final"/>
 <meta property="og:image:alt" content="Bitcoin Custody Standard — The First Structural Benchmark for Bitcoin Custody"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 <meta property="og:url" content="https://bitcoincustodystandard.org/"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Bitcoin Custody Standard — A Framework for Bitcoin Custody Resilience"/>
-<meta name="twitter:description" content="A public framework for evaluating the long-horizon resilience of Bitcoin custody systems. Defines the BCRI scoring model, five structural pillars, and benchmark methodology."/>
+<meta name="twitter:title" content="Bitcoin Custody Standard — The First Structural Benchmark for Bitcoin Custody"/>
+<meta name="twitter:description" content="The first structural benchmark for Bitcoin custody. A public framework for evaluating long-horizon custody resilience across architecture, entropy, exposure, and coordination."/>
 <meta name="twitter:image" content="https://bitcoincustodystandard.org/home-og-1200x630.jpeg?v=final"/>
 <meta name="twitter:site" content="@Bitcoin_Custody"/>
 <style>/* ── Header ── */
@@ -245,7 +247,7 @@ body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!i
 @media(max-width:680px){.viewerFrame{height:70vh;min-height:500px;}}
 </style>
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Bitcoin Custody Standard", "url": "https://bitcoincustodystandard.org", "description": "A public framework for evaluating the long-horizon resilience of Bitcoin custody systems.", "publisher": {"@type": "Organization", "name": "Bitcoin Custody Standard Initiative", "url": "https://bitcoincustodystandard.org"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Bitcoin Custody Standard", "url": "https://bitcoincustodystandard.org", "description": "The first structural benchmark for Bitcoin custody. A public framework for evaluating long-horizon custody resilience across architecture, entropy, exposure, and coordination.", "publisher": {"@type": "Organization", "name": "Bitcoin Custody Standard Initiative", "url": "https://bitcoincustodystandard.org"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the Bitcoin Custody Standard?", "acceptedAnswer": {"@type": "Answer", "text": "The Bitcoin Custody Standard (BCS) is a public framework for evaluating Bitcoin custody beyond point-in-time security controls. It treats custody as a structural system that must preserve control across time, coordination, and adversarial conditions."}}, {"@type": "Question", "name": "What is custodial entropy?", "acceptedAnswer": {"@type": "Answer", "text": "Custodial entropy is the progressive structural degradation of a custody system through knowledge loss, undocumented changes, technological evolution, coordination drift, and insufficient review."}}, {"@type": "Question", "name": "What is the BCRI?", "acceptedAnswer": {"@type": "Answer", "text": "The Bitcoin Custody Resilience Index (BCRI) is a composite score from 0 to 100 measuring custody resilience across five structural pillars: Cryptographic Integrity, Physical Distribution, Operational Dependency, Cognitive Reliability, and Temporal Resilience."}}]}</script>
 <script data-goatcounter="https://bcs.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -274,12 +276,100 @@ body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!i
 <main class="wrap">
 
   <!-- 1. HERO -->
-  <section class="hero" style="padding-bottom:20px;">
-    <h1>Bitcoin Custody Standard</h1>
-    <p class="hero-sub" style="margin-top:10px;">The Bitcoin Custody Standard evaluates whether a custody system can preserve control across time, operational change, participant turnover, and adversarial conditions.</p>
+  <section class="hero" style="padding-bottom:24px;">
+    <h1>The First Structural Benchmark for Bitcoin Custody</h1>
+    <p class="hero-sub" style="margin-top:10px;">Most custody systems are secure at deployment. Few remain recoverable over time.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
-      <a class="btn primary" href="/normative-summary/">Read the Standard</a>
-      <a class="btn secondary" href="/bcri/">View Benchmark</a>
+      <a class="btn primary" href="/bcri/">View Benchmark</a>
+      <a class="btn secondary" href="/normative-summary/">Read the Standard</a>
+    </div>
+  </section>
+
+  <!-- RESILIENCE EFFICIENCY FRONTIER -->
+  <section style="margin-top:28px;" aria-label="Resilience Efficiency Frontier">
+    <div class="section-title">Resilience Efficiency Frontier</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;">
+      <div style="padding:14px 16px 0;">
+        <!-- Legend -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:12px;font-size:11px;color:var(--muted);">
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#fca5a5;border:1.5px solid #f87171;flex-shrink:0;display:inline-block;"></span>No Sovereignty</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#fde68a;border:1.5px solid #d97706;flex-shrink:0;display:inline-block;"></span>Single-Key</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#bfdbfe;border:1.5px solid #2563eb;flex-shrink:0;display:inline-block;"></span>Collaborative</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#bbf7d0;border:1.5px solid #059669;flex-shrink:0;display:inline-block;"></span>Distributed</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#e9d5ff;border:1.5px solid #7c3aed;flex-shrink:0;display:inline-block;"></span>Institutional</span>
+        </div>
+      </div>
+      <!-- Static SVG frontier chart — viewBox 620x320, plot L=56 R=576 T=24 B=284, CS 0-11 ERE -2-36 -->
+      <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto;" aria-label="BCRI Resilience Efficiency Frontier">
+        <!-- Zone bands -->
+        <rect x="56" y="24" width="66"  height="260" fill="rgba(254,202,202,0.18)"/>
+        <rect x="122" y="24" width="88"  height="260" fill="rgba(253,230,138,0.15)"/>
+        <rect x="210" y="24" width="88"  height="260" fill="rgba(191,219,254,0.15)"/>
+        <rect x="298" y="24" width="74"  height="260" fill="rgba(187,247,208,0.15)"/>
+        <rect x="372" y="24" width="204" height="260" fill="rgba(233,213,255,0.15)"/>
+        <!-- Zone labels -->
+        <text x="89"  y="37" text-anchor="middle" font-size="8.5" fill="#b91c1c" font-family="system-ui" font-weight="700">No Sov.</text>
+        <text x="166" y="37" text-anchor="middle" font-size="8.5" fill="#92400e" font-family="system-ui" font-weight="700">Single-Key</text>
+        <text x="254" y="37" text-anchor="middle" font-size="8.5" fill="#1e40af" font-family="system-ui" font-weight="700">Collaborative</text>
+        <text x="335" y="37" text-anchor="middle" font-size="8.5" fill="#065f46" font-family="system-ui" font-weight="700">Distributed</text>
+        <text x="474" y="37" text-anchor="middle" font-size="8.5" fill="#4c1d95" font-family="system-ui" font-weight="700">Institutional</text>
+        <!-- Grid: axes -->
+        <line x1="56" y1="24" x2="56" y2="284" stroke="var(--border)" stroke-width="1"/>
+        <line x1="56" y1="284" x2="576" y2="284" stroke="var(--border)" stroke-width="1"/>
+        <!-- Y grid lines: ERE 0,10,20,30 -->
+        <!-- scale: y = 284 - (ere+2)/38*260; ere=0→y=270.3, ere=10→y=202.8, ere=20→y=135.4, ere=30→y=67.9 -->
+        <line x1="52" y1="270" x2="576" y2="270" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="50" y="273" text-anchor="end" font-size="8.5" fill="var(--dim)" font-family="system-ui">0</text>
+        <line x1="52" y1="203" x2="576" y2="203" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="50" y="206" text-anchor="end" font-size="8.5" fill="var(--dim)" font-family="system-ui">10</text>
+        <line x1="52" y1="135" x2="576" y2="135" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="50" y="138" text-anchor="end" font-size="8.5" fill="var(--dim)" font-family="system-ui">20</text>
+        <line x1="52" y1="68" x2="576" y2="68" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <text x="50" y="71" text-anchor="end" font-size="8.5" fill="var(--dim)" font-family="system-ui">30</text>
+        <!-- X axis labels: CS 0,2,4,6,8,10 -->
+        <!-- scale: x = 56 + cs/11*520 -->
+        <text x="56"  y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">0</text>
+        <text x="151" y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">2</text>
+        <text x="245" y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">4</text>
+        <text x="340" y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">6</text>
+        <text x="434" y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">8</text>
+        <text x="529" y="297" text-anchor="middle" font-size="8.5" fill="var(--dim)" font-family="system-ui">10</text>
+        <!-- Axis titles -->
+        <text x="316" y="313" text-anchor="middle" font-size="9" fill="var(--dim)" font-family="system-ui">Complexity Score (CS)</text>
+        <text x="12"  y="154" text-anchor="middle" font-size="9" fill="var(--dim)" font-family="system-ui" transform="rotate(-90,12,154)">ERE</text>
+        <!-- Frontier curve: ERE(cs)=13.67*cs^1.5*exp(-0.335*cs), x=56+cs/11*520, y=284-(ere+2)/38*260 -->
+        <polyline
+          points="58,270 63,264 71,253 80,240 88,226 97,212 106,198 114,185 123,172 132,160 140,149 149,138 158,128 166,119 175,110 184,103 192,96 201,90 210,85 218,81 227,78 236,75 244,73 253,71 262,71 270,71 279,72 288,73 296,75 305,77 314,79 322,82 331,85 340,88 348,91 357,95 366,98 374,102 383,106 392,110 400,114 409,118 418,122 426,126 435,130 444,134 452,138 461,141 470,145 478,149 487,153 496,157 504,160 513,164 522,167 530,170 539,174 548,177 556,180 565,183 574,186"
+          fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linejoin="round" opacity="0.75"
+        />
+        <!-- Peak marker -->
+        <circle cx="262" cy="71" r="3.5" fill="var(--orange)" opacity="0.9"/>
+        <text x="268" y="64" font-size="8" fill="var(--orange)" font-family="system-ui" font-weight="700">Peak CS 4.5</text>
+        <!-- Data points: x=56+cs/11*520, y=284-(ere+2)/38*260 -->
+        <!-- No Sovereignty -->
+        <circle cx="104" cy="270" r="4.5" fill="#fca5a5" stroke="#f87171" stroke-width="1.5"/>
+        <circle cx="123" cy="270" r="4.5" fill="#fca5a5" stroke="#f87171" stroke-width="1.5"/>
+        <!-- Single-Key -->
+        <circle cx="179" cy="91"  r="4.5" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+        <circle cx="283" cy="90"  r="4.5" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+        <!-- Collaborative -->
+        <circle cx="216" cy="73"  r="4.5" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+        <circle cx="273" cy="94"  r="4.5" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+        <circle cx="301" cy="59"  r="4.5" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+        <!-- Distributed -->
+        <circle cx="264" cy="108" r="4.5" fill="#bbf7d0" stroke="#059669" stroke-width="1.5"/>
+        <circle cx="321" cy="88"  r="4.5" fill="#bbf7d0" stroke="#059669" stroke-width="1.5"/>
+        <circle cx="349" cy="76"  r="4.5" fill="#bbf7d0" stroke="#059669" stroke-width="1.5"/>
+        <!-- Institutional -->
+        <circle cx="406" cy="114" r="4.5" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.5"/>
+        <circle cx="444" cy="165" r="4.5" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.5"/>
+        <circle cx="472" cy="161" r="4.5" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.5"/>
+        <circle cx="500" cy="124" r="4.5" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.5"/>
+      </svg>
+      <div style="padding:12px 16px;border-top:1px solid var(--border);">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;">The Resilience Efficiency Frontier shows how custody architectures perform relative to their structural complexity. It provides a benchmark view of where resilience becomes efficient — and where added complexity begins to produce diminishing returns.</p>
+        <div style="margin-top:10px;"><a class="btn primary" href="/bcri/" style="font-size:12px;">View Full Benchmark →</a></div>
+      </div>
     </div>
   </section>
 
@@ -310,7 +400,7 @@ body.dark [style*="border:1px solid var(--border)"]{border-color:var(--border)!i
       </a>
       <a class="path-tile" href="/governance/">
         <span class="path-tile-label">Governance</span>
-        <span class="path-tile-title">Governance</span>
+        <span class="path-tile-title">Framework Governance</span>
         <span class="path-tile-arrow">→</span>
       </a>
     </div>
