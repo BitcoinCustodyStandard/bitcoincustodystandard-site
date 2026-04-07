@@ -1,1 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>21 Things Bitcoin Holders Still Get Wrong About Custody — Bitcoin Custody Standard</title>
+<meta name="description" content="21 lessons on Bitcoin custody architecture from the Bitcoin Custody Standard. Most Bitcoin is not stolen. It becomes inaccessible.">
+<meta property="og:title" content="21 Things Bitcoin Holders Still Get Wrong About Custody">
+<meta property="og:description" content="Bitcoin Custody Standard · Architecture Education">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="canonical" href="https://bitcoincustodystandard.org/21-things-bitcoin-holders-still-get-wrong-about-custody/">
+<meta property="og:image" content="https://bitcoincustodystandard.org/21-things-bitcoin-holders-still-get-wrong-about-custody.png">
+<meta property="og:url" content="https://bitcoincustodystandard.org/21-things-bitcoin-holders-still-get-wrong-about-custody/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="21 Things Bitcoin Holders Still Get Wrong About Custody">
+<meta name="twitter:description" content="21 lessons on Bitcoin custody architecture from the Bitcoin Custody Standard. Most Bitcoin is not stolen. It becomes inaccessible.">
+<meta name="twitter:image" content="https://bitcoincustodystandard.org/21-things-bitcoin-holders-still-get-wrong-about-custody.png">
+<meta name="twitter:site" content="@Bitcoin_Custody">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
+<style>
+  :root {
+    --navy: #1c2b4a;
+    --orange: #f7931a;
+    --cream: #f8f5ef;
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --light: #e8e4dc;
+    --teal: #2a7a6a;
+    --red: #b03a2e;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--navy);
+    font-family: 'Source Serif 4', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    touch-action: pan-y;
+  }
+
+  /* ── SHELL ── */
+  #shell {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── TOP BAR ── */
+  #topbar {
+    flex-shrink: 0;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px 10px;
+    border-bottom: 3px solid var(--orange);
+    z-index: 10;
+  }
+
+  #topbar .brand {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  #topbar .brand .bcs { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; font-size: 14px; color: var(--orange); letter-spacing: 1px; }
+  #topbar .brand .sep { color: var(--orange); font-size: 16px; font-weight: 300; margin: 0 6px; opacity: .6; }
+  #topbar .brand .full { font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 400; }
+
+  #counter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  #counter .cur { color: var(--orange); font-size: 16px; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-track {
+    flex-shrink: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  #progress-fill {
+    height: 100%;
+    background: var(--orange);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── ACT LABEL ── */
+  #act-label {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 7px 20px;
+    background: var(--navy);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.35);
+    transition: color 0.3s ease;
+  }
+
+  /* ── DECK ── */
+  #deck {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+  }
+
+  #deck:active { cursor: grabbing; }
+
+  .card {
+    position: absolute;
+    inset: 12px;
+    background: var(--cream);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    will-change: transform, opacity;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .card.hidden  { transform: translateX(110%);  opacity: 0; pointer-events: none; }
+  .card.active  { transform: translateX(0);     opacity: 1; pointer-events: auto; }
+  .card.exited-left  { transform: translateX(-110%); opacity: 0; pointer-events: none; }
+
+  /* Drag states */
+  .card.dragging { transition: none; }
+
+  /* ── CARD ACCENT BAR ── */
+  .card-accent {
+    height: 5px;
+    flex-shrink: 0;
+  }
+  .act-1 .card-accent { background: var(--red); }
+  .act-2 .card-accent { background: var(--orange); }
+  .act-3 .card-accent { background: var(--teal); }
+
+  /* ── CARD BODY ── */
+  .card-body {
+    flex: 1;
+    padding: 24px 26px 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .card-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.1;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .card-act-badge {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-style: italic;
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-family: 'Source Serif 4', serif;
+  }
+  .act-1 .card-act-badge { background: rgba(176,58,46,0.1); color: var(--red); }
+  .act-2 .card-act-badge { background: rgba(247,147,26,0.12); color: #c47000; }
+  .act-3 .card-act-badge { background: rgba(42,122,106,0.1); color: var(--teal); }
+
+  .card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(17px, 4.5vw, 22px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+  }
+
+  /* ── SVG VISUAL ── */
+  .card-visual {
+    flex-shrink: 0;
+    margin: 0 -4px 16px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-visual svg {
+    width: 100%;
+    max-width: 320px;
+    height: 130px;
+  }
+
+  /* ── DIVIDER ── */
+  .card-divider {
+    height: 1px;
+    background: rgba(28,43,74,0.1);
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  .card-body-text {
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.7;
+    color: #2d3748;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  /* ── CARD FOOTER ── */
+  .card-footer {
+    flex-shrink: 0;
+    padding: 12px 26px 16px;
+    border-top: 1px solid rgba(28,43,74,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(28,43,74,0.03);
+  }
+
+  .card-footer-brand {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--navy);
+    opacity: 0.3;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  .card-footer-hint {
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ── BOTTOM NAV ── */
+  #nav {
+    flex-shrink: 0;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 14px;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-btn {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 2px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .nav-btn:active { background: rgba(247,147,26,0.15); border-color: var(--orange); color: var(--orange); }
+  .nav-btn:disabled { opacity: 0.2; cursor: default; }
+  .nav-btn.primary {
+    flex: 1;
+    width: auto;
+    border-color: var(--orange);
+    color: var(--orange);
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    font-style: italic;
+  }
+  .nav-btn.primary:active { background: var(--orange); color: var(--white); }
+
+  /* ── ACT DOTS ── */
+  #act-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .act-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .act-dot.active-1 { background: var(--red); width: 18px; border-radius: 3px; }
+  .act-dot.active-2 { background: var(--orange); width: 18px; border-radius: 3px; }
+  .act-dot.active-3 { background: var(--teal); width: 18px; border-radius: 3px; }
+
+  /* ── INTRO SCREEN ── */
+  #intro {
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+    z-index: 100;
+    text-align: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  #intro.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+
+  .intro-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .intro-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(26px, 7vw, 40px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+
+  .intro-title span { color: var(--orange); }
+
+  .intro-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width: 340px;
+    margin-bottom: 36px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .intro-acts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 36px;
+  }
+
+  .intro-act {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    text-align: left;
+  }
+
+  .intro-act-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .intro-act-label {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+  }
+
+  .intro-btn {
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .intro-btn:active { background: #d97e0e; }
+
+  .intro-footer {
+    margin-top: 24px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── COMPLETION SCREEN ── */
+  #completion {
+    position: fixed;
+    inset: 0;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+    z-index: 100;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  #completion.show { opacity: 1; pointer-events: auto; }
+
+  .completion-mark {
+    width: 60px;
+    height: 60px;
+    border: 2.5px solid var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--orange);
+    margin-bottom: 24px;
+  }
+
+  .completion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+
+  .completion-body {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 300px;
+    margin-bottom: 32px;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .completion-restart {
+    background: transparent;
+    border: 1.5px solid var(--orange);
+    color: var(--orange);
+    padding: 13px 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ── SWIPE HINT ── */
+  #swipe-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+    font-style: italic;
+    pointer-events: none;
+    animation: fadeHint 3s ease forwards 1.5s;
+    opacity: 0;
+  }
+
+  @keyframes fadeHint {
+    0%   { opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Hide full brand text on very small phones */
+  @media (max-width: 359px) {
+    #topbar .brand .sep,
+    #topbar .brand .full { display: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (min-width: 600px) {
+    .card { inset: 20px; max-width: 520px; margin: 0 auto; left: 50%; right: auto; transform: translateX(-50%); cursor: pointer; }
+    .card.active { transform: translateX(-50%); }
+    .card.hidden { transform: translateX(calc(-50% + 110vw)); }
+    .card.exited-left { transform: translateX(calc(-50% - 110vw)); }
+    .card-body { padding: 32px 40px 24px; }
+    #topbar { padding: 14px 32px 12px; }
+    #nav { padding: 12px 32px 16px; }
+    .card-title { font-size: clamp(18px, 2.2vw, 24px); }
+    .card-body-text { font-size: clamp(14px, 1.2vw, 17px); }
+    #shell { max-width: 700px; margin: 0 auto; }
+  }
+
+  @media (min-width: 900px) {
+    #shell { max-width: 800px; }
+    .card { max-width: 600px; }
+    .card-visual { height: 150px; }
+    .card-visual svg { height: 150px; }
+  }
+
+  /* Desktop click hint */
+  @media (min-width: 600px) {
+    .card-footer-hint::after { content: ' or click card'; }
+  }
+
+  /* ── MINI PROGRESS DOTS ── */
+  #mini-dots {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 20px 0;
+    background: var(--navy);
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .mini-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mini-dot.visited {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .mini-dot.current-act-1 { background: #b03a2e; transform: scale(1.5); }
+  .mini-dot.current-act-2 { background: #f7931a; transform: scale(1.5); }
+  .mini-dot.current-act-3 { background: #2a7a6a; transform: scale(1.5); }
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <p class="intro-tag">BCS Research Series · Architecture Education</p>
+  <h1 class="intro-title"><span>21</span> Things Bitcoin<br>Holders Still Get Wrong<br>About Custody</h1>
+  <p class="intro-sub">Most Bitcoin is not stolen.<br>It becomes inaccessible.</p>
+  <div class="intro-acts">
+    <div class="intro-act">
+      <span class="intro-act-num" style="color:#b03a2e">I</span>
+      <span class="intro-act-label">The Illusion of Safety · Cards 1–7</span>
+    </div>
+    <div class="intro-act">
+      <span class="intro-act-num" style="color:#f7931a">II</span>
+      <span class="intro-act-label">The Architecture Realities · Cards 8–14</span>
+    </div>
+    <div class="intro-act">
+      <span class="intro-act-num" style="color:#2a7a6a">III</span>
+      <span class="intro-act-label">What Good Custody Looks Like · Cards 15–21</span>
+    </div>
+  </div>
+  <button class="intro-btn" onclick="startDeck()">Begin →</button>
+  <p class="intro-footer">Bitcoin Custody Standard · bitcoincustodystandard.org</p>
+</div>
+
+<!-- COMPLETION -->
+<div id="completion">
+  <div class="completion-mark">₿</div>
+  <h2 class="completion-title">All 21 cards.</h2>
+  <p class="completion-body">Good custody is not about protecting your bitcoin from the world. It is about ensuring it remains accessible, recoverable, and transferable across decades and generations.</p>
+  <button class="completion-restart" onclick="restart()">← Start again</button>
+</div>
+
+<!-- MAIN SHELL -->
+<div id="shell">
+  <div id="topbar">
+    <div class="brand"><span class="bcs">BCS</span><span class="sep">|</span><span class="full">Bitcoin Custody Standard</span></div>
+    <div id="counter"><span class="cur" id="cur-num">1</span> <span style="opacity:.3">/</span> 21</div>
+  </div>
+  <div id="progress-track"><div id="progress-fill" style="width:4.76%"></div></div>
+  <div id="mini-dots"></div>
+  <div id="act-label">Act I · The Illusion of Safety</div>
+  <div id="deck"></div>
+  <div id="swipe-hint">swipe or tap → to advance</div>
+  <div id="nav">
+    <button class="nav-btn" id="btn-prev" onclick="prev()" disabled aria-label="Previous card">←</button>
+    <div id="act-dots">
+      <div class="act-dot active-1" onclick="jumpToAct(1)" title="Act I"></div>
+      <div class="act-dot" onclick="jumpToAct(2)" title="Act II"></div>
+      <div class="act-dot" onclick="jumpToAct(3)" title="Act III"></div>
+    </div>
+    <button class="nav-btn primary" id="btn-next" onclick="next()">Next →</button>
+  </div>
+</div>
+
+<script>
+const NAVY = '#1c2b4a', ORANGE = '#f7931a', TEAL = '#2a7a6a', RED = '#b03a2e';
+
+const cards = [
+  {
+    n:1, act:1,
+    title:"More Keys Does Not Mean More Secure",
+    body:"Adding keys adds complexity. Complexity adds failure points. A 5-of-7 multisig managed poorly is less secure than a well-documented single-sig setup. Architecture quality determines security, not key count.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      ${[0,1,2,3,4].map((i)=>`
+        <g transform="translate(${24+i*42},45)">
+          <circle cx="0" cy="-12" r="13" fill="none" stroke="${i===0?ORANGE:NAVY}" stroke-width="2.5" opacity="${i===0?1:0.2+i*0.08}"/>
+          <rect x="-3.5" y="1" width="7" height="22" rx="1.5" fill="${i===0?ORANGE:NAVY}" opacity="${i===0?1:0.2+i*0.08}"/>
+          <rect x="-3.5" y="15" width="5" height="3.5" rx=".5" fill="${i===0?ORANGE:NAVY}" opacity="${i===0?1:0.2+i*0.08}"/>
+          <rect x="-3.5" y="20" width="7" height="3.5" rx=".5" fill="${i===0?ORANGE:NAVY}" opacity="${i===0?1:0.2+i*0.08}"/>
+        </g>`).join('')}
+      <text x="120" y="85" text-anchor="middle" font-size="8.5" fill="${NAVY}" opacity=".4" font-family="Georgia,serif" font-style="italic">COMPLEXITY ≠ SECURITY</text>
+    </svg>`
+  },
+  {
+    n:2, act:1,
+    title:"Complexity Is Not the Same as Resilience",
+    body:"Custody resilience is the ability to recover bitcoin under adverse conditions. Complexity is the number of moving parts. The two are not the same, and are often inversely related. More mechanisms means more things that can fail.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(30,8)">
+        ${[0,1,2].map((i)=>`<rect x="0" y="${i*18}" width="55" height="13" rx="3" fill="${TEAL}" opacity="${0.6-i*0.15}"/>`).join('')}
+        <text x="27" y="65" text-anchor="middle" font-size="8" fill="${NAVY}" font-family="Georgia,serif">SIMPLE</text>
+      </g>
+      <text x="120" y="43" text-anchor="middle" font-size="22" fill="${NAVY}" opacity=".15" font-family="Georgia,serif">≠</text>
+      <g transform="translate(145,8)">
+        ${[[0,0],[32,14],[16,40],[52,32],[8,52]].map(([x,y],i)=>
+          [[0,0],[32,14],[16,40],[52,32],[8,52]].slice(i+1).map(([x2,y2],j)=>
+            `<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${ORANGE}" stroke-width="1.5" opacity=".45"/>`
+          ).join('')
+        ).join('')}
+        ${[[0,0],[32,14],[16,40],[52,32],[8,52]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="4.5" fill="${ORANGE}"/>`).join('')}
+        <text x="26" y="65" text-anchor="middle" font-size="8" fill="${NAVY}" font-family="Georgia,serif">COMPLEX</text>
+      </g>
+    </svg>`
+  },
+  {
+    n:3, act:1,
+    title:"Your Hardware Wallet Is Not a Custody Strategy",
+    body:"A hardware wallet is a key storage device. Custody is the complete system: key generation, access policy, documentation, succession planning, and recovery. Without all five, you have a device, not a strategy.",
+    svg:`<svg viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="80" y="14" width="80" height="52" rx="6" fill="none" stroke="${ORANGE}" stroke-width="2.5"/>
+      <rect x="93" y="32" width="54" height="14" rx="3" fill="${ORANGE}" opacity=".15"/>
+      <circle cx="120" cy="39" r="6" fill="none" stroke="${ORANGE}" stroke-width="2"/>
+      <circle cx="120" cy="39" r="2" fill="${ORANGE}" opacity=".5"/>
+      <line x1="20" y1="76" x2="220" y2="76" stroke="${NAVY}" stroke-width="1" opacity=".08"/>
+      <text x="46" y="94" text-anchor="middle" font-size="10" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">KEY STORAGE</text>
+      <text x="120" y="94" text-anchor="middle" font-size="14" fill="${NAVY}" opacity=".2" font-family="Georgia,serif">≠</text>
+      <text x="190" y="94" text-anchor="middle" font-size="10" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">COMPLETE CUSTODY</text>
+    </svg>`
+  },
+  {
+    n:4, act:1,
+    title:"Geographic Distribution Is Not Resilience",
+    body:"Keys in three countries sounds sophisticated. But if all three locations can be compromised by one legal action, or one forgetful heir, the geography is theatre, not protection. Jurisdiction alone does not distribute risk.",
+    svg:`<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="120" cy="38" rx="52" ry="30" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".12"/>
+      <ellipse cx="120" cy="38" rx="25" ry="30" fill="none" stroke="${NAVY}" stroke-width="1" opacity=".08"/>
+      <line x1="68" y1="38" x2="172" y2="38" stroke="${NAVY}" stroke-width="1" opacity=".08"/>
+      ${[[88,18],[154,24],[115,56]].map(([x,y])=>`
+        <circle cx="${x}" cy="${y}" r="8" fill="${ORANGE}" opacity=".75"/>
+        <line x1="${x}" y1="${y}" x2="120" y2="38" stroke="${ORANGE}" stroke-width="1.5" stroke-dasharray="4,2.5" opacity=".4"/>
+      `).join('')}
+      <rect x="48" y="30" width="144" height="17" rx="2" fill="${RED}" opacity=".08"/>
+      <text x="120" y="43" text-anchor="middle" font-size="9" fill="${RED}" font-family="Georgia,serif" font-weight="bold" opacity=".75">ONE LEGAL ACTION</text>
+      <line x1="20" y1="78" x2="220" y2="78" stroke="${NAVY}" stroke-width="1" opacity=".1"/>
+      <text x="50" y="97" text-anchor="middle" font-size="10" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">GEOGRAPHY</text>
+      <text x="120" y="97" text-anchor="middle" font-size="14" fill="${NAVY}" opacity=".22" font-family="Georgia,serif">≠</text>
+      <text x="190" y="97" text-anchor="middle" font-size="10" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">RISK DISTRIBUTION</text>
+      <text x="120" y="112" text-anchor="middle" font-size="8" fill="${NAVY}" opacity=".3" font-family="Georgia,serif" font-style="italic">jurisdiction alone does not distribute risk</text>
+    </svg>`
+  },
+  {
+    n:5, act:1,
+    title:"Insurance Doesn't Mean What You Think",
+    body:"Bitcoin custody insurance typically covers a fraction of assets under management, excludes insider threats, and contains exclusions that often swallow the policy whole. Read the exclusions before you read the coverage limits.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <line x1="120" y1="8" x2="120" y2="82" stroke="${NAVY}" stroke-width="1" opacity=".1"/>
+      <polygon points="120,8 175,82 65,82" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".12"/>
+      <line x1="65" y1="48" x2="175" y2="48" stroke="${NAVY}" stroke-width="1" opacity=".2"/>
+      <polygon points="120,8 175,48 65,48" fill="${TEAL}" opacity=".12"/>
+      <polygon points="120,48 175,82 65,82" fill="${ORANGE}" opacity=".1"/>
+      <text x="120" y="36" text-anchor="middle" font-size="8" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold" opacity=".8">WHAT'S COVERED</text>
+      <text x="120" y="70" text-anchor="middle" font-size="8" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">WHAT'S EXCLUDED</text>
+    </svg>`
+  },
+  {
+    n:6, act:1,
+    title:"Multisig Is Not Bulletproof",
+    body:"Multisig distributes key risk. It does not eliminate operational risk, documentation risk, or succession risk. Sloppy multisig loses to disciplined single-sig every time. Architecture type matters less than execution quality.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      ${[30,82,134,186].map((x,i)=>`
+        <rect x="${x-16}" y="22" width="30" height="36" rx="4" fill="none" stroke="${i<2?ORANGE:NAVY}" stroke-width="2" opacity="${i<2?1:0.22}"/>
+        <rect x="${x-10}" y="11" width="18" height="14" rx="9" fill="none" stroke="${i<2?ORANGE:NAVY}" stroke-width="2" opacity="${i<2?1:0.22}"/>
+        <circle cx="${x}" cy="40" r="4" fill="${i<2?ORANGE:NAVY}" opacity="${i<2?0.7:0.15}"/>
+        <text x="${x}" y="72" text-anchor="middle" font-size="6.5" fill="${NAVY}" opacity="${i<2?0.55:0.2}" font-family="Georgia,serif">${i<2?'ACTIVE':'UNUSED'}</text>
+      `).join('')}
+      <text x="120" y="86" text-anchor="middle" font-size="10" fill="${NAVY}" opacity=".45" font-family="Georgia,serif" font-style="italic">execution quality determines security</text>
+    </svg>`
+  },
+  {
+    n:7, act:1,
+    title:"The Custodian's Survival Doesn't Guarantee Yours",
+    body:"A custodian can be solvent and still lock you out. Legal injunctions, jurisdiction changes, and operational failures can make your bitcoin inaccessible long before insolvency is formally declared.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <rect x="70" y="15" width="80" height="52" rx="4" fill="none" stroke="${NAVY}" stroke-width="2" opacity=".5"/>
+      <rect x="83" y="28" width="54" height="6" rx="2" fill="${NAVY}" opacity=".12"/>
+      <rect x="83" y="40" width="38" height="6" rx="2" fill="${NAVY}" opacity=".08"/>
+      <text x="110" y="60" text-anchor="middle" font-size="7.5" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">SOLVENT</text>
+      <path d="M 154 46 Q 178 46 178 58 Q 178 72 154 72" fill="none" stroke="${ORANGE}" stroke-width="2.5"/>
+      <circle cx="178" cy="58" r="4" fill="${ORANGE}" opacity=".4"/>
+      <text x="205" y="55" text-anchor="middle" font-size="7" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">LOCKED</text>
+      <text x="205" y="65" text-anchor="middle" font-size="7" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">OUT</text>
+      <text x="120" y="84" text-anchor="middle" font-size="10" fill="${NAVY}" opacity=".45" font-family="Georgia,serif" font-style="italic">solvency does not equal accessibility</text>
+    </svg>`
+  },
+  {
+    n:8, act:2,
+    title:"Key Generation Is the Most Important Moment in Custody",
+    body:"How your keys were generated determines everything downstream. Entropy quality, device security, and ceremony integrity at the moment of key creation cannot be retroactively fixed. A weak origin produces a weak system regardless of what is layered on top.",
+    svg:`<svg viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="120" cy="48" r="32" fill="none" stroke="${ORANGE}" stroke-width="2" opacity=".9"/>
+      <circle cx="120" cy="48" r="19" fill="none" stroke="${ORANGE}" stroke-width="1.5" opacity=".4"/>
+      <circle cx="120" cy="48" r="7" fill="${ORANGE}" opacity=".8"/>
+      ${[0,45,90,135,180,225,270,315].map((a)=>{const r=a*Math.PI/180; return `<line x1="${120+32*Math.cos(r)}" y1="${48+32*Math.sin(r)}" x2="${120+41*Math.cos(r)}" y2="${48+41*Math.sin(r)}" stroke="${ORANGE}" stroke-width="2" opacity=".35"/>`}).join('')}
+      <text x="120" y="96" text-anchor="middle" font-size="11" fill="${NAVY}" opacity=".55" font-family="Georgia,serif" font-weight="bold">ENTROPY</text>
+      <text x="120" y="109" text-anchor="middle" font-size="9.5" fill="${NAVY}" opacity=".4" font-family="Georgia,serif" font-style="italic">cannot be retroactively fixed</text>
+    </svg>`
+  },
+  {
+    n:9, act:2,
+    title:"Succession Is a Custody Failure Mode",
+    body:"Most Bitcoin custody plans protect against theft. Almost none protect against the owner becoming incapacitated. Your estate plan and your custody plan must be designed together, or one will quietly invalidate the other.",
+    svg:`<svg viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="65" cy="30" r="14" fill="none" stroke="${NAVY}" stroke-width="2" opacity=".5"/>
+      <line x1="65" y1="44" x2="65" y2="60" stroke="${NAVY}" stroke-width="2" opacity=".4"/>
+      <line x1="54" y1="50" x2="76" y2="50" stroke="${NAVY}" stroke-width="2" opacity=".4"/>
+      <line x1="54" y1="60" x2="76" y2="60" stroke="${NAVY}" stroke-width="2" opacity=".4"/>
+      <line x1="65" y1="60" x2="148" y2="68" stroke="${ORANGE}" stroke-width="2" stroke-dasharray="5,3" opacity=".6"/>
+      <circle cx="164" cy="62" r="13" fill="none" stroke="${TEAL}" stroke-width="1.5" opacity=".4"/>
+      <text x="164" y="67" text-anchor="middle" font-size="16" fill="${TEAL}" opacity=".5" font-family="Georgia,serif">?</text>
+      <text x="65" y="88" text-anchor="middle" font-size="9" fill="${NAVY}" opacity=".5" font-family="Georgia,serif" font-weight="bold">OWNER</text>
+      <text x="190" y="88" text-anchor="middle" font-size="9" fill="${NAVY}" opacity=".35" font-family="Georgia,serif" font-weight="bold">HEIR</text>
+      <text x="120" y="12" text-anchor="middle" font-size="10" fill="${ORANGE}" opacity=".7" font-family="Georgia,serif" font-style="italic">undocumented transfer</text>
+    </svg>`
+  },
+  {
+    n:10, act:2,
+    title:"Redundancy and Recoverability Are Not the Same",
+    body:"Redundancy means you have backups. Recoverability means someone can actually use those backups under stress, in the dark, without you, perhaps years later. Only recoverability matters when it actually counts.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="26" width="80" height="38" rx="4" fill="none" stroke="${TEAL}" stroke-width="1.5" opacity=".5"/>
+      <text x="58" y="48" text-anchor="middle" font-size="9" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">BACKUP</text>
+      <text x="58" y="78" text-anchor="middle" font-size="7.5" fill="${TEAL}" opacity=".5" font-family="Georgia,serif">REDUNDANCY</text>
+      <rect x="142" y="26" width="80" height="38" rx="4" fill="${ORANGE}" opacity=".08" stroke="${ORANGE}" stroke-width="2"/>
+      <text x="182" y="48" text-anchor="middle" font-size="9" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">USABLE</text>
+      <text x="182" y="78" text-anchor="middle" font-size="7.5" fill="${ORANGE}" font-family="Georgia,serif">RECOVERABILITY</text>
+      <text x="120" y="50" text-anchor="middle" font-size="16" fill="${NAVY}" opacity=".2">≠</text>
+    </svg>`
+  },
+  {
+    n:11, act:2,
+    title:"Custodial Entropy Is Real",
+    body:"Every day that passes, operational reality drifts further from design assumptions. Keys move. Signers change. Documentation goes stale. Entropy accumulates silently until it does not, and then it is too late. This is Custodial Entropy.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="75" x2="220" y2="75" stroke="${NAVY}" stroke-width="1" opacity=".1"/>
+      <line x1="20" y1="35" x2="220" y2="35" stroke="${TEAL}" stroke-width="2" opacity=".55"/>
+      <path d="M 20,35 C 70,35 100,42 130,52 S 185,68 220,78" fill="none" stroke="${ORANGE}" stroke-width="2.5"/>
+      <text x="24" y="28" font-size="7.5" fill="${TEAL}" font-family="Georgia,serif">DESIGN INTENT</text>
+      <text x="130" y="88" text-anchor="middle" font-size="7.5" fill="${ORANGE}" font-family="Georgia,serif">OPERATIONAL REALITY</text>
+      <text x="218" y="30" font-size="7" fill="${TEAL}" opacity=".45" font-family="Georgia,serif">D1</text>
+      <text x="200" y="72" font-size="7" fill="${ORANGE}" font-family="Georgia,serif">YR5+</text>
+      <text x="120" y="12" text-anchor="middle" font-size="8" fill="${ORANGE}" opacity=".5" font-family="Georgia,serif" font-style="italic">Custodial Entropy · a BCS concept</text>
+    </svg>`
+  },
+  {
+    n:12, act:2,
+    title:"The Custodial Paradox: Every Fix Creates a New Vulnerability",
+    body:"Add a backup key and you create a new attack surface. Add a trusted cosigner and you create a new point of failure. Every rational security improvement degrades resilience somewhere else. This is The Custodial Paradox.",
+    svg:`<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
+      <text x="68" y="16" text-anchor="middle" font-size="10" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">THE FIX</text>
+      <text x="172" y="16" text-anchor="middle" font-size="10" fill="${RED}" font-family="Georgia,serif" font-weight="bold">NEW VULNERABILITY</text>
+      <line x1="10" y1="21" x2="230" y2="21" stroke="${NAVY}" stroke-width="1.5" opacity=".15"/>
+      <rect x="10" y="25" width="110" height="24" rx="2" fill="${TEAL}" opacity=".09"/>
+      <text x="65" y="41" text-anchor="middle" font-size="9.5" fill="${NAVY}" font-family="Georgia,serif">Add backup key</text>
+      <rect x="124" y="25" width="106" height="24" rx="2" fill="${RED}" opacity=".09"/>
+      <text x="177" y="41" text-anchor="middle" font-size="9.5" fill="${RED}" font-family="Georgia,serif">New attack surface</text>
+      <rect x="10" y="51" width="110" height="24" rx="2" fill="${TEAL}" opacity=".05"/>
+      <text x="65" y="67" text-anchor="middle" font-size="9.5" fill="${NAVY}" font-family="Georgia,serif">Add trusted cosigner</text>
+      <rect x="124" y="51" width="106" height="24" rx="2" fill="${RED}" opacity=".05"/>
+      <text x="177" y="67" text-anchor="middle" font-size="9.5" fill="${RED}" font-family="Georgia,serif">New point of failure</text>
+      <rect x="10" y="77" width="110" height="24" rx="2" fill="${TEAL}" opacity=".09"/>
+      <text x="65" y="93" text-anchor="middle" font-size="9.5" fill="${NAVY}" font-family="Georgia,serif">Add geographic split</text>
+      <rect x="124" y="77" width="106" height="24" rx="2" fill="${RED}" opacity=".09"/>
+      <text x="177" y="93" text-anchor="middle" font-size="9.5" fill="${RED}" font-family="Georgia,serif">New coordination risk</text>
+      <line x1="120" y1="21" x2="120" y2="103" stroke="${NAVY}" stroke-width="1" opacity=".1"/>
+      <text x="120" y="118" text-anchor="middle" font-size="9" fill="${ORANGE}" font-family="Georgia,serif" font-style="italic" opacity=".8">The Custodial Paradox · a BCS concept</text>
+    </svg>`
+  },
+  {
+    n:13, act:2,
+    title:"Documentation Failure Kills More Bitcoin Than Hackers",
+    body:"Most lost Bitcoin is not stolen. It is stranded: inaccessible to heirs, lost to forgotten passphrases, or locked behind undocumented procedures that only the owner understood. Documentation is not an afterthought. It is the custody plan.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      <rect x="55" y="12" width="52" height="62" rx="3" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".4"/>
+      ${[28,38,48,58].map((y,i)=>`<rect x="65" y="${y}" width="${28-i*4}" height="5" rx="1.5" fill="${NAVY}" opacity="${0.2-i*0.03}"/>`).join('')}
+      <text x="81" y="82" text-anchor="middle" font-size="7" fill="${NAVY}" opacity=".4" font-family="Georgia,serif">UNDOCUMENTED</text>
+      <text x="175" y="50" text-anchor="middle" font-size="36" fill="${ORANGE}" opacity=".18" font-family="Georgia,serif" font-weight="bold">?</text>
+      <text x="175" y="72" text-anchor="middle" font-size="8.5" fill="${ORANGE}" font-family="Georgia,serif">STRANDED</text>
+    </svg>`
+  },
+  {
+    n:14, act:2,
+    title:"The Threat Model You Ignore Is the One That Gets You",
+    body:"Most custody designs protect well against remote hacking and nothing else. Physical coercion, legal seizure, inheritance failure, and key decay are each statistically more likely than a targeted hack on a private holder.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      ${[
+        {l:'HACK',x:28,h:38,c:TEAL,op:.4},
+        {l:'COERCION',x:76,h:58,c:ORANGE,op:.6},
+        {l:'LEGAL',x:124,h:62,c:ORANGE,op:.65},
+        {l:'INHERITANCE',x:172,h:72,c:RED,op:.65},
+        {l:'KEY DECAY',x:215,h:48,c:ORANGE,op:.5},
+      ].map(({l,x,h,c,op})=>`
+        <rect x="${x-18}" y="${82-h}" width="30" height="${h}" rx="2" fill="${c}" opacity="${op}"/>
+        <text x="${x-3}" y="88" text-anchor="middle" font-size="5.5" fill="${NAVY}" font-family="Georgia,serif">${l}</text>
+      `).join('')}
+      <text x="120" y="12" text-anchor="middle" font-size="7.5" fill="${NAVY}" opacity=".35" font-family="Georgia,serif" font-style="italic">relative likelihood</text>
+    </svg>`
+  },
+  {
+    n:15, act:3,
+    title:"Good Custody Has Five Pillars",
+    body:"The BCRI evaluates five structural pillars: Cryptographic Integrity, Physical Distribution, Operational Dependency, Cognitive Reliability, and Temporal Resilience. The assessment also incorporates the Entropy Risk Index, Exposure Risk Index, and Coordination Health Score.",
+    svg:`<svg viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg">
+      ${[
+        {l:'CRYPTO',s:'INTEGRITY',x:26,c:'#1c2b4a'},
+        {l:'PHYSICAL',s:'DISTRIB.',x:72,c:'#2a7a6a'},
+        {l:'OPER.',s:'DEPEND.',x:118,c:'#f7931a'},
+        {l:'COGNITIVE',s:'RELIAB.',x:164,c:'#b03a2e'},
+        {l:'TEMPORAL',s:'RESILIENCE',x:210,c:'#7b5ea7'},
+      ].map(({l,s,x,c},i)=>`
+        <rect x="${x-20}" y="14" width="38" height="68" rx="3" fill="${c}" opacity=".16" stroke="${c}" stroke-width="1.5"/>
+        <rect x="${x-20}" y="14" width="38" height="6" rx="3" fill="${c}" opacity=".55"/>
+        <text x="${x-1}" y="50" text-anchor="middle" font-size="6.5" fill="${c}" font-family="Georgia,serif" font-weight="bold" opacity=".9">${l}</text>
+        <text x="${x-1}" y="61" text-anchor="middle" font-size="6.5" fill="${c}" font-family="Georgia,serif" opacity=".75">${s}</text>
+      `).join('')}
+      <text x="130" y="102" text-anchor="middle" font-size="9" fill="${NAVY}" opacity=".4" font-family="Georgia,serif" font-style="italic">five pillars · evaluated within the BCS framework</text>
+    </svg>`
+  },
+  {
+    n:16, act:3,
+    title:"Process Is More Important Than Product",
+    body:"The hardware you use matters far less than the procedures around it. A documented, rehearsed, and audited process on modest hardware beats an undocumented process on premium devices. Custody quality lives in the workflow, not the box.",
+    svg:`<svg viewBox="0 0 240 108" xmlns="http://www.w3.org/2000/svg">
+      <!-- LEFT: inferior — same size box as right -->
+      <rect x="4" y="6" width="102" height="74" rx="4" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".2"/>
+      <text x="55" y="28" text-anchor="middle" font-size="13" fill="${NAVY}" opacity=".38" font-family="Georgia,serif" font-weight="bold">PREMIUM</text>
+      <text x="55" y="44" text-anchor="middle" font-size="13" fill="${NAVY}" opacity=".38" font-family="Georgia,serif" font-weight="bold">HARDWARE</text>
+      <text x="55" y="60" text-anchor="middle" font-size="9" fill="${RED}" opacity=".6" font-family="Georgia,serif">no documented process</text>
+      <rect x="14" y="84" width="82" height="20" rx="10" fill="${RED}" opacity=".1" stroke="${RED}" stroke-width="1.5"/>
+      <text x="55" y="98" text-anchor="middle" font-size="10.5" fill="${RED}" font-family="Georgia,serif" font-weight="bold">INFERIOR</text>
+      <!-- divider -->
+      <text x="120" y="48" text-anchor="middle" font-size="24" fill="${NAVY}" opacity=".14" font-family="Georgia,serif">&lt;</text>
+      <!-- RIGHT: superior — same size box as left -->
+      <rect x="134" y="6" width="102" height="74" rx="4" fill="${ORANGE}" opacity=".08" stroke="${ORANGE}" stroke-width="2"/>
+      <text x="185" y="28" text-anchor="middle" font-size="13" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">MODEST</text>
+      <text x="185" y="44" text-anchor="middle" font-size="13" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">HARDWARE</text>
+      <text x="185" y="60" text-anchor="middle" font-size="9" fill="${TEAL}" font-family="Georgia,serif" font-weight="bold">+ documented process</text>
+      <rect x="144" y="84" width="82" height="20" rx="10" fill="${ORANGE}" opacity=".9"/>
+      <text x="185" y="98" text-anchor="middle" font-size="10.5" fill="white" font-family="Georgia,serif" font-weight="bold">SUPERIOR</text>
+    </svg>`
+  },
+  {
+    n:17, act:3,
+    title:"The Best Custody Architecture You Won't Use Is Worthless",
+    body:"Optimal custody is not maximum complexity. It is the most resilient architecture that the owner can actually operate correctly, consistently, across time. An elegant plan that gets abandoned within a year protects nothing.",
+    svg:`<svg viewBox="0 0 240 108" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left: unused optimal — same box size as right -->
+      <rect x="4" y="6" width="102" height="74" rx="4" fill="none" stroke="${NAVY}" stroke-width="1.5" opacity=".2"/>
+      <text x="55" y="28" text-anchor="middle" font-size="11" fill="${NAVY}" opacity=".35" font-family="Georgia,serif" font-weight="bold">THEORETICALLY</text>
+      <text x="55" y="44" text-anchor="middle" font-size="11" fill="${NAVY}" opacity=".35" font-family="Georgia,serif" font-weight="bold">OPTIMAL</text>
+      <text x="55" y="60" text-anchor="middle" font-size="9" fill="${NAVY}" opacity=".28" font-family="Georgia,serif" font-style="italic">but never used</text>
+      <rect x="14" y="84" width="82" height="20" rx="10" fill="${RED}" opacity=".1" stroke="${RED}" stroke-width="1.5"/>
+      <text x="55" y="98" text-anchor="middle" font-size="10.5" fill="${RED}" font-family="Georgia,serif" font-weight="bold">WORTHLESS</text>
+      <!-- divider -->
+      <text x="120" y="48" text-anchor="middle" font-size="24" fill="${NAVY}" opacity=".14" font-family="Georgia,serif">&lt;</text>
+      <!-- Right: actually operated — same box size as left -->
+      <rect x="134" y="6" width="102" height="74" rx="4" fill="${ORANGE}" opacity=".08" stroke="${ORANGE}" stroke-width="2"/>
+      <text x="185" y="28" text-anchor="middle" font-size="11" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">ACTUALLY</text>
+      <text x="185" y="44" text-anchor="middle" font-size="11" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">OPERATED</text>
+      <text x="185" y="60" text-anchor="middle" font-size="9" fill="${TEAL}" font-family="Georgia,serif">consistently, across time</text>
+      <rect x="144" y="84" width="82" height="20" rx="10" fill="${TEAL}" opacity=".8"/>
+      <text x="185" y="98" text-anchor="middle" font-size="10.5" fill="white" font-family="Georgia,serif" font-weight="bold">EFFECTIVE</text>
+    </svg>`
+  },
+  {
+    n:18, act:3,
+    title:"Collaborative Custody Is Not Third-Party Custody",
+    body:"In collaborative custody, no single party can move your bitcoin unilaterally, including the service provider. This is structurally safer than third-party custody, where one entity holds full control. The architecture enforces the protection. You hold keys. They hold keys. Neither alone is enough.",
+    svg:`<svg viewBox="0 0 240 90" xmlns="http://www.w3.org/2000/svg">
+      ${[[58,34,'YOU',ORANGE],[120,18,'SERVICE',TEAL],[182,34,'3RD KEY',NAVY]].map(([x,y,l,c])=>`
+        <circle cx="${x}" cy="${y}" r="16" fill="none" stroke="${c}" stroke-width="2" opacity=".65"/>
+        <text x="${x}" y="${y+4}" text-anchor="middle" font-size="7" fill="${c}" font-family="Georgia,serif" font-weight="bold">${l}</text>
+        <text x="${x}" y="75" text-anchor="middle" font-size="7" fill="${c}" opacity=".4" font-family="Georgia,serif">1 KEY</text>
+      `).join('')}
+      <line x1="74" y1="38" x2="104" y2="28" stroke="${NAVY}" stroke-width="1" opacity=".12" stroke-dasharray="3,2"/>
+      <line x1="136" y1="28" x2="166" y2="38" stroke="${NAVY}" stroke-width="1" opacity=".12" stroke-dasharray="3,2"/>
+      <line x1="74" y1="46" x2="166" y2="46" stroke="${NAVY}" stroke-width="1" opacity=".08" stroke-dasharray="3,2"/>
+      <text x="120" y="90" text-anchor="middle" font-size="8" fill="${NAVY}" opacity=".35" font-family="Georgia,serif" font-style="italic">2-of-3 · no single party controls</text>
+    </svg>`
+  },
+  {
+    n:19, act:3,
+    title:"Custody Quality Is Measurable",
+    body:"The Bitcoin Custody Standard provides independent custody architecture assessments across the five structural pillars, with reported metrics including ARS, CHS, ERI, and XRI, and a final BCRI score and rating. Assessments are not affiliated with any wallet or custodian. Learn more at bitcoincustodystandard.org.",
+    svg:`<svg viewBox="0 0 240 122" xmlns="http://www.w3.org/2000/svg">
+      <!-- Score gauge -->
+      <path d="M 46,90 A 40,40 0 1,1 114,90" fill="none" stroke="${NAVY}" stroke-width="7" opacity=".08" stroke-linecap="round"/>
+      <path d="M 46,90 A 40,40 0 1,1 105,70" fill="none" stroke="${ORANGE}" stroke-width="7" opacity=".75" stroke-linecap="round"/>
+      <text x="80" y="78" text-anchor="middle" font-size="22" fill="${NAVY}" font-family="Georgia,serif" font-weight="bold">68</text>
+      <text x="80" y="92" text-anchor="middle" font-size="8" fill="${NAVY}" opacity=".4" font-family="Georgia,serif">BCRI SCORE</text>
+      <!-- BCRI Rating badge -->
+      <rect x="116" y="50" width="52" height="44" rx="4" fill="${ORANGE}" opacity=".1" stroke="${ORANGE}" stroke-width="1.5"/>
+      <text x="142" y="79" text-anchor="middle" font-size="20" fill="${ORANGE}" font-family="Georgia,serif" font-weight="bold">BBB-</text>
+      <text x="142" y="102" text-anchor="middle" font-size="7.5" fill="${ORANGE}" opacity=".6" font-family="Georgia,serif">BCRI RATING</text>
+      <!-- Factors -->
+      ${[
+        {l:'Entropy Risk Index',x:178,y:52,c:'#f7931a'},
+        {l:'Exposure Risk Index',x:178,y:70,c:'#b03a2e'},
+        {l:'Coordination Health',x:178,y:88,c:'#2a7a6a'},
+      ].map(({l,x,y,c})=>`
+        <circle cx="${x-2}" cy="${y-3}" r="4" fill="${c}" opacity=".55"/>
+        <text x="${x+8}" y="${y}" font-size="7.5" fill="${NAVY}" opacity=".6" font-family="Georgia,serif">${l}</text>
+      `).join('')}
+      <text x="120" y="116" text-anchor="middle" font-size="7.5" fill="${NAVY}" opacity=".28" font-family="Georgia,serif" font-style="italic">illustrative only · not affiliated with any wallet or custodian</text>
+    </svg>`
+  },
+  {
+    n:20, act:3,
+    title:"Audit Your Custody Architecture Before You Need To",
+    body:"The time to discover a documentation gap, a stale key, or an untested recovery process is during a planned review, not during a crisis, a death, or a legal proceeding. Custody architecture degrades silently across time. A periodic BCS assessment helps identify structural weaknesses before they become failure events.",
+    svg:`<svg viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+      ${[
+        {l:'Key generation verified',done:true,y:12},
+        {l:'Recovery procedure tested',done:true,y:36},
+        {l:'Documentation current',done:false,y:60},
+        {l:'Succession plan active',done:false,y:84},
+      ].map(({l,done,y})=>`
+        <rect x="18" y="${y}" width="16" height="16" rx="3" fill="none" stroke="${done?TEAL:ORANGE}" stroke-width="2"/>
+        ${done?`<text x="26" y="${y+13}" text-anchor="middle" font-size="12" fill="${TEAL}" font-weight="bold">✓</text>`:''}
+        <text x="42" y="${y+12}" font-size="10" fill="${NAVY}" opacity="${done?.6:.5}" font-family="Georgia,serif">${l}</text>
+      `).join('')}
+      <text x="120" y="108" text-anchor="middle" font-size="0" fill="none">spacer</text>
+    </svg>`
+  },
+  {
+    n:21, act:3,
+    title:"The Goal Is Bitcoin That Survives You",
+    body:"Good custody is not about protecting your bitcoin from the world. It is about ensuring your bitcoin remains accessible, recoverable, and transferable across decades and generations. That is the standard.",
+    svg:`<svg viewBox="0 0 240 115" xmlns="http://www.w3.org/2000/svg">
+      <!-- Generational branches outward from centre -->
+      <!-- Gen 1 branches -->
+      <line x1="120" y1="58" x2="78" y2="32" stroke="${NAVY}" stroke-width="2" opacity=".18"/>
+      <line x1="120" y1="58" x2="162" y2="32" stroke="${NAVY}" stroke-width="2" opacity=".18"/>
+      <!-- Gen 2 branches left -->
+      <line x1="78" y1="32" x2="54" y2="14" stroke="${NAVY}" stroke-width="1.5" opacity=".14"/>
+      <line x1="78" y1="32" x2="90" y2="12" stroke="${NAVY}" stroke-width="1.5" opacity=".14"/>
+      <!-- Gen 2 branches right -->
+      <line x1="162" y1="32" x2="150" y2="12" stroke="${NAVY}" stroke-width="1.5" opacity=".14"/>
+      <line x1="162" y1="32" x2="186" y2="14" stroke="${NAVY}" stroke-width="1.5" opacity=".14"/>
+      <!-- Gen 2 leaf nodes -->
+      ${[[54,14],[90,12],[150,12],[186,14]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="${TEAL}" opacity=".25"/>`).join('')}
+      <!-- Gen 1 nodes -->
+      <circle cx="78" cy="32" r="9" fill="${TEAL}" opacity=".18"/>
+      <circle cx="162" cy="32" r="9" fill="${TEAL}" opacity=".18"/>
+      <!-- Root: full Bitcoin circle -->
+      <circle cx="120" cy="58" r="22" fill="${ORANGE}" opacity=".15" stroke="${ORANGE}" stroke-width="2.5"/>
+      <circle cx="120" cy="58" r="16" fill="${ORANGE}" opacity=".2"/>
+      <text x="120" y="64" text-anchor="middle" font-size="18" fill="white" font-family="Georgia,serif" font-weight="bold">₿</text>
+      <!-- Timeline base -->
+      <line x1="20" y1="90" x2="220" y2="90" stroke="${NAVY}" stroke-width="1" opacity=".1"/>
+      <text x="120" y="103" text-anchor="middle" font-size="11" fill="${NAVY}" opacity=".5" font-family="Georgia,serif" font-weight="bold">CROSS-GENERATION</text>
+      <text x="120" y="114" text-anchor="middle" font-size="9.5" fill="${NAVY}" opacity=".3" font-family="Georgia,serif" font-style="italic">across decades · that is the standard</text>
+    </svg>`
+  }
+];
+
+const ACT_LABELS = {1:'Act I · The Illusion of Safety', 2:'Act II · The Architecture Realities', 3:'Act III · What Good Custody Looks Like'};
+const ACT_STARTS = {1:0, 2:7, 3:14};
+
+let current = 0;
+let startX = 0, startY = 0, isDragging = false, dragDelta = 0;
+const deck = document.getElementById('deck');
+let cardEls = [];
+
+function buildCards() {
+  deck.innerHTML = '';
+  cardEls = [];
+  // Build mini dots
+  const miniDots = document.getElementById('mini-dots');
+  miniDots.innerHTML = '';
+  cards.forEach((c, i) => {
+    // Card element
+    const el = document.createElement('div');
+    el.className = `card act-${c.act} ${i === 0 ? 'active' : 'hidden'}`;
+    el.setAttribute('role', 'article');
+    el.setAttribute('aria-label', `Card ${c.n} of 21: ${c.title}`);
+    el.addEventListener('click', (e) => {
+      if (Math.abs(dragDelta) < 8) next();
+    });
+    el.innerHTML = `
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <div class="card-num">${c.n}</div>
+          <div class="card-act-badge">Act ${c.act}</div>
+        </div>
+        <h2 class="card-title">${c.title}</h2>
+        <div class="card-visual" aria-hidden="true">${c.svg}</div>
+        <div class="card-divider"></div>
+        <p class="card-body-text">${c.body}</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-footer-brand">Bitcoin Custody Standard</span>
+        <span class="card-footer-hint">${i < cards.length-1 ? '→ swipe' : '✓ done'}</span>
+      </div>`;
+    deck.appendChild(el);
+    cardEls.push(el);
+    // Mini dot
+    const dot = document.createElement('div');
+    dot.className = 'mini-dot';
+    dot.title = `Card ${i+1}: ${c.title}`;
+    dot.addEventListener('click', () => { goTo(i, i > current ? 'next' : 'prev'); });
+    miniDots.appendChild(dot);
+  });
+}
+
+function updateUI() {
+  const c = cards[current];
+  document.getElementById('cur-num').textContent = current + 1;
+  document.getElementById('progress-fill').style.width = `${((current+1)/21)*100}%`;
+  document.getElementById('act-label').textContent = ACT_LABELS[c.act];
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').textContent = current === 20 ? 'Finish ✓' : 'Next →';
+
+  // Act dots
+  const dots = document.querySelectorAll('.act-dot');
+  dots.forEach((d,i) => {
+    d.className = 'act-dot';
+    if (c.act === i+1) d.classList.add(`active-${i+1}`);
+  });
+
+  // Mini dots
+  const miniDots = document.querySelectorAll('.mini-dot');
+  miniDots.forEach((d, i) => {
+    d.className = 'mini-dot';
+    if (i < current) d.classList.add('visited');
+    if (i === current) d.classList.add(`current-act-${cards[i].act}`);
+  });
+}
+
+function goTo(idx, direction) {
+  if (idx < 0 || idx > 20) return;
+  const prev = current;
+  cardEls[prev].className = `card act-${cards[prev].act} ${direction === 'next' ? 'exited-left' : 'hidden'}`;
+  current = idx;
+  cardEls[current].className = `card act-${cards[current].act} active`;
+  updateUI();
+
+  if (current === 20 && direction === 'next') {
+    // tiny delay then check if they hit finish
+  }
+}
+
+function next() {
+  if (current === 20) {
+    document.getElementById('completion').classList.add('show');
+    return;
+  }
+  goTo(current + 1, 'next');
+}
+
+function prev() {
+  if (current === 0) return;
+  goTo(current - 1, 'prev');
+}
+
+function jumpToAct(act) {
+  const target = ACT_STARTS[act];
+  const dir = target > current ? 'next' : 'prev';
+  goTo(target, dir);
+}
+
+function startDeck() {
+  document.getElementById('intro').classList.add('hide');
+}
+
+function restart() {
+  document.getElementById('completion').classList.remove('show');
+  // reset all cards
+  cardEls.forEach((el, i) => {
+    el.className = `card act-${cards[i].act} ${i === 0 ? 'active' : 'hidden'}`;
+  });
+  current = 0;
+  updateUI();
+}
+
+// Touch / mouse drag
+deck.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  isDragging = true;
+  dragDelta = 0;
+}, {passive: true});
+
+deck.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const dx = e.touches[0].clientX - startX;
+  const dy = e.touches[0].clientY - startY;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+    dragDelta = dx;
+    cardEls[current].classList.add('dragging');
+    cardEls[current].style.transform = `translateX(${dx * 0.4}px)`;
+  }
+}, {passive: true});
+
+deck.addEventListener('touchend', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  cardEls[current].classList.remove('dragging');
+  cardEls[current].style.transform = '';
+  if (dragDelta < -50) next();
+  else if (dragDelta > 50) prev();
+  dragDelta = 0;
+});
+
+// Mouse drag
+deck.addEventListener('mousedown', (e) => {
+  startX = e.clientX;
+  isDragging = true;
+  dragDelta = 0;
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.clientX - startX;
+  dragDelta = dx;
+  cardEls[current].classList.add('dragging');
+  cardEls[current].style.transform = `translateX(${dx * 0.35}px)`;
+});
+
+window.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  if (cardEls[current]) {
+    cardEls[current].classList.remove('dragging');
+    cardEls[current].style.transform = '';
+  }
+  if (dragDelta < -60) next();
+  else if (dragDelta > 60) prev();
+  dragDelta = 0;
+});
+
+// Keyboard
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+});
+
+buildCards();
+updateUI();
+</script>
+</body>
+</html>
